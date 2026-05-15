@@ -49,51 +49,78 @@ The server will start on `http://localhost:8000`
 - **Module 1**: http://localhost:8000/modules/module-01-data-foundation.html
 - **Health Check**: http://localhost:8000/health
 
-## 📦 Deployment to Heroku
+## 📦 Deployment
 
-### First-Time Setup
+### Step 1: Push to GitHub
 
-1. **Install Heroku CLI** (if not already installed)
+1. **Create a new repository on GitHub** (e.g., `mc-next-training`)
+   - Go to https://github.com/new
+   - Name: `mc-next-training`
+   - Description: "Marketing Cloud Next Training with Loyalty Management"
+   - Keep as Private (internal training materials)
+   - Don't initialize with README (we already have one)
+
+2. **Push your local repository to GitHub**
    ```bash
-   brew tap heroku/brew && brew install heroku
-   # Or download from: https://devcenter.heroku.com/articles/heroku-cli
+   # Add GitHub as remote
+   git remote add origin https://github.com/YOUR-USERNAME/mc-next-training.git
+   
+   # Push to GitHub
+   git branch -M main
+   git push -u origin main
    ```
 
-2. **Login to Heroku**
-   ```bash
-   heroku login
-   ```
+### Step 2: Deploy to Heroku (Automatic Deploys from GitHub)
 
-3. **Create Heroku App**
-   ```bash
-   heroku create mc-next-training
-   # Or use your preferred app name: heroku create your-app-name
-   ```
+1. **Create Heroku App**
+   - Go to https://dashboard.heroku.com
+   - Click "New" → "Create new app"
+   - App name: `mc-next-training` (or your preferred name)
+   - Region: Choose your region
+   - Click "Create app"
 
-4. **Deploy**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push heroku main
-   ```
+2. **Connect to GitHub**
+   - In your Heroku app dashboard, go to the "Deploy" tab
+   - Under "Deployment method", click "GitHub"
+   - Click "Connect to GitHub" and authorize if needed
+   - Search for your repository: `mc-next-training`
+   - Click "Connect"
 
-5. **Open the App**
-   ```bash
-   heroku open
-   ```
+3. **Enable Automatic Deploys**
+   - Scroll to "Automatic deploys" section
+   - Choose branch: `main`
+   - Click "Enable Automatic Deploys"
+   - (Optional) Check "Wait for CI to pass before deploy" if you add CI later
 
-### Subsequent Deployments
+4. **Initial Deploy**
+   - Scroll to "Manual deploy" section
+   - Choose branch: `main`
+   - Click "Deploy Branch"
+   - Wait for build to complete
+
+5. **Open Your App**
+   - Click "Open app" button at top right
+   - Or visit: `https://mc-next-training.herokuapp.com`
+
+### Subsequent Updates
 
 ```bash
+# Make your changes locally
+# Test: npm start
+
+# Commit and push to GitHub
 git add .
-git commit -m "Your commit message"
-git push heroku main
+git commit -m "Update Module 1 styling"
+git push origin main
+
+# Heroku will automatically deploy! 🎉
+# Check deploy progress in Heroku dashboard → Activity tab
 ```
 
 ### Heroku Configuration
 
 The app is configured with:
-- **Node.js Buildpack** (automatic)
+- **Node.js Buildpack** (automatic detection)
 - **Procfile** specifying `web: node server.js`
 - **Express Server** serving static files
 - **Compression** middleware for faster loading
@@ -101,15 +128,28 @@ The app is configured with:
 
 ### Monitoring
 
+**Via Heroku Dashboard:**
+- Activity tab: View deployment history
+- Resources tab: View dyno status
+- Metrics tab: View app performance
+- Logs: Click "More" → "View logs"
+
+**Via Heroku CLI** (optional):
 ```bash
+# Install CLI
+brew tap heroku/brew && brew install heroku
+
+# Login
+heroku login
+
 # View logs
-heroku logs --tail
+heroku logs --tail --app mc-next-training
 
 # Check app status
-heroku ps
+heroku ps --app mc-next-training
 
-# Open app in browser
-heroku open
+# Restart app
+heroku restart --app mc-next-training
 ```
 
 ## 📸 Screenshots
