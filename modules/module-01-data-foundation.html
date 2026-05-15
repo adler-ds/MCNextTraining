@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: The Data Foundation | MC Next Training</title>
+    <link rel="stylesheet" href="../styles/training.css">
+</head>
+<body>
+    <nav class="training-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">🏔️ MC Next Training</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="module-01-data-foundation.html" class="active">Module 1</a>
+                <a href="module-02-segmentation.html">Module 2</a>
+                <a href="#" class="disabled">Module 3</a>
+                <a href="../resources.html">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="module-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> ›
+                <a href="../index.html#level-2">Level 2: Practitioner</a> ›
+                <span>Module 1</span>
+            </div>
+            <h1>Module 1: The Data Foundation</h1>
+            <p class="module-subtitle">Setting up NTO's customer & loyalty data</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p class="progress-text">Progress: 0% Complete</p>
+
+            <div class="module-meta">
+                <span class="meta-item">⏱️ <strong>2 hours</strong></span>
+                <span class="meta-item">🎯 <strong>2 Labs</strong></span>
+                <span class="meta-item">📸 <strong>8 Screenshots</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-content">
+
+            <!-- NTO Rewards Context -->
+            <section class="nto-context">
+                <div class="context-header">
+                    <span class="context-icon">🏔️</span>
+                    <h2>NTO Rewards Context</h2>
+                </div>
+                <div class="context-body">
+                    <p><strong>The Scenario:</strong> Northern Trail Outfitters has launched <strong>NTO Rewards</strong> - a loyalty program for outdoor enthusiasts. Members earn points on purchases, unlock tier benefits (Bronze → Silver → Gold), and can participate in <strong>Engagement Trails</strong> (gamified challenges).</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">2M</div>
+                            <div class="stat-label">Total Customers</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">500K</div>
+                            <div class="stat-label">Loyalty Members</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Member Tiers</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">15K</div>
+                            <div class="stat-label">Trail Participants</div>
+                        </div>
+                    </div>
+
+                    <p><strong>Your Challenge:</strong> NTO's customer data lives in Sales Cloud (Contacts, Leads, Orders). Their loyalty data lives in Salesforce Loyalty Management (Members, Tiers, Points, Promotions). You need to unify this data so marketing can target and personalize based on both customer AND loyalty information.</p>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2>🎯 What You'll Learn</h2>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <span class="objective-icon">📊</span>
+                        <h3>Data Streams</h3>
+                        <p>How customer and loyalty data flows into Data Cloud</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🔗</span>
+                        <h3>Identity Resolution</h3>
+                        <p>Creating Unified Individuals from disparate records</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">👤</span>
+                        <h3>Unified Individual</h3>
+                        <p>The foundation of all MC Next marketing</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🏆</span>
+                        <h3>Loyalty Data Model</h3>
+                        <p>Understanding Loyalty Program Member DMO and relationships</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Lesson -->
+            <section class="lesson-section core-lesson">
+                <div class="section-header">
+                    <span class="section-badge core">📖 CORE LESSON</span>
+                    <h2>Understanding the Data Foundation</h2>
+                    <p class="section-duration">Required • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <h3>The Five Key Concepts</h3>
+                    <p>Before we dive into the hands-on labs, let's understand the foundation that powers MC Next marketing:</p>
+
+                    <div class="concept-card">
+                        <div class="concept-number">1</div>
+                        <div class="concept-content">
+                            <h4>Data Streams</h4>
+                            <p>Data Streams are the pipelines that bring data into Data Cloud. For NTO, we have multiple streams:</p>
+                            <ul>
+                                <li><strong>CRM Data:</strong> Contacts, Leads, Accounts, Orders from Sales Cloud</li>
+                                <li><strong>Loyalty Data:</strong> Program Members, Tiers, Points, Promotions from Loyalty Management</li>
+                                <li><strong>Behavioral Data:</strong> Web activity, email engagement, purchases</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Key Insight:</strong> If data isn't in Data Cloud, it won't be available in MC Next! Data Streams are your data highway.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">2</div>
+                        <div class="concept-content">
+                            <h4>DLO vs DMO (Data Lake Object vs Data Model Object)</h4>
+                            <p><strong>DLO (Data Lake Object):</strong> Raw data as it first lands in Data Cloud - a 1:1 copy of the source.</p>
+                            <p><strong>DMO (Data Model Object):</strong> Cleaned, standardized, mapped data ready for use.</p>
+                            <div class="analogy-box">
+                                <strong>🛒 Analogy:</strong> DLO is like your grocery bags when you get home (everything mixed together). DMO is after you've sorted everything into the fridge, freezer, and pantry (organized and ready to use).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">3</div>
+                        <div class="concept-content">
+                            <h4>Identity Resolution (IDR)</h4>
+                            <p>Identity Resolution is the process that identifies which records represent the same person and links them together.</p>
+                            <p><strong>Example:</strong> Sarah Johnson might appear as:</p>
+                            <ul>
+                                <li>A Contact in Sales Cloud (sarah.johnson@email.com)</li>
+                                <li>A Loyalty Member (Member ID: LM-12345, same email)</li>
+                                <li>A website visitor (cookie ID: ABC123, same email)</li>
+                            </ul>
+                            <p>IDR says "These are all the same person!" and creates a Unified Individual.</p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">4</div>
+                        <div class="concept-content">
+                            <h4>Unified Individual</h4>
+                            <p>The Unified Individual is the single, consolidated view of a person across all your systems. It's what you'll segment on and send to in MC Next.</p>
+                            <div class="data-model-visual">
+                                <div class="visual-header">Sarah Johnson's Unified Individual</div>
+                                <div class="visual-body">
+                                    <div class="source-record">
+                                        <strong>CRM Contact</strong><br>
+                                        Name: Sarah Johnson<br>
+                                        Email: sarah.johnson@email.com<br>
+                                        Last Purchase: 2026-04-15
+                                    </div>
+                                    <div class="merge-arrow">→ UNIFIED → </div>
+                                    <div class="source-record">
+                                        <strong>Loyalty Member</strong><br>
+                                        Member ID: LM-12345<br>
+                                        Tier: Silver<br>
+                                        Points: 2,450
+                                    </div>
+                                </div>
+                                <div class="visual-result">
+                                    <strong>Result:</strong> One Unified Individual with complete customer + loyalty data
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">5</div>
+                        <div class="concept-content">
+                            <h4>Individual DMO & Loyalty Program Member DMO</h4>
+                            <p><strong>Individual DMO:</strong> The source person record (Contact, Lead, etc.)</p>
+                            <p><strong>Loyalty Program Member DMO:</strong> The loyalty-specific data for that person</p>
+                            <p>These are <em>related</em> DMOs. When you build segments and Data Graphs, you'll navigate these relationships to pull in both customer and loyalty data.</p>
+                            <div class="relationship-diagram">
+                                <div class="dmo-box">Unified Individual</div>
+                                <div class="arrow-down">↓</div>
+                                <div class="dmo-box">Individual</div>
+                                <div class="arrow-down">↓</div>
+                                <div class="dmo-box">Loyalty Program Member</div>
+                                <div class="arrow-down">↓</div>
+                                <div class="dmo-box">Loyalty Promotion Enrollment</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="watch-video">
+                        <h3>📺 Watch: Data Foundation Overview (10 min)</h3>
+                        <p>Before the lab, watch this video explanation of Data Streams, Identity Resolution, and the Unified Individual.</p>
+                        <div class="video-placeholder">
+                            <p>🎥 Video: Data Cloud Fundamentals for MC Next</p>
+                            <p><em>Note: Link to existing Vidyard video or create placeholder</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 1 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 1</span>
+                    <h2>View NTO's Data Streams & Identity Resolution</h2>
+                    <p class="section-duration">Hands-on • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Explore how NTO's customer and loyalty data flows into Data Cloud, and see Identity Resolution in action creating Unified Individuals.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>View Data Streams for CRM and Loyalty data</li>
+                                <li>Understand Identity Resolution ruleset</li>
+                                <li>Query Unified Individual DMO to see 500K NTO Rewards members</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Navigate to Data Cloud Setup</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From the App Launcher, search for and select <strong>"Data Cloud"</strong>.</p>
+                                <p>You'll land on the Data Cloud home page. Click the <strong>gear icon</strong> in the top right to access <strong>Data Cloud Setup</strong>.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step1-data-cloud-nav.jpg"
+                                         alt="App Launcher showing Data Cloud selection"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">App Launcher with Data Cloud highlighted</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step1-data-cloud-nav.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>View Data Streams</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>In Data Cloud Setup, navigate to <strong>Data Streams</strong> in the left sidebar.</p>
+                                <p>You'll see a list of all data streams configured for NTO. Look for:</p>
+                                <ul>
+                                    <li><strong>Salesforce CRM:</strong> Bringing in Contacts, Leads, Accounts, Orders</li>
+                                    <li><strong>Loyalty Management:</strong> Bringing in Loyalty Program Members, Tiers, Points</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step2-data-streams-list.jpg"
+                                         alt="Data Streams list showing CRM and Loyalty streams"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Data Streams configuration page showing active streams</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step2-data-streams-list.jpg</code></p>
+                                </div>
+
+                                <p><strong>Click on the Salesforce CRM stream</strong> to see details:</p>
+                                <ul>
+                                    <li>Which objects are being synced (Contact, Lead, Account, etc.)</li>
+                                    <li>Refresh frequency (how often data syncs)</li>
+                                    <li>Field mappings</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step3-crm-stream-detail.jpg"
+                                         alt="CRM Data Stream detail showing objects and refresh schedule"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">CRM Data Stream showing Contact and Lead objects</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step3-crm-stream-detail.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Review Identity Resolution Ruleset</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>In Data Cloud Setup, navigate to <strong>Identity Resolution</strong>.</p>
+                                <p>Review the ruleset configured for NTO. You'll likely see a rule like:</p>
+                                <div class="code-block">
+                                    <strong>Rule:</strong> Email Exact Match<br>
+                                    <strong>Logic:</strong> If Contact.Email = Loyalty_Member.Email → Same person
+                                </div>
+                                <p>This is how Data Cloud knows that Sarah Johnson the Contact and Sarah Johnson the Loyalty Member are the same person.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step4-identity-resolution.jpg"
+                                         alt="Identity Resolution ruleset configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Identity Resolution ruleset showing Email matching rule</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step4-identity-resolution.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Identity Resolution can take 4-24 hours for the first run on large datasets. For NTO's 2M customers, it likely ran overnight during setup.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Query the Unified Individual DMO</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Now let's see the result: Unified Individuals!</p>
+                                <p>From Data Cloud, navigate to <strong>Query</strong> in the left sidebar.</p>
+                                <p>Run this query:</p>
+                                <div class="code-block">
+                                    SELECT Id, FirstName, LastName, Email<br>
+                                    FROM UnifiedIndividual__dlm<br>
+                                    LIMIT 10
+                                </div>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step5-query-workbench.jpg"
+                                         alt="Data Cloud Query interface"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Query workbench with UnifiedIndividual query</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step5-query-workbench.jpg</code></p>
+                                </div>
+
+                                <p>You should see a list of NTO customers. Each row is a Unified Individual - a person who may have records across multiple systems.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step6-unified-results.jpg"
+                                         alt="Query results showing Unified Individual records"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Query results showing 10 Unified Individuals</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step6-unified-results.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 1 Checkpoint</h3>
+                        <p>Before moving to Lab 2, verify you can answer these questions:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ What are the two main Data Streams NTO has configured?</li>
+                            <li>✓ How does Identity Resolution know two records are the same person?</li>
+                            <li>✓ What is a Unified Individual?</li>
+                            <li>✓ Can you see NTO's customer data in the Query results?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 2 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 2</span>
+                    <h2>Explore NTO's Loyalty Data</h2>
+                    <p class="section-duration">Hands-on • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>See how Loyalty Management data integrates with customer data. You'll explore the Loyalty Program Member DMO and see tier, points, and enrollment data.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>View Loyalty Program Member DMO structure</li>
+                                <li>Query loyalty data (members, tiers, points)</li>
+                                <li>Understand relationship between Individual and Loyalty Member</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>View Loyalty Program Member DMO</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>In Data Cloud, navigate to <strong>Data Model</strong> in the left sidebar.</p>
+                                <p>Search for <strong>"Loyalty Program Member"</strong>.</p>
+                                <p>Click on it to see the DMO structure. Key fields to notice:</p>
+                                <ul>
+                                    <li><strong>Member Tier:</strong> Bronze, Silver, or Gold</li>
+                                    <li><strong>Points Balance:</strong> Current loyalty points</li>
+                                    <li><strong>Enrollment Date:</strong> When they joined NTO Rewards</li>
+                                    <li><strong>Member Status:</strong> Active, Inactive, etc.</li>
+                                    <li><strong>Lifetime Value:</strong> Total spend as a loyalty member</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-lab2-step1-loyalty-dmo.jpg"
+                                         alt="Loyalty Program Member DMO field list"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Loyalty Program Member DMO showing tier, points, and other fields</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-lab2-step1-loyalty-dmo.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>💡 Key Insight:</strong> This DMO is where all loyalty-specific data lives. When you build segments later, you'll filter on these fields to target specific tiers or point ranges.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Query Loyalty Member Data</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Go back to the Query interface. Run this query:</p>
+                                <div class="code-block">
+                                    SELECT MemberTier__c, PointsBalance__c, EnrollmentDate__c<br>
+                                    FROM LoyaltyProgramMember__dlm<br>
+                                    WHERE MemberTier__c = 'Gold'<br>
+                                    LIMIT 10
+                                </div>
+                                <p>This shows you NTO's Gold tier members - the most valuable loyalty members!</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-lab2-step2-loyalty-query.jpg"
+                                         alt="Query results showing Gold tier loyalty members"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Gold tier members with points balance and enrollment date</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-lab2-step2-loyalty-query.jpg</code></p>
+                                </div>
+
+                                <p><strong>Try another query</strong> to see tier distribution:</p>
+                                <div class="code-block">
+                                    SELECT MemberTier__c, COUNT(*) as MemberCount<br>
+                                    FROM LoyaltyProgramMember__dlm<br>
+                                    GROUP BY MemberTier__c
+                                </div>
+                                <p>This shows you how many members are in each tier (Bronze, Silver, Gold).</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>See Customer + Loyalty Data Together</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Now for the magic - let's see customer data AND loyalty data unified!</p>
+                                <p>This requires joining the Individual DMO with Loyalty Program Member DMO:</p>
+                                <div class="code-block">
+                                    SELECT <br>
+                                    &nbsp;&nbsp;i.FirstName, <br>
+                                    &nbsp;&nbsp;i.LastName, <br>
+                                    &nbsp;&nbsp;i.Email,<br>
+                                    &nbsp;&nbsp;lpm.MemberTier__c,<br>
+                                    &nbsp;&nbsp;lpm.PointsBalance__c<br>
+                                    FROM Individual__dlm i<br>
+                                    JOIN LoyaltyProgramMember__dlm lpm<br>
+                                    &nbsp;&nbsp;ON i.Id = lpm.IndividualId__c<br>
+                                    LIMIT 10
+                                </div>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-lab2-step3-unified-view.jpg"
+                                         alt="Query showing customer data with loyalty tier and points"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Customer names/emails with loyalty tiers and points - fully unified!</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-lab2-step3-unified-view.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 This is the power of MC Next!</strong> You can see Sarah Johnson is a Silver member with 2,450 points. When you send her an email, you can personalize with "Hi Sarah, you're 550 points away from Gold!"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 2 Checkpoint</h3>
+                        <p>Verify you understand:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ What data lives in the Loyalty Program Member DMO?</li>
+                            <li>✓ How are Individual and Loyalty Member DMOs related?</li>
+                            <li>✓ Can you query to see customer + loyalty data together?</li>
+                            <li>✓ Why is this unified view important for marketing?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Section -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Deep Dive: Identity Resolution & Loyalty Data</h2>
+                    <p class="section-duration">Optional • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Content ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <h3>Identity Resolution Strategies</h3>
+                        <p>The simple "Email Exact Match" rule works for most cases, but enterprise implementations often need more sophisticated approaches:</p>
+
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <h4>Exact Match (Recommended Start)</h4>
+                                <p>Match on normalized email only. Simple, fast, low false-positive rate.</p>
+                                <p><strong>Use when:</strong> You have clean email data and it's the primary identifier.</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Fuzzy Matching</h4>
+                                <p>Match on name + address even if email differs slightly.</p>
+                                <p><strong>Use when:</strong> Same person uses multiple emails (personal + work).</p>
+                                <p><strong>Risk:</strong> False positives (matching wrong people).</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Custom IDs (LPID)</h4>
+                                <p>Some enterprises use their own master person IDs.</p>
+                                <p><strong>Use when:</strong> You have mature MDM system (e.g., Informatica).</p>
+                                <p><strong>Benefit:</strong> No fuzzy logic needed - you control matching.</p>
+                            </div>
+                        </div>
+
+                        <h3>Loyalty Data Model Deep-Dive</h3>
+                        <p>The full Loyalty Management data model includes several related DMOs:</p>
+                        <ul>
+                            <li><strong>Loyalty Program Member:</strong> The member profile (tier, points, status)</li>
+                            <li><strong>Loyalty Ledger:</strong> Points transaction history (earned, redeemed)</li>
+                            <li><strong>Loyalty Promotion:</strong> Engagement Trails and campaigns</li>
+                            <li><strong>Loyalty Promotion Enrollment:</strong> Which members are in which trails</li>
+                            <li><strong>Loyalty Promotion Activity:</strong> Individual activity completions</li>
+                            <li><strong>Loyalty Voucher:</strong> Rewards and coupons</li>
+                        </ul>
+
+                        <p>When building Data Graphs and segments, you'll navigate these relationships to access the data you need.</p>
+
+                        <h3>Multi-Program Considerations</h3>
+                        <p>NTO currently has one loyalty program (NTO Rewards), but some enterprises run multiple programs:</p>
+                        <ul>
+                            <li><strong>Example:</strong> NTO Retail Rewards + NTO Pro (B2B program)</li>
+                            <li><strong>Challenge:</strong> Same person could be a member of both</li>
+                            <li><strong>Solution:</strong> Filter by Program Name in all queries and segments</li>
+                        </ul>
+
+                        <h3>Historical Data Considerations</h3>
+                        <p>When migrating from a legacy loyalty platform:</p>
+                        <ul>
+                            <li>Import historical points transactions (for accurate LTV)</li>
+                            <li>Preserve tier history (when did they achieve Gold?)</li>
+                            <li>Migrate past promotion participation</li>
+                            <li>Consider data retention policies (do you need 5 years of history?)</li>
+                        </ul>
+
+                        <div class="further-reading">
+                            <h4>📚 Further Reading</h4>
+                            <ul>
+                                <li><a href="#">Identity Resolution Best Practices (Salesforce Help)</a></li>
+                                <li><a href="#">Loyalty Management Data Model Guide</a></li>
+                                <li><a href="#">Multi-Program Loyalty Architecture Patterns</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Notes -->
+            <section class="lesson-section implementation">
+                <div class="section-header">
+                    <span class="section-badge implementation">🏗️ IMPLEMENTATION NOTES</span>
+                    <h2>For Implementation Teams</h2>
+                    <p class="section-duration">Optional • 15 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Implementation Notes ▼
+                    </button>
+
+                    <div class="implementation-content">
+                        <h3>Discovery Questions for Customers</h3>
+                        <p>When scoping a customer's data foundation, ask:</p>
+                        <div class="question-grid">
+                            <div class="question-card">
+                                <strong>Q:</strong> How many customer records do you have?
+                                <p><em>Why it matters:</em> Identity Resolution can take 4-24 hours on first run for large datasets (10M+).</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Do you have existing Loyalty Management, or will this be new?
+                                <p><em>Why it matters:</em> Migration from legacy loyalty platforms requires data mapping and historical import strategy.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> What is your primary identifier? (Email, Phone, Custom ID?)
+                                <p><em>Why it matters:</em> Determines Identity Resolution rule strategy.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Do you have multiple loyalty programs?
+                                <p><em>Why it matters:</em> Requires program-scoped segmentation and data model considerations.</p>
+                            </div>
+                        </div>
+
+                        <h3>Timeline Considerations</h3>
+                        <div class="timeline-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Activity</th>
+                                        <th>Typical Duration</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Data Stream Configuration</td>
+                                        <td>1-2 days</td>
+                                        <td>Includes field mapping and testing</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Initial Identity Resolution Run</td>
+                                        <td>4-24 hours</td>
+                                        <td>Depends on volume (1M vs 10M records)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Loyalty Data Integration</td>
+                                        <td>2-3 days</td>
+                                        <td>Includes historical transaction import</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data Quality Validation</td>
+                                        <td>1-2 days</td>
+                                        <td>Check match rates, missing data, etc.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Common Pitfalls & How to Avoid</h3>
+                        <div class="pitfall-list">
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Poor email data quality</h4>
+                                    <p><strong>Symptom:</strong> Low Identity Resolution match rates</p>
+                                    <p><strong>Solution:</strong> Clean email data in source system first. Use Data Cloud validation rules.</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Missing loyalty member linkage</h4>
+                                    <p><strong>Symptom:</strong> Loyalty members don't match to CRM contacts</p>
+                                    <p><strong>Solution:</strong> Ensure email field is populated on Loyalty Program Member records. Check case sensitivity.</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Not accounting for IR latency</h4>
+                                    <p><strong>Symptom:</strong> New loyalty members don't appear in segments immediately</p>
+                                    <p><strong>Solution:</strong> Set expectations that IR runs every 4-24 hours. For real-time needs, use Individual DMO (not Unified Individual) in Release 262+.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>When to Escalate</h3>
+                        <ul>
+                            <li><strong>Data quality issues:</strong> If match rate is below 80%, engage Data Cloud architect</li>
+                            <li><strong>Complex MDM scenarios:</strong> If customer has Informatica or other MDM, engage Professional Services for integration strategy</li>
+                            <li><strong>Multi-cloud loyalty:</strong> If loyalty spans multiple Salesforce orgs, engage architecture team</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz -->
+            <section class="lesson-section quiz">
+                <div class="section-header">
+                    <span class="section-badge quiz">✅ KNOWLEDGE CHECK</span>
+                    <h2>Module 1 Quiz</h2>
+                    <p class="section-duration">5 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Test your understanding before moving to Module 2:</p>
+
+                    <div class="quiz-question">
+                        <p><strong>1. What is the difference between a DLO and a DMO?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1"> A) There is no difference, they're the same thing</label>
+                            <label><input type="radio" name="q1"> B) DLO is raw data, DMO is cleaned/standardized data</label>
+                            <label><input type="radio" name="q1"> C) DMO is raw data, DLO is cleaned/standardized data</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>2. What does Identity Resolution do?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2"> A) Identifies duplicate records and deletes them</label>
+                            <label><input type="radio" name="q2"> B) Links records from different sources that represent the same person</label>
+                            <label><input type="radio" name="q2"> C) Validates email addresses</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>3. Where does NTO's loyalty tier and points data live?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3"> A) On the Contact object</label>
+                            <label><input type="radio" name="q3"> B) In the Unified Individual DMO</label>
+                            <label><input type="radio" name="q3"> C) In the Loyalty Program Member DMO</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>4. True or False: If data isn't in Data Cloud, it won't be available in MC Next.</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4"> True</label>
+                            <label><input type="radio" name="q4"> False</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-answers" style="display:none;">
+                        <h3>Answers:</h3>
+                        <p>1. B) DLO is raw data, DMO is cleaned/standardized data</p>
+                        <p>2. B) Links records from different sources that represent the same person</p>
+                        <p>3. C) In the Loyalty Program Member DMO</p>
+                        <p>4. True</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="document.querySelector('.quiz-answers').style.display='block'; this.style.display='none';">
+                        Show Answers
+                    </button>
+                </div>
+            </section>
+
+            <!-- Module Summary -->
+            <section class="module-summary">
+                <h2>🎉 Module 1 Complete!</h2>
+                <p>Congratulations! You've built the data foundation for NTO Rewards marketing.</p>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>✅ What You Learned</h3>
+                        <ul>
+                            <li>How Data Streams bring customer & loyalty data into Data Cloud</li>
+                            <li>How Identity Resolution creates Unified Individuals</li>
+                            <li>The difference between DLO and DMO</li>
+                            <li>How loyalty data (tiers, points) integrates with customer data</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h3>🛠️ What You Built</h3>
+                        <ul>
+                            <li>Explored NTO's Data Streams (CRM + Loyalty)</li>
+                            <li>Reviewed Identity Resolution ruleset</li>
+                            <li>Queried Unified Individual DMO</li>
+                            <li>Viewed unified customer + loyalty data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="next-module">
+                    <h3>🚀 Next Up: Module 2 - Segmentation</h3>
+                    <p>Now that NTO's data is unified, you'll learn how to find and target the right audiences for campaigns. You'll build three segments for the NTO Rewards member journey!</p>
+                    <a href="module-02-segmentation.html" class="btn-primary btn-large">Continue to Module 2 →</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="training-footer">
+        <div class="container">
+            <p>MC Next Training: The NTO Rewards Journey | Module 1 of 9</p>
+            <p><a href="../index.html">Back to Home</a> | <a href="../resources.html">Resources</a> | <a href="../screenshot-tracker.html">Screenshot Tracker</a></p>
+        </div>
+    </footer>
+
+    <script src="../scripts/training.js"></script>
+</body>
+</html>
