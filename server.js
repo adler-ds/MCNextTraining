@@ -26,10 +26,9 @@ app.use(express.static(__dirname, {
   }
 }));
 
-// Root route - redirect to index or serve a welcome page
+// Root route - serve index page
 app.get('/', (req, res) => {
-  // For now, serve Module 1 as the default since index.html doesn't exist yet
-  res.sendFile(path.join(__dirname, 'modules', 'module-01-data-foundation.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Health check endpoint for Heroku

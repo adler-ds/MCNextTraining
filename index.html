@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Cloud Next Training | NTO Rewards</title>
+    <link rel="stylesheet" href="styles/training.css">
+    <style>
+        .hero {
+            background: linear-gradient(135deg, var(--nto-blue) 0%, var(--nto-dark-blue) 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .pyramid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .pyramid-level {
+            margin-bottom: 3rem;
+        }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--sf-light-blue) 0%, var(--white) 100%);
+            border-left: 4px solid var(--nto-orange);
+            border-radius: 8px;
+        }
+
+        .level-number {
+            background-color: var(--nto-orange);
+            color: var(--white);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .level-info h2 {
+            margin: 0;
+            color: var(--nto-blue);
+            font-size: 1.75rem;
+        }
+
+        .level-info p {
+            margin: 0;
+            color: var(--dark-gray);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .module-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-color: var(--nto-orange);
+        }
+
+        .module-card.available {
+            cursor: pointer;
+        }
+
+        .module-card.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-icon {
+            font-size: 2rem;
+        }
+
+        .module-number {
+            background-color: var(--nto-blue);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .module-card h3 {
+            color: var(--nto-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .module-card p {
+            color: var(--charcoal);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .module-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+
+        .module-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-available {
+            background-color: var(--success-green);
+            color: var(--white);
+        }
+
+        .status-coming-soon {
+            background-color: var(--medium-gray);
+            color: var(--dark-gray);
+        }
+
+        .quick-links {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-links h2 {
+            color: var(--nto-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .link-card {
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+            border-radius: 8px;
+            border-left: 3px solid var(--sf-blue);
+            transition: all 0.2s;
+        }
+
+        .link-card:hover {
+            background: linear-gradient(135deg, var(--sf-light-blue) 0%, var(--white) 100%);
+            transform: translateX(4px);
+        }
+
+        .link-card a {
+            text-decoration: none;
+            color: var(--nto-blue);
+            font-weight: 600;
+        }
+
+        .link-card p {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--dark-gray);
+        }
+    </style>
+</head>
+<body>
+    <nav class="training-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">🏔️ MC Next Training</a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="overview/key-concepts-summary.md">Key Concepts</a>
+                <a href="referance docs/reference-sources.md">References</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>🏔️ Marketing Cloud Next Training</h1>
+        <p>Master Agentforce Marketing with Salesforce Loyalty Management</p>
+        <p style="font-size: 1rem; margin-top: 1rem; opacity: 0.8;">Northern Trail Outfitters Rewards Scenario</p>
+    </div>
+
+    <div class="pyramid">
+        <!-- Level 1: Foundation -->
+        <div class="pyramid-level" id="level-1">
+            <div class="level-header">
+                <div class="level-number">1</div>
+                <div class="level-info">
+                    <h2>Foundation</h2>
+                    <p>Prerequisites and basic concepts</p>
+                </div>
+            </div>
+            <div class="modules-grid">
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-icon">📚</span>
+                        <span class="module-number">FOUNDATION</span>
+                    </div>
+                    <h3>Getting Started</h3>
+                    <p>Platform overview, terminology, and navigation basics</p>
+                    <div class="module-meta">
+                        <span>⏱️ 30 min</span>
+                        <span>📖 Reading</span>
+                    </div>
+                    <span class="module-status status-coming-soon">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 2: Practitioner (Core) -->
+        <div class="pyramid-level" id="level-2">
+            <div class="level-header">
+                <div class="level-number">2</div>
+                <div class="level-info">
+                    <h2>Practitioner (Core)</h2>
+                    <p>Hands-on modules for day-to-day marketing operations</p>
+                </div>
+            </div>
+            <div class="modules-grid">
+                <a href="modules/module-01-data-foundation.html" style="text-decoration: none;">
+                    <div class="module-card available">
+                        <div class="module-header">
+                            <span class="module-icon">📊</span>
+                            <span class="module-number">MODULE 1</span>
+                        </div>
+                        <h3>The Data Foundation</h3>
+                        <p>Data Streams, Identity Resolution, Unified Individuals, and Loyalty DMOs</p>
+                        <div class="module-meta">
+                            <span>⏱️ 2 hours</span>
+                            <span>🧪 2 Labs</span>
+                            <span>📸 8 Screenshots</span>
+                        </div>
+                        <span class="module-status status-available">Available</span>
+                    </div>
+                </a>
+
+                <a href="modules/module-02-segmentation.html" style="text-decoration: none;">
+                    <div class="module-card available">
+                        <div class="module-header">
+                            <span class="module-icon">🎯</span>
+                            <span class="module-number">MODULE 2</span>
+                        </div>
+                        <h3>Segmentation</h3>
+                        <p>Building audiences with NTO member tiers, engagement trails, and purchase behavior</p>
+                        <div class="module-meta">
+                            <span>⏱️ 2 hours</span>
+                            <span>🧪 2 Labs</span>
+                            <span>📸 7 Screenshots</span>
+                        </div>
+                        <span class="module-status status-available">Available</span>
+                    </div>
+                </a>
+
+                <a href="modules/module-03-data-graphs.html" style="text-decoration: none;">
+                    <div class="module-card available">
+                        <div class="module-header">
+                            <span class="module-icon">🕸️</span>
+                            <span class="module-number">MODULE 3</span>
+                        </div>
+                        <h3>Data Graphs</h3>
+                        <p>Personalization with loyalty points, tier benefits, and engagement trail progress</p>
+                        <div class="module-meta">
+                            <span>⏱️ 2 hours</span>
+                            <span>🧪 2 Labs</span>
+                            <span>📸 6 Screenshots</span>
+                        </div>
+                        <span class="module-status status-available">Available</span>
+                    </div>
+                </a>
+
+                <a href="modules/module-04-consent.html" style="text-decoration: none;">
+                    <div class="module-card available">
+                        <div class="module-header">
+                            <span class="module-icon">✅</span>
+                            <span class="module-number">MODULE 4</span>
+                        </div>
+                        <h3>Consent Management</h3>
+                        <p>Channel consent, preference centers, and loyalty program communications</p>
+                        <div class="module-meta">
+                            <span>⏱️ 1.5 hours</span>
+                            <span>🧪 2 Labs</span>
+                            <span>📸 5 Screenshots</span>
+                        </div>
+                        <span class="module-status status-available">Available</span>
+                    </div>
+                </a>
+
+                <a href="modules/module-05-content-builder.html" style="text-decoration: none;">
+                    <div class="module-card available">
+                        <div class="module-header">
+                            <span class="module-icon">✉️</span>
+                            <span class="module-number">MODULE 5</span>
+                        </div>
+                        <h3>Content Builder</h3>
+                        <p>Email templates, dynamic content, and personalized loyalty messaging</p>
+                        <div class="module-meta">
+                            <span>⏱️ 2.5 hours</span>
+                            <span>🧪 3 Labs</span>
+                            <span>📸 9 Screenshots</span>
+                        </div>
+                        <span class="module-status status-available">Available</span>
+                    </div>
+                </a>
+
+                <a href="modules/module-06-flows.html" style="text-decoration: none;">
+                    <div class="module-card available">
+                        <div class="module-header">
+                            <span class="module-icon">🔄</span>
+                            <span class="module-number">MODULE 6</span>
+                        </div>
+                        <h3>Flows & Automation</h3>
+                        <p>Welcome journeys, engagement trail promotions, and tier upgrade flows</p>
+                        <div class="module-meta">
+                            <span>⏱️ 3 hours</span>
+                            <span>🧪 3 Labs</span>
+                            <span>📸 10 Screenshots</span>
+                        </div>
+                        <span class="module-status status-available">Available</span>
+                    </div>
+                </a>
+
+                <a href="modules/module-07-loyalty-integration.html" style="text-decoration: none;">
+                    <div class="module-card available">
+                        <div class="module-header">
+                            <span class="module-icon">🎁</span>
+                            <span class="module-number">MODULE 7</span>
+                        </div>
+                        <h3>Loyalty Integration</h3>
+                        <p>Deep-dive: Loyalty Management DMOs, event triggers, and points tracking</p>
+                        <div class="module-meta">
+                            <span>⏱️ 2 hours</span>
+                            <span>🧪 2 Labs</span>
+                            <span>📸 7 Screenshots</span>
+                        </div>
+                        <span class="module-status status-available">Available</span>
+                    </div>
+                </a>
+
+                <a href="modules/module-08-analytics.html" style="text-decoration: none;">
+                    <div class="module-card available">
+                        <div class="module-header">
+                            <span class="module-icon">📈</span>
+                            <span class="module-number">MODULE 8</span>
+                        </div>
+                        <h3>Analytics & Reporting</h3>
+                        <p>Campaign performance, loyalty metrics, and ROI tracking</p>
+                        <div class="module-meta">
+                            <span>⏱️ 1.5 hours</span>
+                            <span>🧪 2 Labs</span>
+                            <span>📸 6 Screenshots</span>
+                        </div>
+                        <span class="module-status status-available">Available</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Level 3: Advanced -->
+        <div class="pyramid-level" id="level-3">
+            <div class="level-header">
+                <div class="level-number">3</div>
+                <div class="level-info">
+                    <h2>Advanced (Optional)</h2>
+                    <p>Deep-dives, edge cases, and architectural decisions</p>
+                </div>
+            </div>
+            <div class="modules-grid">
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-icon">🏗️</span>
+                        <span class="module-number">ADVANCED</span>
+                    </div>
+                    <h3>Business Units</h3>
+                    <p>Multi-brand architecture and data governance</p>
+                    <div class="module-meta">
+                        <span>⏱️ 1.5 hours</span>
+                        <span>📖 Reading</span>
+                    </div>
+                    <span class="module-status status-coming-soon">Coming Soon</span>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-icon">⚡</span>
+                        <span class="module-number">ADVANCED</span>
+                    </div>
+                    <h3>API & Integrations</h3>
+                    <p>REST API, webhooks, and custom integrations</p>
+                    <div class="module-meta">
+                        <span>⏱️ 2 hours</span>
+                        <span>🧪 1 Lab</span>
+                    </div>
+                    <span class="module-status status-coming-soon">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 4: Implementation Guide -->
+        <div class="pyramid-level" id="level-4">
+            <div class="level-header">
+                <div class="level-number">4</div>
+                <div class="level-info">
+                    <h2>Implementation Guide (Optional)</h2>
+                    <p>Professional services and enterprise implementations</p>
+                </div>
+            </div>
+            <div class="modules-grid">
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-icon">🎯</span>
+                        <span class="module-number">IMPLEMENTATION</span>
+                    </div>
+                    <h3>Discovery & Scoping</h3>
+                    <p>Requirements gathering and project planning</p>
+                    <div class="module-meta">
+                        <span>⏱️ 1 hour</span>
+                        <span>📖 Reading</span>
+                    </div>
+                    <span class="module-status status-coming-soon">Coming Soon</span>
+                </div>
+
+                <div class="module-card coming-soon">
+                    <div class="module-header">
+                        <span class="module-icon">🚀</span>
+                        <span class="module-number">IMPLEMENTATION</span>
+                    </div>
+                    <h3>Enterprise Deployment</h3>
+                    <p>Best practices for large-scale rollouts</p>
+                    <div class="module-meta">
+                        <span>⏱️ 1.5 hours</span>
+                        <span>📖 Reading</span>
+                    </div>
+                    <span class="module-status status-coming-soon">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <h2>📚 Quick Links</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="overview/key-concepts-summary.md">📖 Key Concepts Summary</a>
+                    <p>Consolidated learning from all reference materials</p>
+                </div>
+                <div class="link-card">
+                    <a href="referance docs/reference-sources.md">🔗 Reference Sources</a>
+                    <p>Master catalog of PDFs, videos, and Slack canvases</p>
+                </div>
+                <div class="link-card">
+                    <a href="resources/glossary.md">📝 Glossary</a>
+                    <p>Terms and definitions</p>
+                </div>
+                <div class="link-card">
+                    <a href="screenshot-tracker.md">📸 Screenshot Tracker</a>
+                    <p>Track needed screenshots for all labs</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background-color: var(--nto-dark-blue); color: var(--white); padding: 2rem; text-align: center; margin-top: 4rem;">
+        <p>&copy; 2026 Salesforce - Internal Training Material</p>
+        <p style="font-size: 0.875rem; opacity: 0.8; margin-top: 0.5rem;">Release 262 (Summer '26) - May/June 2026</p>
+    </footer>
+</body>
+</html>
