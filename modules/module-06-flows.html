@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6: Flows & Automation | MC Next Training</title>
+    <link rel="stylesheet" href="../styles/training.css">
+</head>
+<body>
+    <nav class="training-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">🏔️ MC Next Training</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="module-01-data-foundation.html">Module 1</a>
+                <a href="module-02-segmentation.html">Module 2</a>
+                <a href="module-06-flows.html" class="active">Module 6</a>
+                <a href="../resources.html">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="module-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> ›
+                <a href="../index.html#level-2">Level 2: Practitioner</a> ›
+                <span>Module 6</span>
+            </div>
+            <h1>Module 6: Flows & Automation</h1>
+            <p class="module-subtitle">Building automated customer journeys for NTO Rewards</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p class="progress-text">Progress: 0% Complete</p>
+
+            <div class="module-meta">
+                <span class="meta-item">⏱️ <strong>3 hours</strong></span>
+                <span class="meta-item">🎯 <strong>3 Labs</strong></span>
+                <span class="meta-item">📸 <strong>10 Screenshots</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-content">
+
+            <!-- NTO Rewards Context -->
+            <section class="nto-context">
+                <div class="context-header">
+                    <span class="context-icon">🏔️</span>
+                    <h2>NTO Rewards Context</h2>
+                </div>
+                <div class="context-body">
+                    <p><strong>The Scenario:</strong> NTO's marketing team needs to automate their member communications. New members should receive a welcome series over 7 days. When members start engagement trails, they should get notifications tailored to their tier. The team also wants to test different messaging to optimize engagement.</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Active Flows</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">50K</div>
+                            <div class="stat-label">Journey Entries/Month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Flow Types</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">42%</div>
+                            <div class="stat-label">Engagement Rate</div>
+                        </div>
+                    </div>
+
+                    <p><strong>Your Challenge:</strong> Build a welcome journey triggered by segment entry, an engagement trail promotion flow triggered by events, and implement A/B testing with path experimentation to optimize messaging.</p>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2>🎯 What You'll Learn</h2>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <span class="objective-icon">🔄</span>
+                        <h3>Flow Builder</h3>
+                        <p>Master trigger types: Segment-based, Event-based, and On-Demand flows</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">⏱️</span>
+                        <h3>Wait & Decision Logic</h3>
+                        <p>Control timing and create branching paths based on member behavior</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🧪</span>
+                        <h3>Path Experimentation</h3>
+                        <p>A/B test subject lines and content to optimize campaign performance</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">📱</span>
+                        <h3>Multi-channel Orchestration</h3>
+                        <p>Coordinate Email, SMS, and WhatsApp in a single journey</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Lesson -->
+            <section class="lesson-section core-lesson">
+                <div class="section-header">
+                    <span class="section-badge core">📖 CORE LESSON</span>
+                    <h2>Understanding Flow Builder</h2>
+                    <p class="section-duration">Required • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <h3>The Four Key Concepts</h3>
+                    <p>Flow Builder is MC Next's journey automation engine. Let's understand the building blocks:</p>
+
+                    <div class="concept-card">
+                        <div class="concept-number">1</div>
+                        <div class="concept-content">
+                            <h4>Trigger Types</h4>
+                            <p>Every flow starts with a trigger that determines how members enter the journey:</p>
+                            <ul>
+                                <li><strong>Segment-triggered:</strong> Members enter when they join a segment (e.g., "New Members" segment)</li>
+                                <li><strong>Event-triggered:</strong> Members enter when a specific event occurs (e.g., "Trail Started" event from Data Cloud)</li>
+                                <li><strong>On-Demand:</strong> Manually trigger for a specific audience (e.g., flash sale announcement)</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Key Insight:</strong> For NTO's welcome journey, use segment-triggered. For trail promotions, use event-triggered to respond in real-time to member actions.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">2</div>
+                        <div class="concept-content">
+                            <h4>Interaction Elements</h4>
+                            <p>Interactions are the touchpoints where you communicate with members:</p>
+                            <p><strong>Available channels:</strong></p>
+                            <div class="analogy-box">
+                                <strong>Email:</strong> Best for detailed content, product showcases, educational series<br>
+                                <strong>SMS:</strong> Urgent alerts, time-sensitive promotions, appointment reminders<br>
+                                <strong>WhatsApp:</strong> Two-way conversations, customer service escalations<br>
+                                <strong>Agent Handoff:</strong> Transfer to Service Cloud when journey needs human intervention
+                            </div>
+                            <p>Each interaction element references content you've created in Content Builder.</p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">3</div>
+                        <div class="concept-content">
+                            <h4>Wait & Decision Splits</h4>
+                            <p><strong>Wait Elements:</strong> Control timing between interactions</p>
+                            <ul>
+                                <li><strong>Wait for Duration:</strong> Fixed time (e.g., "Wait 2 days")</li>
+                                <li><strong>Wait Until Date:</strong> Specific date/time (e.g., "Wait until 10am Pacific")</li>
+                                <li><strong>Wait for Event:</strong> Wait until member performs action (e.g., "Wait for Purchase" up to 7 days)</li>
+                            </ul>
+                            <p><strong>Decision Splits:</strong> Branch based on conditions</p>
+                            <ul>
+                                <li><strong>Example:</strong> If LoyaltyMember.Tier = Gold → Send SMS + Email, else → Send Email only</li>
+                                <li><strong>Use for:</strong> Tier-based experiences, engagement-based paths, purchase behavior</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Best Practice:</strong> Use "Wait for Event" with a timeout. Example: "Wait for first purchase (max 7 days). If purchased → Send thank you. If timeout → Send incentive."
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">4</div>
+                        <div class="concept-content">
+                            <h4>Agent Handoff</h4>
+                            <p>When automation isn't enough, hand off to Service Cloud for human intervention:</p>
+                            <p><strong>Use cases for NTO:</strong></p>
+                            <ul>
+                                <li><strong>High-value tier escalation:</strong> Gold member has issue → Create case for VIP support team</li>
+                                <li><strong>Journey abandonment:</strong> Member doesn't engage after 3 emails → Trigger outreach call</li>
+                                <li><strong>Complex questions:</strong> Member replies to WhatsApp message → Route to agent</li>
+                            </ul>
+                            <p>Agent Handoff creates a Service Cloud case with full journey context (which emails sent, clicks, opens).</p>
+                        </div>
+                    </div>
+
+                    <div class="watch-video">
+                        <h3>📺 Watch: Flow Builder Tour (10 min)</h3>
+                        <p>Before the lab, watch this walkthrough of the Flow Builder interface.</p>
+                        <div class="video-placeholder">
+                            <p>🎥 Video: Building Your First Journey in MC Next</p>
+                            <p><em>Note: Link to existing Vidyard video or create placeholder</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 1 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 1</span>
+                    <h2>Build Welcome Journey</h2>
+                    <p class="section-duration">Hands-on • 60 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Create a 3-email welcome series for new NTO Rewards members. When Sarah Johnson joins the "New Members" segment, she should receive: Day 0 Welcome, Day 2 Getting Started, Day 7 First Purchase Incentive.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Create segment-triggered flow from "New Members" segment</li>
+                                <li>Add 3 email interactions with appropriate Wait elements</li>
+                                <li>Use emails created in Module 5 (or templates)</li>
+                                <li>Activate flow and verify members can enter</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Navigate to Flow Builder</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From the MC Next app, click <strong>Journeys</strong> in the left navigation.</p>
+                                <p>Click <strong>Create Journey</strong> → <strong>Segment-triggered</strong>.</p>
+                                <p>Name: <code>NTO_Welcome_Journey_v1</code></p>
+                                <p>Select segment: <code>New_Members</code> (the segment you built in Module 2)</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-step1-flow-builder.jpg"
+                                         alt="Flow Builder navigation"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Creating a new segment-triggered journey</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-step1-flow-builder.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Add First Email: Day 0 Welcome</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From the Flow Builder canvas, drag an <strong>Email</strong> element onto the canvas right after the entry trigger.</p>
+                                <p>Configure the email:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>Welcome Email</code></li>
+                                    <li><strong>Select Email:</strong> Choose the welcome email you created in Module 5 (or use <code>NTO_Welcome_Template</code>)</li>
+                                    <li><strong>Subject:</strong> <code>Welcome to NTO Rewards, {{Individual.FirstName}}!</code></li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-step2-first-email.jpg"
+                                         alt="Adding email interaction to flow"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">First email interaction in welcome journey</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-step2-first-email.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> This email sends immediately when a member enters the journey. No wait needed for the first touchpoint!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Add Wait Element: 2 Days</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Drag a <strong>Wait</strong> element onto the canvas after the first email.</p>
+                                <p>Configure:</p>
+                                <ul>
+                                    <li><strong>Wait Type:</strong> <code>Wait for Duration</code></li>
+                                    <li><strong>Duration:</strong> <code>2 days</code></li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-step3-wait-element.jpg"
+                                         alt="Wait element configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Wait 2 days before second email</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-step3-wait-element.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Add Second Email: Day 2 Getting Started</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Drag another <strong>Email</strong> element after the Wait.</p>
+                                <p>Configure:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>Getting Started Email</code></li>
+                                    <li><strong>Subject:</strong> <code>Here's how to make the most of NTO Rewards</code></li>
+                                    <li><strong>Content:</strong> Educational content about earning points, browsing trails, tier benefits</li>
+                                </ul>
+
+                                <p>Then add another <strong>Wait</strong> element:</p>
+                                <ul>
+                                    <li><strong>Duration:</strong> <code>5 days</code> (Days 2-7)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-step4-second-email.jpg"
+                                         alt="Second email and wait"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Complete flow showing Day 0, Wait 2, Day 2, Wait 5</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-step4-second-email.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">5</span>
+                                <h4>Add Third Email: Day 7 First Purchase</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Drag a final <strong>Email</strong> element after the 5-day wait.</p>
+                                <p>Configure:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>First Purchase Incentive</code></li>
+                                    <li><strong>Subject:</strong> <code>Ready for your first order? Here's 500 bonus points!</code></li>
+                                    <li><strong>Content:</strong> Offer 500 bonus points on first purchase, highlight popular products</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-step5-third-email.jpg"
+                                         alt="Complete 3-email journey"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Full welcome journey: 3 emails over 7 days</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-step5-third-email.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Result:</strong> New members receive a perfectly-timed welcome series: immediate welcome, educational content after 2 days, purchase incentive after 7 days.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">6</span>
+                                <h4>Activate the Journey</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click <strong>Review</strong> in the top right to validate your flow.</p>
+                                <p>MC Next will check for errors (missing emails, invalid waits, etc.).</p>
+                                <p>Once validated, click <strong>Activate</strong>.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-step6-activate.jpg"
+                                         alt="Activating the journey"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Journey activated and ready to accept new members</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-step6-activate.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Use naming convention <code>NTO_[Type]_Journey_v[#]</code> so you can version flows (v2, v3) when you make improvements.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 1 Checkpoint</h3>
+                        <p>Before moving to Lab 2, verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Journey is segment-triggered from "New Members"</li>
+                            <li>✓ Three emails are configured with proper timing</li>
+                            <li>✓ Wait elements are 2 days and 5 days</li>
+                            <li>✓ Journey is activated and accepting entries</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 2 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 2</span>
+                    <h2>Build Event-Triggered Trail Promotion</h2>
+                    <p class="section-duration">Hands-on • 60 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Create an event-triggered flow that fires when a member starts an engagement trail. Gold members get SMS + Email, Silver/Bronze get Email only. Personalize with the specific trail name they started.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Create event-triggered flow on "Trail Started" event</li>
+                                <li>Add decision split based on member tier</li>
+                                <li>Gold path: Send SMS + Email</li>
+                                <li>Silver/Bronze path: Send Email only</li>
+                                <li>Personalize with trail name from event data</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Create Event-Triggered Flow</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From Journeys, click <strong>Create Journey</strong> → <strong>Event-triggered</strong>.</p>
+                                <p>Name: <code>NTO_Trail_Promotion_v1</code></p>
+                                <p>Select event: <code>Trail_Started</code> (this event streams from Data Cloud when a member joins a trail)</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab2-step1-event-trigger.jpg"
+                                         alt="Event-triggered flow setup"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Event-triggered journey listening for Trail Started events</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab2-step1-event-trigger.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Event-triggered flows fire in real-time. Sarah starts a trail at 3pm → receives email within minutes!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Add Decision Split by Tier</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Drag a <strong>Decision Split</strong> element onto the canvas after the entry trigger.</p>
+                                <p>Configure the split:</p>
+                                <ul>
+                                    <li><strong>Split Name:</strong> <code>Check Member Tier</code></li>
+                                    <li><strong>Condition 1 (Gold Path):</strong> <code>LoyaltyMember.Tier equals "Gold"</code></li>
+                                    <li><strong>Default Path:</strong> Everyone else (Silver/Bronze)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab2-step2-decision-split.jpg"
+                                         alt="Decision split configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Decision split creating two paths based on tier</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab2-step2-decision-split.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Configure Gold Path: SMS + Email</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>On the Gold path (Condition 1), add two interactions:</p>
+
+                                <p><strong>First, add SMS:</strong></p>
+                                <ul>
+                                    <li>Drag <strong>SMS</strong> element onto Gold path</li>
+                                    <li><strong>Message:</strong> <code>🏔️ You started {{Trail.Name}}! As a Gold member, track your progress at nto.com/trails</code></li>
+                                </ul>
+
+                                <p><strong>Then, add Email:</strong></p>
+                                <ul>
+                                    <li>Drag <strong>Email</strong> element after SMS</li>
+                                    <li><strong>Subject:</strong> <code>Welcome to {{Trail.Name}} - Your Gold Benefits</code></li>
+                                    <li><strong>Content:</strong> Detailed trail info, Gold-tier benefits, progress tracker link</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab2-step3-gold-path.jpg"
+                                         alt="Gold tier path with SMS and Email"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Gold members receive SMS alert + detailed email</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab2-step3-gold-path.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Configure Default Path: Email Only</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>On the Default path (Silver/Bronze), add just email:</p>
+                                <ul>
+                                    <li>Drag <strong>Email</strong> element onto Default path</li>
+                                    <li><strong>Subject:</strong> <code>Welcome to {{Trail.Name}}!</code></li>
+                                    <li><strong>Content:</strong> Trail info with tier-appropriate benefits (use dynamic content from Module 5)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab2-step4-default-path.jpg"
+                                         alt="Default path with email only"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Silver/Bronze members receive email only</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab2-step4-default-path.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Success!</strong> Marcus Chen (Gold) starts "Summit Seeker" trail → Gets SMS + Email. Sarah Johnson (Silver) starts "Valley Explorer" → Gets Email only. Both are personalized with trail name!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 2 Checkpoint</h3>
+                        <p>Verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Flow is event-triggered on "Trail Started"</li>
+                            <li>✓ Decision split checks LoyaltyMember.Tier</li>
+                            <li>✓ Gold path has SMS + Email</li>
+                            <li>✓ Default path has Email only</li>
+                            <li>✓ Trail name personalization is configured</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 3 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 3</span>
+                    <h2>Implement A/B Testing with Path Experimentation</h2>
+                    <p class="section-duration">Hands-on • 60 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Test two different subject lines for the trail invitation email to see which drives more opens. Use Path Experimentation to split traffic 50/50 and measure performance.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Add Path Experimentation element to existing flow</li>
+                                <li>Create two paths with different subject lines</li>
+                                <li>Set 50/50 traffic split</li>
+                                <li>Define success metric (email opens)</li>
+                                <li>Activate test and verify split is working</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Add Path Experimentation Element</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Open your Trail Promotion flow from Lab 2.</p>
+                                <p>Before the Decision Split, insert a <strong>Path Experimentation</strong> element.</p>
+                                <p>Configure:</p>
+                                <ul>
+                                    <li><strong>Experiment Name:</strong> <code>Trail Invitation Subject Line Test</code></li>
+                                    <li><strong>Number of Paths:</strong> <code>2</code> (Variant A and Variant B)</li>
+                                    <li><strong>Traffic Split:</strong> <code>50% / 50%</code></li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab3-step1-experimentation.jpg"
+                                         alt="Path Experimentation setup"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">A/B test element with 50/50 split</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab3-step1-experimentation.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> MC Next automatically randomizes members into paths and tracks performance for you!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Configure Variant A: Benefit-Focused Subject</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>On Path A, add an <strong>Email</strong> interaction:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>Trail Invite - Variant A</code></li>
+                                    <li><strong>Subject Line A:</strong> <code>Earn 5,000 bonus points on the Summit Seeker Trail!</code></li>
+                                    <li><strong>Content:</strong> Standard trail invitation email (same for both variants)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab3-step2-variant-a.jpg"
+                                         alt="Variant A configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Variant A emphasizes point reward</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab3-step2-variant-a.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Configure Variant B: Urgency-Focused Subject</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>On Path B, add an <strong>Email</strong> interaction:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>Trail Invite - Variant B</code></li>
+                                    <li><strong>Subject Line B:</strong> <code>Only 3 days left to join the Summit Seeker Trail</code></li>
+                                    <li><strong>Content:</strong> Same email content as Variant A</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab3-step3-variant-b.jpg"
+                                         alt="Variant B configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Variant B emphasizes urgency</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab3-step3-variant-b.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🧪 Hypothesis:</strong> Does urgency (Variant B) drive more opens than reward messaging (Variant A)? Let's test!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Set Success Metric</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click on the Path Experimentation element to configure measurement:</p>
+                                <ul>
+                                    <li><strong>Success Metric:</strong> <code>Email Opens</code></li>
+                                    <li><strong>Measurement Window:</strong> <code>24 hours after send</code></li>
+                                    <li><strong>Statistical Significance:</strong> <code>95% confidence</code></li>
+                                </ul>
+
+                                <p>MC Next will automatically calculate which variant is winning and can auto-select the winner once statistical significance is reached.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">5</span>
+                                <h4>Activate Test</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click <strong>Review</strong> to validate the experiment.</p>
+                                <p>Then click <strong>Activate</strong>.</p>
+
+                                <p>Monitor the test in the Journey Analytics dashboard:</p>
+                                <ul>
+                                    <li>View Path A vs Path B open rates</li>
+                                    <li>See which variant is performing better</li>
+                                    <li>Once winner is determined, update all future sends with winning subject line</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab3-step3-activate.jpg"
+                                         alt="Active A/B test with analytics"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">A/B test running with real-time results</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab3-step3-activate.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Result:</strong> You're now scientifically testing messaging to optimize NTO's engagement! After 1,000 sends, you'll know which subject line performs better.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 3 Checkpoint</h3>
+                        <p>Verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Path Experimentation element has 2 variants</li>
+                            <li>✓ Traffic is split 50/50</li>
+                            <li>✓ Both variants have different subject lines</li>
+                            <li>✓ Success metric is set to email opens</li>
+                            <li>✓ Test is activated and collecting data</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Section -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Deep Dive: Multi-Channel Orchestration & Error Handling</h2>
+                    <p class="section-duration">Optional • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Content ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <h3>Profile Selection for Multi-Brand Flows</h3>
+                        <p>If you're managing multiple brands (e.g., NTO Retail vs NTO Rewards), use profile selection:</p>
+                        <ul>
+                            <li><strong>Profile Selection element:</strong> Route members based on Brand preference</li>
+                            <li><strong>Example:</strong> If Brand = "NTO Retail" → Retail welcome journey, else → Rewards welcome journey</li>
+                            <li><strong>Benefit:</strong> One entry trigger, multiple brand-specific experiences</li>
+                        </ul>
+
+                        <h3>Error Handling & Flow Monitoring</h3>
+                        <p>Production flows need robust error handling:</p>
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <h4>Email Send Failures</h4>
+                                <p>What if an email bounces or member has no email address?</p>
+                                <p><strong>Solution:</strong> Add fallback path. If email fails → Send SMS (if available) or create Service Cloud case.</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Event Data Missing</h4>
+                                <p>What if "Trail Name" field is missing in event payload?</p>
+                                <p><strong>Solution:</strong> Use default value. Example: <code>{{Trail.Name | default: "an engagement trail"}}</code></p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Journey Monitoring</h4>
+                                <p>How do you know if a flow is broken?</p>
+                                <p><strong>Solution:</strong> Set up Journey Health alerts. Get notified if error rate exceeds 5%.</p>
+                            </div>
+                        </div>
+
+                        <h3>Multi-Channel Orchestration Best Practices</h3>
+                        <p>When mixing Email, SMS, and WhatsApp in one journey:</p>
+                        <ul>
+                            <li><strong>Check consent:</strong> Add decision split to verify member has opted in to SMS/WhatsApp before sending</li>
+                            <li><strong>Respect frequency:</strong> Don't send SMS and Email in same hour. Add 2-hour wait between channels.</li>
+                            <li><strong>Channel hierarchy:</strong> Use SMS for urgent/transactional, Email for promotional/educational</li>
+                            <li><strong>WhatsApp for two-way:</strong> Only use WhatsApp if you have agents available to respond</li>
+                        </ul>
+
+                        <h3>Advanced Wait Strategies</h3>
+                        <p>Beyond simple duration waits:</p>
+                        <ul>
+                            <li><strong>Einstein Send Time Optimization:</strong> Wait until optimal send time for each member (ML-powered)</li>
+                            <li><strong>Wait until attribute change:</strong> Wait until LoyaltyMember.Tier changes (max 90 days)</li>
+                            <li><strong>Business hours wait:</strong> Wait until 9am-5pm Pacific (don't send overnight)</li>
+                            <li><strong>Event-based wait:</strong> Wait for "Purchase" event (timeout 14 days)</li>
+                        </ul>
+
+                        <div class="further-reading">
+                            <h4>📚 Further Reading</h4>
+                            <ul>
+                                <li><a href="#">Flow Builder Advanced Patterns</a></li>
+                                <li><a href="#">Multi-Channel Orchestration Guide</a></li>
+                                <li><a href="#">Journey Health Monitoring & Alerts</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Notes -->
+            <section class="lesson-section implementation">
+                <div class="section-header">
+                    <span class="section-badge implementation">🏗️ IMPLEMENTATION NOTES</span>
+                    <h2>For Implementation Teams</h2>
+                    <p class="section-duration">Optional • 15 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Implementation Notes ▼
+                    </button>
+
+                    <div class="implementation-content">
+                        <h3>Naming Conventions & Governance</h3>
+                        <p>Establish flow naming standards early:</p>
+                        <ul>
+                            <li><strong>Format:</strong> <code>[Brand]_[Type]_[Purpose]_v[#]</code></li>
+                            <li><strong>Example:</strong> <code>NTO_Welcome_Journey_v2</code>, <code>NTO_Abandoned_Cart_v1</code></li>
+                            <li><strong>Never overwrite:</strong> Always version up (v1 → v2) and deactivate old version</li>
+                            <li><strong>Folder structure:</strong> Organize by lifecycle stage (Acquisition, Onboarding, Engagement, Retention)</li>
+                        </ul>
+
+                        <h3>Testing Strategy Before Production</h3>
+                        <p>Always test flows in sandbox before activating in production:</p>
+                        <div class="timeline-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Test Type</th>
+                                        <th>What to Check</th>
+                                        <th>How</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Validation Test</td>
+                                        <td>No errors in flow logic</td>
+                                        <td>Click "Review" button - fix any errors</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data Test</td>
+                                        <td>Personalization renders correctly</td>
+                                        <td>Use "Preview" with real member data</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Timing Test</td>
+                                        <td>Waits execute as expected</td>
+                                        <td>Activate with test segment, monitor for 24 hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Multi-path Test</td>
+                                        <td>Decision splits route correctly</td>
+                                        <td>Test with members in each tier/segment</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Performance Monitoring in Production</h3>
+                        <p>Key metrics to track for each active flow:</p>
+                        <ul>
+                            <li><strong>Entry Rate:</strong> How many members entering per day? (Should match segment size or event volume)</li>
+                            <li><strong>Completion Rate:</strong> % of members who reach the end of journey</li>
+                            <li><strong>Drop-off Points:</strong> Where are members exiting early? (Indicates disengagement)</li>
+                            <li><strong>Error Rate:</strong> % of interactions that fail (email bounce, SMS error, etc.)</li>
+                            <li><strong>Engagement Rate:</strong> Opens, clicks, conversions per journey</li>
+                        </ul>
+
+                        <h3>Common Pitfalls & Solutions</h3>
+                        <div class="pitfall-list">
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Members enter journey multiple times</h4>
+                                    <p><strong>Symptom:</strong> Sarah gets the welcome series twice</p>
+                                    <p><strong>Solution:</strong> Set entry criteria: "Has not entered this journey before" or use "Entry limit: 1 time"</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Event-triggered flow fires too frequently</h4>
+                                    <p><strong>Symptom:</strong> Member starts 5 trails in 1 day → Gets 5 separate emails</p>
+                                    <p><strong>Solution:</strong> Add "Frequency Cap: Max 1 entry per member per day"</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Personalization field missing</h4>
+                                    <p><strong>Symptom:</strong> Email shows "Hello, {{Individual.FirstName}}" instead of "Hello, Sarah"</p>
+                                    <p><strong>Solution:</strong> Use default values: <code>{{Individual.FirstName | default: "Valued Member"}}</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>When to Escalate</h3>
+                        <ul>
+                            <li><strong>Complex business logic:</strong> If decision splits require 5+ conditions, consider splitting into multiple flows</li>
+                            <li><strong>Custom events:</strong> If needed event doesn't exist in Data Cloud, engage data team to create streaming event</li>
+                            <li><strong>Agent handoff setup:</strong> Requires Service Cloud configuration - engage Service Cloud admin</li>
+                            <li><strong>High-volume performance:</strong> If flow will send 1M+ messages/day, engage platform architect for capacity planning</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz -->
+            <section class="lesson-section quiz">
+                <div class="section-header">
+                    <span class="section-badge quiz">✅ KNOWLEDGE CHECK</span>
+                    <h2>Module 6 Quiz</h2>
+                    <p class="section-duration">5 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Test your understanding before moving to Module 7:</p>
+
+                    <div class="quiz-question">
+                        <p><strong>1. What's the difference between segment-triggered and event-triggered flows?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1"> A) Segment-triggered runs once per day, event-triggered runs in real-time</label>
+                            <label><input type="radio" name="q1"> B) Segment-triggered fires when member joins segment, event-triggered fires when specific action occurs</label>
+                            <label><input type="radio" name="q1"> C) They're the same, just different names</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>2. What does a "Wait for Duration" element do?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2"> A) Pauses the journey for a fixed amount of time before the next interaction</label>
+                            <label><input type="radio" name="q2"> B) Waits until the member clicks an email</label>
+                            <label><input type="radio" name="q2"> C) Delays the journey until a specific date</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>3. What is a Decision Split used for?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3"> A) To branch the journey into different paths based on member attributes or behavior</label>
+                            <label><input type="radio" name="q3"> B) To test two different email subject lines</label>
+                            <label><input type="radio" name="q3"> C) To send the same message via multiple channels</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>4. What does Path Experimentation allow you to do?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4"> A) Create multiple versions of content and test which performs better</label>
+                            <label><input type="radio" name="q4"> B) Send the same email to multiple segments</label>
+                            <label><input type="radio" name="q4"> C) Preview your email before sending</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-answers" style="display:none;">
+                        <h3>Answers:</h3>
+                        <p>1. B) Segment-triggered fires when member joins segment, event-triggered fires when specific action occurs</p>
+                        <p>2. A) Pauses the journey for a fixed amount of time before the next interaction</p>
+                        <p>3. A) To branch the journey into different paths based on member attributes or behavior</p>
+                        <p>4. A) Create multiple versions of content and test which performs better</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="document.querySelector('.quiz-answers').style.display='block'; this.style.display='none';">
+                        Show Answers
+                    </button>
+                </div>
+            </section>
+
+            <!-- Module Summary -->
+            <section class="module-summary">
+                <h2>🎉 Module 6 Complete!</h2>
+                <p>Fantastic work! You've mastered Flow Builder and automation for NTO Rewards.</p>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>✅ What You Learned</h3>
+                        <ul>
+                            <li>Three trigger types: Segment, Event, and On-Demand</li>
+                            <li>Wait elements for timing control and event-based pauses</li>
+                            <li>Decision Splits for tier-based branching logic</li>
+                            <li>Path Experimentation for A/B testing campaigns</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h3>🛠️ What You Built</h3>
+                        <ul>
+                            <li>3-email welcome journey over 7 days</li>
+                            <li>Event-triggered trail promotion with tier-based paths</li>
+                            <li>A/B test comparing two subject lines</li>
+                            <li>Multi-channel journey with SMS and Email</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="next-module">
+                    <h3>🚀 Next Up: Module 7 - Loyalty Integration</h3>
+                    <p>Now you'll go deeper into Salesforce Loyalty Management integration. You'll build flows triggered by loyalty events like tier upgrades and points expiration, and learn to work with Loyalty DMOs in Data Cloud.</p>
+                    <a href="module-07-loyalty-integration.html" class="btn-primary btn-large">Continue to Module 7 →</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="training-footer">
+        <div class="container">
+            <p>MC Next Training: The NTO Rewards Journey | Module 6 of 8</p>
+            <p><a href="module-05-content-builder.html">← Previous Module</a> | <a href="../index.html">Back to Home</a> | <a href="module-07-loyalty-integration.html">Next Module →</a></p>
+        </div>
+    </footer>
+
+    <script src="../scripts/training.js"></script>
+</body>
+</html>

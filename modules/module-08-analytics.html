@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 8: Analytics & Reporting | MC Next Training</title>
+    <link rel="stylesheet" href="../styles/training.css">
+</head>
+<body>
+    <nav class="training-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">🏔️ MC Next Training</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="module-01-data-foundation.html">Module 1</a>
+                <a href="module-02-segmentation.html">Module 2</a>
+                <a href="module-08-analytics.html" class="active">Module 8</a>
+                <a href="../resources.html">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="module-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> ›
+                <a href="../index.html#level-3">Level 3: Advanced</a> ›
+                <span>Module 8</span>
+            </div>
+            <h1>Module 8: Analytics & Reporting</h1>
+            <p class="module-subtitle">Measuring campaign success and loyalty program ROI</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p class="progress-text">Progress: 0% Complete</p>
+
+            <div class="module-meta">
+                <span class="meta-item">⏱️ <strong>1.5 hours</strong></span>
+                <span class="meta-item">🎯 <strong>2 Labs</strong></span>
+                <span class="meta-item">📸 <strong>6 Screenshots</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-content">
+
+            <!-- NTO Rewards Context -->
+            <section class="nto-context">
+                <div class="context-header">
+                    <span class="context-icon">🏔️</span>
+                    <h2>NTO Rewards Context</h2>
+                </div>
+                <div class="context-body">
+                    <p><strong>The Scenario:</strong> NTO's leadership wants to understand if the loyalty program is driving business value. The marketing team needs to prove ROI: Are loyalty members more engaged than non-members? Which campaigns perform best? How do we optimize future sends?</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Active Campaigns</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">2.8M</div>
+                            <div class="stat-label">Emails Sent</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">28%</div>
+                            <div class="stat-label">Open Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3.2%</div>
+                            <div class="stat-label">Click Rate</div>
+                        </div>
+                    </div>
+
+                    <p><strong>Your Challenge:</strong> Build campaign performance dashboards to track email engagement. Calculate loyalty-specific metrics like enrollment rate and tier progression. Measure loyalty lift by comparing member vs non-member purchase behavior.</p>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2>🎯 What You'll Learn</h2>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <span class="objective-icon">📊</span>
+                        <h3>Campaign Performance</h3>
+                        <p>Track sends, opens, clicks, bounces, and conversions across journeys</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">💎</span>
+                        <h3>Loyalty Metrics</h3>
+                        <p>Measure enrollment rate, tier progression, and trail completion</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🔬</span>
+                        <h3>Micro vs Macro Dashboards</h3>
+                        <p>Campaign-level optimization vs strategic planning views</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">💰</span>
+                        <h3>ROI Calculation</h3>
+                        <p>Calculate loyalty lift and prove program business value</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Lesson -->
+            <section class="lesson-section core-lesson">
+                <div class="section-header">
+                    <span class="section-badge core">📖 CORE LESSON</span>
+                    <h2>Understanding Analytics & Reporting</h2>
+                    <p class="section-duration">Required • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <h3>The Four Key Concepts</h3>
+                    <p>MC Next provides multiple layers of analytics to measure campaign and program performance. Let's understand the core building blocks:</p>
+
+                    <div class="concept-card">
+                        <div class="concept-number">1</div>
+                        <div class="concept-content">
+                            <h4>Micro Dashboards (Campaign-Level)</h4>
+                            <p>Micro dashboards show performance for individual campaigns and journeys:</p>
+                            <ul>
+                                <li><strong>Journey Analytics:</strong> View performance of a specific flow (e.g., Welcome Journey)</li>
+                                <li><strong>Metrics tracked:</strong> Sends, Opens, Clicks, Bounces, Unsubscribes, Conversions</li>
+                                <li><strong>Drill-down views:</strong> By device (mobile vs desktop), location, time of day</li>
+                                <li><strong>Path analysis:</strong> See where members drop off in journey</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Use Case:</strong> NTO's marketing manager checks the Welcome Journey micro dashboard daily to optimize timing and content. If Day 2 email has low opens, test a different subject line.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">2</div>
+                        <div class="concept-content">
+                            <h4>Macro Dashboards (Strategic Planning)</h4>
+                            <p>Macro dashboards provide high-level insights across all campaigns:</p>
+                            <p><strong>Marketing Performance Dashboard shows:</strong></p>
+                            <div class="analogy-box">
+                                <strong>Global metrics:</strong> Total sends, average open rate, click-through rate across all campaigns<br>
+                                <strong>Trend analysis:</strong> Are metrics improving month-over-month?<br>
+                                <strong>Channel comparison:</strong> Email vs SMS vs WhatsApp performance<br>
+                                <strong>Segment performance:</strong> Gold members vs Silver vs Bronze engagement
+                            </div>
+                            <p><strong>Purpose:</strong> Strategic planning, executive reporting, identifying patterns.</p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">3</div>
+                        <div class="concept-content">
+                            <h4>Semantic Data Model (Raw Data Exports)</h4>
+                            <p>For advanced analysis, export raw data using the Semantic Data Model:</p>
+                            <ul>
+                                <li><strong>What it is:</strong> Direct access to underlying campaign data (sends, opens, clicks) as SQL tables</li>
+                                <li><strong>Export to:</strong> Tableau, CRM Analytics, Excel, external BI tools</li>
+                                <li><strong>Use cases:</strong> Custom reports, complex attribution modeling, cross-system analysis</li>
+                            </ul>
+                            <p><strong>Example query:</strong> "Show me all members who opened 3+ welcome emails but never made a purchase."</p>
+                            <div class="key-insight">
+                                <strong>💡 Pro Tip:</strong> Use built-in dashboards for day-to-day monitoring. Export raw data for deep-dive analysis or custom reports.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">4</div>
+                        <div class="concept-content">
+                            <h4>Loyalty Lift (ROI Calculation)</h4>
+                            <p>The ultimate question: Does the loyalty program drive more business value?</p>
+                            <p><strong>Loyalty Lift measures:</strong></p>
+                            <ul>
+                                <li><strong>Purchase frequency:</strong> Do loyalty members buy more often than non-members?</li>
+                                <li><strong>Average order value:</strong> Do members spend more per transaction?</li>
+                                <li><strong>Lifetime value:</strong> What's the total value of a member over 3 years vs non-member?</li>
+                                <li><strong>Retention rate:</strong> Do members churn less than non-members?</li>
+                            </ul>
+                            <p><strong>NTO Example:</strong></p>
+                            <div class="analogy-box">
+                                <strong>Loyalty Members:</strong> Purchase 4.2 times/year, AOV $95<br>
+                                <strong>Non-Members:</strong> Purchase 1.8 times/year, AOV $75<br>
+                                <strong>Loyalty Lift:</strong> 2.3x purchase frequency, 27% higher AOV<br>
+                                <strong>Result:</strong> Loyalty program ROI = 320% (members generate 3.2x more revenue)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="watch-video">
+                        <h3>📺 Watch: Analytics Tour (8 min)</h3>
+                        <p>Before the lab, watch this walkthrough of MC Next analytics and dashboards.</p>
+                        <div class="video-placeholder">
+                            <p>🎥 Video: Measuring Campaign Success in MC Next</p>
+                            <p><em>Note: Link to existing Vidyard video or create placeholder</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 1 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 1</span>
+                    <h2>Analyze Campaign Performance</h2>
+                    <p class="section-duration">Hands-on • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Navigate to the Marketing Performance dashboard and analyze your Welcome Journey performance. Drill into email metrics by device and location. Identify optimization opportunities.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Access Marketing Performance dashboard</li>
+                                <li>View global metrics: sends, opens, clicks, bounces</li>
+                                <li>Drill into Welcome Journey analytics</li>
+                                <li>Analyze performance by device (mobile vs desktop) and location</li>
+                                <li>Identify one optimization opportunity</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Navigate to Marketing Performance Dashboard</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From MC Next, click <strong>Analytics</strong> in the left navigation.</p>
+                                <p>Select <strong>Marketing Performance</strong> (the macro dashboard).</p>
+                                <p>You'll see global metrics for all campaigns:</p>
+                                <ul>
+                                    <li><strong>Total Sends:</strong> 2.8M</li>
+                                    <li><strong>Open Rate:</strong> 28%</li>
+                                    <li><strong>Click Rate:</strong> 3.2%</li>
+                                    <li><strong>Bounce Rate:</strong> 2.1%</li>
+                                    <li><strong>Unsubscribe Rate:</strong> 0.3%</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod8-step1-analytics-nav.jpg"
+                                         alt="Marketing Performance dashboard"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Global campaign metrics across all NTO journeys</p>
+                                    <p class="screenshot-meta">📸 <code>mod8-step1-analytics-nav.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Compare your metrics to industry benchmarks. NTO's 28% open rate is above the retail industry average of 21%!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Drill Into Welcome Journey Analytics</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From the Marketing Performance dashboard, click on the <strong>Journeys</strong> tab.</p>
+                                <p>Find and click <strong>NTO_Welcome_Journey_v1</strong> to see micro-level analytics.</p>
+                                <p>You'll see performance for each interaction in the journey:</p>
+                                <ul>
+                                    <li><strong>Day 0 Welcome Email:</strong> 35% open rate, 5% click rate</li>
+                                    <li><strong>Day 2 Getting Started:</strong> 28% open rate, 3.5% click rate</li>
+                                    <li><strong>Day 7 First Purchase:</strong> 24% open rate, 6% click rate (highest conversion!)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod8-step2-journey-analytics.jpg"
+                                         alt="Welcome Journey analytics"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Email-by-email performance in welcome journey</p>
+                                    <p class="screenshot-meta">📸 <code>mod8-step2-journey-analytics.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>📈 Insight:</strong> Open rates decline over the journey (35% → 28% → 24%), but click rates remain strong. This is normal engagement decay. Consider adding a re-engagement email if no clicks after Day 7.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Analyze by Device</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click on <strong>Day 0 Welcome Email</strong> to see detailed metrics.</p>
+                                <p>Select the <strong>Device Breakdown</strong> tab:</p>
+                                <ul>
+                                    <li><strong>Mobile:</strong> 68% of opens, 4.2% click rate</li>
+                                    <li><strong>Desktop:</strong> 28% of opens, 6.5% click rate</li>
+                                    <li><strong>Tablet:</strong> 4% of opens, 5.1% click rate</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod8-step3-device-breakdown.jpg"
+                                         alt="Device analytics"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Most members open on mobile, but desktop has higher clicks</p>
+                                    <p class="screenshot-meta">📸 <code>mod8-step3-device-breakdown.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>💡 Optimization Idea:</strong> Mobile gets 68% of opens but lower clicks. Test mobile-optimized CTAs (bigger buttons, less text) to improve mobile conversion.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Analyze by Location</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click the <strong>Location Breakdown</strong> tab:</p>
+                                <ul>
+                                    <li><strong>West Coast (CA, OR, WA):</strong> 35% open rate, 4.8% click rate</li>
+                                    <li><strong>Mountain (CO, UT, WY):</strong> 38% open rate, 5.5% click rate (highest!)</li>
+                                    <li><strong>East Coast (NY, MA, FL):</strong> 32% open rate, 4.2% click rate</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod8-step4-location-breakdown.jpg"
+                                         alt="Location analytics"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Mountain region members are most engaged</p>
+                                    <p class="screenshot-meta">📸 <code>mod8-step4-location-breakdown.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>📈 Insight:</strong> Mountain region members (Colorado, Utah, Wyoming) have highest engagement. Makes sense - they're closest to outdoor trails! Consider region-specific content (highlight local trails).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 1 Checkpoint</h3>
+                        <p>Before moving to Lab 2, verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ You accessed the Marketing Performance dashboard</li>
+                            <li>✓ You drilled into Welcome Journey micro analytics</li>
+                            <li>✓ You analyzed performance by device</li>
+                            <li>✓ You analyzed performance by location</li>
+                            <li>✓ You identified at least one optimization opportunity</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 2 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 2</span>
+                    <h2>Calculate Loyalty Metrics & ROI</h2>
+                    <p class="section-duration">Hands-on • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Build a custom report showing loyalty-specific metrics: enrollment rate per month, tier progression tracking, and trail completion percentage. Then calculate loyalty lift ROI by comparing member vs non-member purchase behavior.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Create custom report for enrollment rate trend</li>
+                                <li>Track tier progression (Bronze→Silver→Gold) over time</li>
+                                <li>Calculate trail completion percentage</li>
+                                <li>Calculate loyalty lift: purchase frequency members vs non-members</li>
+                                <li>Export report for executive presentation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Create Enrollment Rate Report</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Go to <strong>Analytics</strong> → <strong>Custom Reports</strong> → <strong>Create Report</strong>.</p>
+                                <p>Name: <code>NTO_Loyalty_Enrollment_Trend</code></p>
+                                <p>Configure the report:</p>
+                                <ul>
+                                    <li><strong>Data Source:</strong> <code>LoyaltyProgramMember</code></li>
+                                    <li><strong>Metric:</strong> Count of new members (where <code>EnrollmentDate >= FirstDayOfMonth</code>)</li>
+                                    <li><strong>Dimension:</strong> Month</li>
+                                    <li><strong>Date Range:</strong> Last 12 months</li>
+                                </ul>
+
+                                <p>You'll see a trend line showing:</p>
+                                <ul>
+                                    <li><strong>January:</strong> 4,200 new enrollments</li>
+                                    <li><strong>February:</strong> 4,800 new enrollments</li>
+                                    <li><strong>March:</strong> 5,500 new enrollments (growing!)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod8-lab2-step1-enrollment.jpg"
+                                         alt="Enrollment rate trend chart"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Monthly new member enrollment showing 12-month trend</p>
+                                    <p class="screenshot-meta">📸 <code>mod8-lab2-step1-enrollment.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>📈 Insight:</strong> Enrollment is growing 10-15% month-over-month. Correlate with marketing campaigns to identify which channels drive enrollments.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Track Tier Progression</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Create a second report: <code>NTO_Tier_Progression</code></p>
+                                <p>Configure:</p>
+                                <ul>
+                                    <li><strong>Data Source:</strong> <code>LoyaltyMemberTier</code> with date filter on <code>EffectiveDate</code></li>
+                                    <li><strong>Metric:</strong> Count of tier changes</li>
+                                    <li><strong>Dimensions:</strong> Previous Tier, New Tier, Month</li>
+                                </ul>
+
+                                <p>Results for March:</p>
+                                <ul>
+                                    <li><strong>Bronze → Silver:</strong> 1,800 members upgraded</li>
+                                    <li><strong>Silver → Gold:</strong> 450 members upgraded</li>
+                                    <li><strong>Total Active:</strong> Bronze: 45K, Silver: 18K, Gold: 5K</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod8-lab2-step2-tier-progression.jpg"
+                                         alt="Tier progression funnel"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Monthly tier upgrades showing progression funnel</p>
+                                    <p class="screenshot-meta">📸 <code>mod8-lab2-step2-tier-progression.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>💡 Insight:</strong> 4% of Bronze members upgrade to Silver each month. 2.5% of Silver upgrade to Gold. These are healthy progression rates indicating engaged member base.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Calculate Trail Completion Rate</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Create report: <code>NTO_Trail_Completion_Rate</code></p>
+                                <p>Query logic:</p>
+                                <ul>
+                                    <li><strong>Started:</strong> Count of <code>Promotion_Joined</code> events</li>
+                                    <li><strong>Completed:</strong> Count of <code>Promotion_Completed</code> events</li>
+                                    <li><strong>Completion Rate:</strong> (Completed / Started) * 100</li>
+                                </ul>
+
+                                <p>Results by trail:</p>
+                                <ul>
+                                    <li><strong>Beginner's Adventure:</strong> 78% completion (easy trail, high success)</li>
+                                    <li><strong>Valley Explorer:</strong> 62% completion</li>
+                                    <li><strong>Summit Seeker:</strong> 45% completion (challenging, but engaged Gold members)</li>
+                                </ul>
+
+                                <div class="key-insight">
+                                    <strong>📈 Insight:</strong> Summit Seeker has 45% completion. That's actually good for a difficult trail! Consider adding mid-journey encouragement email to boost to 50%+.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Calculate Loyalty Lift ROI</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>This is the big one! Calculate the business value of the loyalty program.</p>
+                                <p>Go to <strong>Data Cloud</strong> → <strong>Query</strong> → <strong>Create Query</strong>.</p>
+                                <p>Name: <code>Loyalty_Lift_Analysis</code></p>
+
+                                <p><strong>Query 1: Member Purchase Behavior</strong></p>
+                                <div class="code-block">
+                                    SELECT<br>
+                                    &nbsp;&nbsp;COUNT(DISTINCT Order.Id) / COUNT(DISTINCT Individual.Id) AS PurchasesPerMember,<br>
+                                    &nbsp;&nbsp;AVG(Order.TotalAmount) AS AverageOrderValue,<br>
+                                    &nbsp;&nbsp;SUM(Order.TotalAmount) / COUNT(DISTINCT Individual.Id) AS LifetimeValue<br>
+                                    FROM Individual<br>
+                                    JOIN LoyaltyProgramMember ON Individual.Id = LoyaltyProgramMember.ContactId<br>
+                                    JOIN Order ON Individual.Id = Order.CustomerId<br>
+                                    WHERE Order.OrderDate >= '2025-01-01'
+                                </div>
+
+                                <p><strong>Results for Loyalty Members:</strong></p>
+                                <ul>
+                                    <li><strong>Purchases per member:</strong> 4.2 per year</li>
+                                    <li><strong>Average order value:</strong> $95</li>
+                                    <li><strong>Lifetime value (12 months):</strong> $399</li>
+                                </ul>
+
+                                <p><strong>Query 2: Non-Member Purchase Behavior</strong> (same query, exclude LoyaltyProgramMember join)</p>
+                                <ul>
+                                    <li><strong>Purchases per customer:</strong> 1.8 per year</li>
+                                    <li><strong>Average order value:</strong> $75</li>
+                                    <li><strong>Lifetime value (12 months):</strong> $135</li>
+                                </ul>
+
+                                <p><strong>Calculate Loyalty Lift:</strong></p>
+                                <ul>
+                                    <li><strong>Purchase Frequency Lift:</strong> 4.2 / 1.8 = 2.33x (members buy 233% more often!)</li>
+                                    <li><strong>AOV Lift:</strong> $95 / $75 = 1.27x (members spend 27% more per order)</li>
+                                    <li><strong>LTV Lift:</strong> $399 / $135 = 2.96x (members generate 3x more revenue)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod8-lab2-step3-export.jpg"
+                                         alt="Loyalty lift ROI calculation"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Side-by-side comparison showing loyalty program ROI</p>
+                                    <p class="screenshot-meta">📸 <code>mod8-lab2-step3-export.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Result:</strong> NTO Rewards members generate 3x more revenue than non-members! This is the data your executives need to see. Export this report and present to leadership.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">5</span>
+                                <h4>Export Report for Executive Presentation</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From any report, click <strong>Export</strong> in the top right.</p>
+                                <p>Choose format:</p>
+                                <ul>
+                                    <li><strong>PDF:</strong> For executive presentations (includes charts)</li>
+                                    <li><strong>CSV:</strong> For further analysis in Excel/Tableau</li>
+                                    <li><strong>PowerPoint:</strong> Slides ready to present</li>
+                                </ul>
+
+                                <p>Schedule automated reports:</p>
+                                <ul>
+                                    <li><strong>Frequency:</strong> Monthly</li>
+                                    <li><strong>Recipients:</strong> Marketing team + leadership</li>
+                                    <li><strong>Content:</strong> Enrollment trend, tier progression, loyalty lift ROI</li>
+                                </ul>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Schedule the loyalty lift report to send on the 1st of each month. Leadership loves consistent, automated insights!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 2 Checkpoint</h3>
+                        <p>Verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Enrollment rate report shows 12-month trend</li>
+                            <li>✓ Tier progression report tracks Bronze→Silver→Gold</li>
+                            <li>✓ Trail completion rates calculated for all trails</li>
+                            <li>✓ Loyalty lift ROI calculated (members vs non-members)</li>
+                            <li>✓ Reports exported for executive presentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Section -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Deep Dive: CRM Analytics & Data Cloud Insights</h2>
+                    <p class="section-duration">Optional • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Content ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <h3>CRM Analytics Dashboards</h3>
+                        <p>For enterprise customers, CRM Analytics (formerly Tableau CRM) provides advanced visualization:</p>
+                        <ul>
+                            <li><strong>Interactive dashboards:</strong> Drill-down, filter, explore data in real-time</li>
+                            <li><strong>Predictive analytics:</strong> Einstein forecasts future enrollment, churn risk, LTV</li>
+                            <li><strong>Custom calculations:</strong> Build complex metrics (e.g., cohort analysis, attribution modeling)</li>
+                            <li><strong>Mobile-optimized:</strong> View dashboards on mobile for on-the-go insights</li>
+                        </ul>
+
+                        <h3>Data Cloud Insights</h3>
+                        <p>Data Cloud provides AI-powered insights automatically:</p>
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <h4>Anomaly Detection</h4>
+                                <p>Einstein alerts you if metrics suddenly drop (e.g., open rate drops from 28% to 15%).</p>
+                                <p><strong>Benefit:</strong> Catch deliverability issues before they impact full campaign.</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Trend Forecasting</h4>
+                                <p>Predict future enrollment based on historical trends.</p>
+                                <p><strong>Use case:</strong> "At current growth rate, NTO will hit 100K members by Q4."</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Segment Insights</h4>
+                                <p>Einstein identifies which segments are most valuable.</p>
+                                <p><strong>Example:</strong> "Gold members in Mountain region have 2x higher LTV."</p>
+                            </div>
+                        </div>
+
+                        <h3>Tableau Integration</h3>
+                        <p>For customers with Tableau licenses, connect MC Next data to Tableau Desktop:</p>
+                        <ul>
+                            <li><strong>Data connector:</strong> Use Salesforce Data Cloud connector in Tableau</li>
+                            <li><strong>Pre-built dashboards:</strong> Salesforce provides loyalty dashboard templates</li>
+                            <li><strong>Custom visualizations:</strong> Build executive dashboards with brand colors, logos</li>
+                            <li><strong>Combine data sources:</strong> Merge MC Next data with external data (e.g., Google Analytics, CRM)</li>
+                        </ul>
+
+                        <h3>Attribution Modeling</h3>
+                        <p>Advanced question: Which touchpoints drive conversions?</p>
+                        <ul>
+                            <li><strong>First-touch attribution:</strong> Credit to first email member opened</li>
+                            <li><strong>Last-touch attribution:</strong> Credit to last email before purchase</li>
+                            <li><strong>Multi-touch attribution:</strong> Credit distributed across all touchpoints</li>
+                        </ul>
+                        <p><strong>NTO Example:</strong> Sarah's journey: Welcome Email (Day 0) → Getting Started (Day 2) → First Purchase Email (Day 7) → Purchase. Multi-touch model gives 40% credit to each email.</p>
+
+                        <div class="further-reading">
+                            <h4>📚 Further Reading</h4>
+                            <ul>
+                                <li><a href="#">CRM Analytics for MC Next</a></li>
+                                <li><a href="#">Data Cloud Insights User Guide</a></li>
+                                <li><a href="#">Advanced Attribution Modeling</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Notes -->
+            <section class="lesson-section implementation">
+                <div class="section-header">
+                    <span class="section-badge implementation">🏗️ IMPLEMENTATION NOTES</span>
+                    <h2>For Implementation Teams</h2>
+                    <p class="section-duration">Optional • 15 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Implementation Notes ▼
+                    </button>
+
+                    <div class="implementation-content">
+                        <h3>Reporting Governance</h3>
+                        <p>Establish governance before rolling out analytics to teams:</p>
+                        <ul>
+                            <li><strong>Single source of truth:</strong> Designate Marketing Performance as the official dashboard</li>
+                            <li><strong>Naming conventions:</strong> <code>[Brand]_[Metric]_[Timeframe]</code> (e.g., <code>NTO_Enrollment_12Mo</code>)</li>
+                            <li><strong>Access control:</strong> Campaign managers see their campaigns, leadership sees global view</li>
+                            <li><strong>Data definitions:</strong> Document how metrics are calculated (e.g., "Open rate = Unique opens / Delivered sends")</li>
+                        </ul>
+
+                        <h3>Scheduled Exports & Distribution</h3>
+                        <p>Automate reporting to reduce manual work:</p>
+                        <div class="timeline-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Report</th>
+                                        <th>Frequency</th>
+                                        <th>Audience</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Campaign Performance Summary</td>
+                                        <td>Weekly (Monday 8am)</td>
+                                        <td>Marketing team</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Loyalty Lift ROI</td>
+                                        <td>Monthly (1st of month)</td>
+                                        <td>Leadership + finance</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Journey Health Alerts</td>
+                                        <td>Daily</td>
+                                        <td>Campaign managers (only if errors)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tier Progression Report</td>
+                                        <td>Monthly</td>
+                                        <td>Loyalty program manager</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Dashboard Refresh Schedules</h3>
+                        <p>Configure how often dashboards update:</p>
+                        <ul>
+                            <li><strong>Real-time dashboards:</strong> Journey Health, Campaign Performance (15-minute refresh)</li>
+                            <li><strong>Daily dashboards:</strong> Segment performance, engagement metrics (6am daily)</li>
+                            <li><strong>Weekly dashboards:</strong> Strategic planning views (Sunday night)</li>
+                            <li><strong>Monthly dashboards:</strong> ROI reports, executive summaries (1st of month)</li>
+                        </ul>
+
+                        <h3>Metrics Validation Process</h3>
+                        <p>Before sharing reports with executives, validate metrics:</p>
+                        <div class="question-grid">
+                            <div class="question-card">
+                                <strong>Q:</strong> Do send counts match what's in journey logs?
+                                <p><em>Check:</em> Compare dashboard "Total Sends" to journey entry count.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Are open rates reasonable (not 0% or 100%)?
+                                <p><em>Check:</em> Industry benchmark is 15-30% for retail. If you're way off, investigate.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Does loyalty lift make business sense?
+                                <p><em>Check:</em> 2-3x LTV lift is typical. If showing 10x, likely data error.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Are date ranges consistent across reports?
+                                <p><em>Check:</em> Don't compare Q1 data to Q4 - seasonality skews results.</p>
+                            </div>
+                        </div>
+
+                        <h3>Common Pitfalls & Solutions</h3>
+                        <div class="pitfall-list">
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Open rates look inflated</h4>
+                                    <p><strong>Symptom:</strong> 60%+ open rates (too good to be true)</p>
+                                    <p><strong>Solution:</strong> Check if Apple Mail Privacy Protection is counted. Exclude machine opens for accurate metrics.</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Loyalty lift calculation excludes inactive members</h4>
+                                    <p><strong>Symptom:</strong> ROI looks too high</p>
+                                    <p><strong>Solution:</strong> Include ALL members (active + inactive) in denominator for accurate LTV calculation.</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Dashboard shows different numbers than email</h4>
+                                    <p><strong>Symptom:</strong> Team loses trust in reporting</p>
+                                    <p><strong>Solution:</strong> Check refresh schedules. Dashboard may be cached. Add "Last Updated" timestamp to all dashboards.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>When to Escalate</h3>
+                        <ul>
+                            <li><strong>Custom attribution modeling:</strong> Requires Data Cloud expert to build multi-touch model</li>
+                            <li><strong>CRM Analytics setup:</strong> Engage CRM Analytics consultant for dashboard development</li>
+                            <li><strong>Data discrepancies:</strong> If metrics don't match across systems (MC Next vs Data Cloud vs CRM), engage data architect</li>
+                            <li><strong>Tableau integration:</strong> Requires Tableau Desktop license + data connector setup</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz -->
+            <section class="lesson-section quiz">
+                <div class="section-header">
+                    <span class="section-badge quiz">✅ KNOWLEDGE CHECK</span>
+                    <h2>Module 8 Quiz</h2>
+                    <p class="section-duration">5 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Test your understanding of analytics and reporting:</p>
+
+                    <div class="quiz-question">
+                        <p><strong>1. What's the difference between micro and macro dashboards?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1"> A) Micro dashboards show individual campaign performance, macro dashboards show global metrics across all campaigns</label>
+                            <label><input type="radio" name="q1"> B) Micro dashboards are for small teams, macro dashboards are for large organizations</label>
+                            <label><input type="radio" name="q1"> C) They're the same, just different names</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>2. What does "loyalty lift" measure?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2"> A) The difference in business value (purchase frequency, AOV, LTV) between loyalty members and non-members</label>
+                            <label><input type="radio" name="q2"> B) How many members upgrade tiers per month</label>
+                            <label><input type="radio" name="q2"> C) The total number of loyalty program enrollments</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>3. Why is it important to analyze campaign performance by device (mobile vs desktop)?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3"> A) To identify optimization opportunities - if mobile has lower clicks, optimize CTAs for mobile</label>
+                            <label><input type="radio" name="q3"> B) Mobile metrics don't matter since most people use desktop</label>
+                            <label><input type="radio" name="q3"> C) It's only important for ecommerce companies</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>4. What's the benefit of scheduling automated report exports?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4"> A) Reduces manual work and ensures stakeholders receive consistent, timely insights</label>
+                            <label><input type="radio" name="q4"> B) Makes reports more accurate</label>
+                            <label><input type="radio" name="q4"> C) Allows you to hide bad metrics from leadership</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-answers" style="display:none;">
+                        <h3>Answers:</h3>
+                        <p>1. A) Micro dashboards show individual campaign performance, macro dashboards show global metrics across all campaigns</p>
+                        <p>2. A) The difference in business value (purchase frequency, AOV, LTV) between loyalty members and non-members</p>
+                        <p>3. A) To identify optimization opportunities - if mobile has lower clicks, optimize CTAs for mobile</p>
+                        <p>4. A) Reduces manual work and ensures stakeholders receive consistent, timely insights</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="document.querySelector('.quiz-answers').style.display='block'; this.style.display='none';">
+                        Show Answers
+                    </button>
+                </div>
+            </section>
+
+            <!-- Module Summary -->
+            <section class="module-summary">
+                <h2>🎉 Module 8 Complete!</h2>
+                <p>Congratulations! You've mastered analytics and can now prove the ROI of NTO Rewards.</p>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>✅ What You Learned</h3>
+                        <ul>
+                            <li>Micro vs macro dashboards for campaign and strategic insights</li>
+                            <li>Device and location analysis for optimization</li>
+                            <li>Loyalty-specific metrics: enrollment, tier progression, trail completion</li>
+                            <li>Loyalty lift ROI calculation comparing members vs non-members</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h3>🛠️ What You Built</h3>
+                        <ul>
+                            <li>Campaign performance analysis identifying optimization opportunities</li>
+                            <li>Enrollment rate trend showing 12-month growth</li>
+                            <li>Tier progression report tracking member advancement</li>
+                            <li>Loyalty lift ROI report proving 3x revenue from members</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="next-module">
+                    <h3>🎓 Training Complete!</h3>
+                    <p>You've finished all 8 modules of MC Next Training! You now have the skills to build data foundations, create segments, design content, automate journeys, integrate loyalty, and measure ROI. You're ready to launch NTO Rewards!</p>
+                    <a href="../index.html" class="btn-primary btn-large">Return to Home</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="training-footer">
+        <div class="container">
+            <p>MC Next Training: The NTO Rewards Journey | Module 8 of 8</p>
+            <p><a href="module-07-loyalty-integration.html">← Previous Module</a> | <a href="../index.html">Back to Home</a></p>
+        </div>
+    </footer>
+
+    <script src="../scripts/training.js"></script>
+</body>
+</html>

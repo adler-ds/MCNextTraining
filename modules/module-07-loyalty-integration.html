@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 7: Loyalty Integration | MC Next Training</title>
+    <link rel="stylesheet" href="../styles/training.css">
+</head>
+<body>
+    <nav class="training-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">🏔️ MC Next Training</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="module-01-data-foundation.html">Module 1</a>
+                <a href="module-02-segmentation.html">Module 2</a>
+                <a href="module-07-loyalty-integration.html" class="active">Module 7</a>
+                <a href="../resources.html">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="module-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> ›
+                <a href="../index.html#level-3">Level 3: Advanced</a> ›
+                <span>Module 7</span>
+            </div>
+            <h1>Module 7: Loyalty Integration</h1>
+            <p class="module-subtitle">Deep integration with Salesforce Loyalty Management</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p class="progress-text">Progress: 0% Complete</p>
+
+            <div class="module-meta">
+                <span class="meta-item">⏱️ <strong>2 hours</strong></span>
+                <span class="meta-item">🎯 <strong>2 Labs</strong></span>
+                <span class="meta-item">📸 <strong>7 Screenshots</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-content">
+
+            <!-- NTO Rewards Context -->
+            <section class="nto-context">
+                <div class="context-header">
+                    <span class="context-icon">🏔️</span>
+                    <h2>NTO Rewards Context</h2>
+                </div>
+                <div class="context-body">
+                    <p><strong>The Scenario:</strong> NTO Rewards runs on Salesforce Loyalty Management, which tracks member tiers, points balances, and promotion enrollments. The marketing team needs to celebrate important loyalty milestones (like tier upgrades) and prevent member churn by reminding members about expiring points.</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Loyalty Events</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">2K</div>
+                            <div class="stat-label">Tier Upgrades/Month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">50K</div>
+                            <div class="stat-label">Points Issued</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">15%</div>
+                            <div class="stat-label">Expiration Rate</div>
+                        </div>
+                    </div>
+
+                    <p><strong>Your Challenge:</strong> Build a flow triggered by the "Member Tier Changed" loyalty event to celebrate upgrades. Then create a points expiration reminder campaign by querying members with points expiring in 30 days.</p>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2>🎯 What You'll Learn</h2>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <span class="objective-icon">📊</span>
+                        <h3>Loyalty DMOs</h3>
+                        <p>Work with Program Member, Tier, and Promotion Enrollment data models</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">⚡</span>
+                        <h3>Event Triggers</h3>
+                        <p>Respond to loyalty events: tier changes, points accrued, promotion joins</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🔄</span>
+                        <h3>Data Streams</h3>
+                        <p>Understand real-time vs batch loyalty data ingestion patterns</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">📜</span>
+                        <h3>Transaction History</h3>
+                        <p>Track and segment based on member activity and transaction patterns</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Lesson -->
+            <section class="lesson-section core-lesson">
+                <div class="section-header">
+                    <span class="section-badge core">📖 CORE LESSON</span>
+                    <h2>Understanding Loyalty Integration</h2>
+                    <p class="section-duration">Required • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <h3>The Four Key Concepts</h3>
+                    <p>MC Next integrates natively with Salesforce Loyalty Management through Data Cloud. Let's understand the core building blocks:</p>
+
+                    <div class="concept-card">
+                        <div class="concept-number">1</div>
+                        <div class="concept-content">
+                            <h4>Loyalty DMOs (Data Model Objects)</h4>
+                            <p>Loyalty data flows from Loyalty Management to Data Cloud as structured DMOs:</p>
+                            <ul>
+                                <li><strong>LoyaltyProgramMember:</strong> Core member record (tier, enrollment date, status)</li>
+                                <li><strong>LoyaltyMemberTier:</strong> Current tier assignment (Bronze, Silver, Gold) with effective dates</li>
+                                <li><strong>LoyaltyProgramPromotion:</strong> Active promotions members can enroll in (engagement trails, double points events)</li>
+                                <li><strong>LoyaltyMemberPromotion:</strong> Member enrollment in specific promotions</li>
+                                <li><strong>JournalEntry:</strong> Points transactions (accruals, redemptions, expirations)</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Key Insight:</strong> These DMOs are automatically mapped to your Data Graph in Module 1. That's why you can personalize with fields like <code>{{LoyaltyMember.Tier}}</code> and <code>{{LoyaltyMember.PointsBalance}}</code>.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">2</div>
+                        <div class="concept-content">
+                            <h4>Loyalty Event Triggers</h4>
+                            <p>Loyalty Management publishes real-time events to Data Cloud that can trigger MC Next journeys:</p>
+                            <p><strong>Available loyalty events:</strong></p>
+                            <div class="analogy-box">
+                                <strong>Member Tier Changed:</strong> Fires when Sarah upgrades from Silver → Gold<br>
+                                <strong>Points Accrued:</strong> Fires when Marcus earns 500 points from a purchase<br>
+                                <strong>Points Redeemed:</strong> Fires when Elena redeems 2,000 points for a voucher<br>
+                                <strong>Promotion Joined:</strong> Fires when member enrolls in engagement trail<br>
+                                <strong>Promotion Completed:</strong> Fires when member completes trail requirements
+                            </div>
+                            <p>These events enable real-time, contextual marketing messages.</p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">3</div>
+                        <div class="concept-content">
+                            <h4>Data Streams & Ingestion Patterns</h4>
+                            <p><strong>Real-time streaming:</strong> Loyalty events publish within seconds of occurring</p>
+                            <ul>
+                                <li><strong>Use for:</strong> Tier upgrade celebrations, promotion joins, time-sensitive messages</li>
+                                <li><strong>Example:</strong> Sarah upgrades to Gold at 2:00pm → Celebration email arrives at 2:02pm</li>
+                            </ul>
+                            <p><strong>Batch ingestion:</strong> Loyalty snapshots sync hourly/daily</p>
+                            <ul>
+                                <li><strong>Use for:</strong> Points balance reports, tier status checks, bulk segmentation</li>
+                                <li><strong>Example:</strong> Nightly batch updates all members' points balances for reporting</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Best Practice:</strong> Use real-time events for member-facing communications (celebrate moments!). Use batch for analytics and bulk operations.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">4</div>
+                        <div class="concept-content">
+                            <h4>Transaction History</h4>
+                            <p>The JournalEntry DMO tracks every points transaction:</p>
+                            <p><strong>What's tracked:</strong></p>
+                            <ul>
+                                <li><strong>Accruals:</strong> Points earned (from purchases, activities, bonuses)</li>
+                                <li><strong>Redemptions:</strong> Points spent (vouchers, products, experiences)</li>
+                                <li><strong>Expirations:</strong> Points that expired (typically 12 months after accrual)</li>
+                                <li><strong>Adjustments:</strong> Manual corrections by support team</li>
+                            </ul>
+                            <p><strong>Use cases for NTO:</strong></p>
+                            <ul>
+                                <li><strong>Segment by activity:</strong> "High earners" (earned 5,000+ points in last 30 days)</li>
+                                <li><strong>Predict churn:</strong> Members who haven't earned points in 90 days</li>
+                                <li><strong>Expiration alerts:</strong> Members with points expiring soon</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="watch-video">
+                        <h3>📺 Watch: Loyalty Management + MC Next Integration (8 min)</h3>
+                        <p>Before the lab, watch this overview of how loyalty data flows to MC Next.</p>
+                        <div class="video-placeholder">
+                            <p>🎥 Video: End-to-End Loyalty Data Flow</p>
+                            <p><em>Note: Link to existing Vidyard video or create placeholder</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 1 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 1</span>
+                    <h2>Build Tier Upgrade Celebration Flow</h2>
+                    <p class="section-duration">Hands-on • 60 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Create an event-triggered flow that fires when a member's tier changes. Celebrate the upgrade with a personalized email showing their new benefits. Differentiate messaging for Bronze→Silver vs Silver→Gold upgrades.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Create event-triggered flow on "Member Tier Changed" event</li>
+                                <li>Add decision split to detect upgrade type (Bronze→Silver or Silver→Gold)</li>
+                                <li>Send celebration email with new tier benefits</li>
+                                <li>Personalize with member name and new tier details</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Navigate to Loyalty Events</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>First, let's confirm the loyalty events are available in Data Cloud.</p>
+                                <p>From MC Next, go to <strong>Data Cloud</strong> → <strong>Data Streams</strong>.</p>
+                                <p>Search for <code>Loyalty</code> and verify you see:</p>
+                                <ul>
+                                    <li><strong>Member_Tier_Changed</strong> stream</li>
+                                    <li><strong>Points_Accrued</strong> stream</li>
+                                    <li><strong>Promotion_Joined</strong> stream</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod7-step1-loyalty-events.jpg"
+                                         alt="Loyalty events in Data Cloud"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Data Streams showing available loyalty events</p>
+                                    <p class="screenshot-meta">📸 <code>mod7-step1-loyalty-events.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> If you don't see these events, the Loyalty Management connector needs to be activated in Data Cloud setup.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Create Event-Triggered Flow</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Go to <strong>Journeys</strong> → <strong>Create Journey</strong> → <strong>Event-triggered</strong>.</p>
+                                <p>Configure:</p>
+                                <ul>
+                                    <li><strong>Journey Name:</strong> <code>NTO_Tier_Upgrade_Celebration_v1</code></li>
+                                    <li><strong>Event:</strong> Select <code>Member_Tier_Changed</code></li>
+                                    <li><strong>Entry Criteria:</strong> Add filter <code>NewTier > PreviousTier</code> (only upgrades, not downgrades)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod7-step2-event-flow.jpg"
+                                         alt="Event-triggered flow setup"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Flow triggered by tier upgrade events only</p>
+                                    <p class="screenshot-meta">📸 <code>mod7-step2-event-flow.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Add Decision Split for Upgrade Type</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Drag a <strong>Decision Split</strong> element onto the canvas.</p>
+                                <p>Configure two paths:</p>
+                                <ul>
+                                    <li><strong>Path 1 (Gold Upgrade):</strong> <code>NewTier equals "Gold"</code></li>
+                                    <li><strong>Path 2 (Silver Upgrade):</strong> <code>NewTier equals "Silver"</code></li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod7-step3-decision-split.jpg"
+                                         alt="Decision split by new tier"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Branching logic for Gold vs Silver upgrades</p>
+                                    <p class="screenshot-meta">📸 <code>mod7-step3-decision-split.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Configure Gold Upgrade Email</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>On the Gold path, add an <strong>Email</strong> element:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>Gold Tier Upgrade Celebration</code></li>
+                                    <li><strong>Subject:</strong> <code>🎉 Congratulations {{Individual.FirstName}}! You're now a Gold member</code></li>
+                                    <li><strong>Email Content:</strong></li>
+                                </ul>
+                                <div class="code-block">
+                                    <strong>Congratulations on reaching Gold status!</strong><br><br>
+                                    Hi {{Individual.FirstName}},<br><br>
+                                    Your loyalty has unlocked our highest tier! Here's what you now enjoy:<br>
+                                    ✓ Free shipping on all orders<br>
+                                    ✓ 2X points on every purchase<br>
+                                    ✓ Exclusive access to Summit Seeker trails<br>
+                                    ✓ Priority customer support<br>
+                                    ✓ Early access to new products<br><br>
+                                    Current Points Balance: {{LoyaltyMember.PointsBalance}}<br><br>
+                                    [Explore Your Benefits →]
+                                </div>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod7-step4-gold-email.jpg"
+                                         alt="Gold upgrade email"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Celebration email for Gold tier upgrades</p>
+                                    <p class="screenshot-meta">📸 <code>mod7-step4-gold-email.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">5</span>
+                                <h4>Configure Silver Upgrade Email</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>On the Silver path, add an <strong>Email</strong> element:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>Silver Tier Upgrade Celebration</code></li>
+                                    <li><strong>Subject:</strong> <code>🎉 You've reached Silver status, {{Individual.FirstName}}!</code></li>
+                                    <li><strong>Email Content:</strong></li>
+                                </ul>
+                                <div class="code-block">
+                                    <strong>Welcome to Silver!</strong><br><br>
+                                    Hi {{Individual.FirstName}},<br><br>
+                                    You've unlocked great new benefits:<br>
+                                    ✓ $5 shipping on all orders<br>
+                                    ✓ 1.5X points on purchases<br>
+                                    ✓ Access to Valley Explorer trails<br>
+                                    ✓ Birthday bonus: 1,000 points<br><br>
+                                    Current Points Balance: {{LoyaltyMember.PointsBalance}}<br><br>
+                                    Keep earning to reach Gold! Only {{PointsToGold}} points away.<br><br>
+                                    [Explore Your Benefits →]
+                                </div>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod7-step5-silver-email.jpg"
+                                         alt="Silver upgrade email"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Celebration email for Silver tier upgrades</p>
+                                    <p class="screenshot-meta">📸 <code>mod7-step5-silver-email.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Result:</strong> When Sarah upgrades from Bronze to Silver, she immediately receives a personalized celebration email. If Marcus later upgrades to Gold, he gets the premium celebration message!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 1 Checkpoint</h3>
+                        <p>Before moving to Lab 2, verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Flow is event-triggered on Member_Tier_Changed</li>
+                            <li>✓ Entry filter only allows upgrades (NewTier > PreviousTier)</li>
+                            <li>✓ Decision split creates Gold vs Silver paths</li>
+                            <li>✓ Both celebration emails are personalized</li>
+                            <li>✓ Journey is activated</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 2 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 2</span>
+                    <h2>Build Points Expiration Reminder Campaign</h2>
+                    <p class="section-duration">Hands-on • 60 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Create a campaign to remind members about points expiring in 30 days. Query loyalty transaction history to find members with expiring points, create a segment, and send automated reminders.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Query JournalEntry DMO for points expiring in next 30 days</li>
+                                <li>Create "Points Expiring Soon" segment</li>
+                                <li>Build segment-triggered journey to send reminder</li>
+                                <li>Personalize with expiration date and points amount</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Query for Expiring Points</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Go to <strong>Data Cloud</strong> → <strong>Query</strong> → <strong>Create Query</strong>.</p>
+                                <p>Name: <code>Members_with_Expiring_Points</code></p>
+                                <p>Build query:</p>
+                                <ul>
+                                    <li><strong>FROM:</strong> <code>Individual</code></li>
+                                    <li><strong>JOIN:</strong> <code>LoyaltyProgramMember</code> on <code>Individual.Id = LoyaltyProgramMember.ContactId</code></li>
+                                    <li><strong>JOIN:</strong> <code>JournalEntry</code> on <code>LoyaltyProgramMember.Id = JournalEntry.LoyaltyMemberId</code></li>
+                                    <li><strong>WHERE:</strong> <code>JournalEntry.ExpirationDate BETWEEN Today AND Today + 30 days</code></li>
+                                    <li><strong>AND:</strong> <code>JournalEntry.EntryType = "Accrual"</code></li>
+                                    <li><strong>AND:</strong> <code>JournalEntry.Balance > 0</code> (points haven't been redeemed yet)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod7-lab2-step1-query.jpg"
+                                         alt="Query for expiring points"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">SQL query finding members with points expiring soon</p>
+                                    <p class="screenshot-meta">📸 <code>mod7-lab2-step1-query.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> This query looks at JournalEntry records (transactions) to find accruals that expire soon. Much more accurate than just looking at current points balance!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Create Segment from Query</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From the query results, click <strong>Create Segment</strong>.</p>
+                                <p>Configure segment:</p>
+                                <ul>
+                                    <li><strong>Segment Name:</strong> <code>Points_Expiring_30_Days</code></li>
+                                    <li><strong>Description:</strong> <code>Members with points expiring in next 30 days</code></li>
+                                    <li><strong>Refresh Schedule:</strong> <code>Daily at 6am</code> (check every day for new expirations)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod7-lab2-step2-segment.jpg"
+                                         alt="Segment creation from query"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Daily-refreshing segment of members with expiring points</p>
+                                    <p class="screenshot-meta">📸 <code>mod7-lab2-step2-segment.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Build Reminder Journey</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Go to <strong>Journeys</strong> → <strong>Create Journey</strong> → <strong>Segment-triggered</strong>.</p>
+                                <p>Configure:</p>
+                                <ul>
+                                    <li><strong>Journey Name:</strong> <code>NTO_Points_Expiration_Reminder_v1</code></li>
+                                    <li><strong>Segment:</strong> <code>Points_Expiring_30_Days</code></li>
+                                    <li><strong>Entry Limit:</strong> <code>Once per member per 30 days</code> (don't spam if they keep ignoring)</li>
+                                </ul>
+
+                                <p>Add an <strong>Email</strong> interaction immediately after entry:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>Points Expiration Reminder</code></li>
+                                    <li><strong>Subject:</strong> <code>⏰ Your NTO Rewards points are expiring soon!</code></li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod7-lab2-step3-reminder.jpg"
+                                         alt="Expiration reminder journey"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Automated reminder flow for expiring points</p>
+                                    <p class="screenshot-meta">📸 <code>mod7-lab2-step3-reminder.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Personalize Reminder Email</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Configure the email content with personalization:</p>
+                                <div class="code-block">
+                                    <strong>Don't lose your rewards!</strong><br><br>
+                                    Hi {{Individual.FirstName}},<br><br>
+                                    You have <strong>{{JournalEntry.PointsBalance}} points</strong> expiring on <strong>{{JournalEntry.ExpirationDate | date: "MMMM d, yyyy"}}</strong>.<br><br>
+                                    That's only {{DaysUntilExpiration}} days away!<br><br>
+                                    <strong>Here's how to use them:</strong><br>
+                                    • Redeem for gear and apparel<br>
+                                    • Convert to vouchers for future purchases<br>
+                                    • Donate to outdoor conservation efforts<br><br>
+                                    Current Total Balance: {{LoyaltyMember.PointsBalance}} points<br><br>
+                                    [Redeem Your Points Now →]
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Result:</strong> Elena has 1,500 points expiring on May 15. She joins the segment on April 15 (30 days before) and receives a personalized reminder email with her exact expiration date and points amount. She redeems the points for a new hiking jacket, preventing expiration!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 2 Checkpoint</h3>
+                        <p>Verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Query finds members with points expiring in 30 days</li>
+                            <li>✓ Segment refreshes daily at 6am</li>
+                            <li>✓ Journey is segment-triggered with entry limit</li>
+                            <li>✓ Email personalizes with expiration date and points amount</li>
+                            <li>✓ Journey is activated</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Section -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Deep Dive: Multi-Program Management & Transaction History</h2>
+                    <p class="section-duration">Optional • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Content ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <h3>Multi-Program Considerations</h3>
+                        <p>If NTO runs multiple loyalty programs (e.g., Retail Rewards + Travel Rewards), you need to:</p>
+                        <ul>
+                            <li><strong>Segment by program:</strong> Add <code>LoyaltyProgramMember.ProgramId = "NTO_Rewards"</code> to all queries</li>
+                            <li><strong>Separate Data Graphs:</strong> Create <code>NTO_Retail_Graph</code> and <code>NTO_Travel_Graph</code> for different personalization contexts</li>
+                            <li><strong>Cross-program logic:</strong> Use decision splits to route members based on which program(s) they're enrolled in</li>
+                        </ul>
+
+                        <h3>Voucher Management</h3>
+                        <p>Many loyalty programs let members convert points to vouchers (discount codes). Integration points:</p>
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <h4>Voucher Issued Event</h4>
+                                <p>Trigger journey when member redeems points for voucher.</p>
+                                <p><strong>Email content:</strong> Voucher code, expiration date, redemption instructions.</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Voucher Expiring Soon</h4>
+                                <p>Query for vouchers expiring in 7 days, send reminder.</p>
+                                <p><strong>Benefit:</strong> Increases voucher utilization, prevents "forgotten" discounts.</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Voucher Redemption</h4>
+                                <p>Event fires when voucher is used at checkout.</p>
+                                <p><strong>Follow-up:</strong> Thank you email + "Redeem more points" upsell.</p>
+                            </div>
+                        </div>
+
+                        <h3>Transaction History Deep-Dive</h3>
+                        <p>Advanced segmentation using JournalEntry data:</p>
+                        <ul>
+                            <li><strong>High-value members:</strong> Members who earned 10,000+ points in last 90 days</li>
+                            <li><strong>Redemption risk:</strong> Members with high balance but no redemptions in 6 months (consider incentive to redeem)</li>
+                            <li><strong>Churn prediction:</strong> Members with no accruals in 90 days (send re-engagement campaign)</li>
+                            <li><strong>Tier acceleration:</strong> Members within 500 points of next tier (motivate with "almost there!" message)</li>
+                        </ul>
+
+                        <h3>Real-Time vs Batch Processing</h3>
+                        <p>Decision framework for loyalty campaigns:</p>
+                        <div class="timeline-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Use Case</th>
+                                        <th>Processing Type</th>
+                                        <th>Why</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tier upgrade celebration</td>
+                                        <td>Real-time (event)</td>
+                                        <td>Celebrate the moment, high emotional impact</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Points expiration reminder</td>
+                                        <td>Batch (daily)</td>
+                                        <td>Not time-sensitive within a day</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Promotion enrollment</td>
+                                        <td>Real-time (event)</td>
+                                        <td>Confirm enrollment immediately</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Monthly points summary</td>
+                                        <td>Batch (monthly)</td>
+                                        <td>Historical report, scheduled send</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="further-reading">
+                            <h4>📚 Further Reading</h4>
+                            <ul>
+                                <li><a href="#">Loyalty Management Data Model Reference</a></li>
+                                <li><a href="#">Advanced Loyalty Segmentation Patterns</a></li>
+                                <li><a href="#">Multi-Program Loyalty Architecture</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Notes -->
+            <section class="lesson-section implementation">
+                <div class="section-header">
+                    <span class="section-badge implementation">🏗️ IMPLEMENTATION NOTES</span>
+                    <h2>For Implementation Teams</h2>
+                    <p class="section-duration">Optional • 15 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Implementation Notes ▼
+                    </button>
+
+                    <div class="implementation-content">
+                        <h3>Discovery Questions for Loyalty Customers</h3>
+                        <p>When scoping loyalty integration, ask:</p>
+                        <div class="question-grid">
+                            <div class="question-card">
+                                <strong>Q:</strong> How many loyalty programs do you run?
+                                <p><em>Why it matters:</em> Multi-program requires separate Data Graphs and segmentation strategy.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> What are your most important loyalty milestones to celebrate?
+                                <p><em>Why it matters:</em> Determines which events to prioritize (tier changes, promotion completions, point thresholds).</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> What's your points expiration policy?
+                                <p><em>Why it matters:</em> Drives expiration reminder campaign timing and frequency.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Do members redeem for vouchers, products, or both?
+                                <p><em>Why it matters:</em> Determines voucher management flows needed.</p>
+                            </div>
+                        </div>
+
+                        <h3>Performance Considerations for Large Member Bases</h3>
+                        <p>If loyalty program has 1M+ members:</p>
+                        <ul>
+                            <li><strong>Batch size limits:</strong> Daily segment refreshes should process max 100K members at a time (use batch windows)</li>
+                            <li><strong>Event throttling:</strong> High-volume events (Points Accrued) may need rate limiting to prevent journey overload</li>
+                            <li><strong>Query optimization:</strong> Add indexes to JournalEntry.ExpirationDate and LoyaltyMember.Tier for faster queries</li>
+                            <li><strong>Data retention:</strong> Archive old transaction history (2+ years) to keep queries performant</li>
+                        </ul>
+
+                        <h3>Testing Loyalty Journeys</h3>
+                        <p>Special considerations for testing loyalty flows:</p>
+                        <div class="timeline-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Test Scenario</th>
+                                        <th>How to Test</th>
+                                        <th>What to Verify</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tier upgrade</td>
+                                        <td>Manually change tier in Loyalty Management sandbox</td>
+                                        <td>Event fires, email personalizes correctly</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Points expiration</td>
+                                        <td>Create test JournalEntry with near-future expiration</td>
+                                        <td>Member joins segment, gets reminder</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Multi-tier logic</td>
+                                        <td>Test with members in each tier (Bronze, Silver, Gold)</td>
+                                        <td>Decision splits route correctly</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Promotion enrollment</td>
+                                        <td>Enroll test member in promotion</td>
+                                        <td>Enrollment event triggers journey</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Common Pitfalls & Solutions</h3>
+                        <div class="pitfall-list">
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Event data doesn't include expected fields</h4>
+                                    <p><strong>Symptom:</strong> <code>{{NewTier}}</code> shows blank in email</p>
+                                    <p><strong>Solution:</strong> Check event payload structure in Data Streams. Use <code>{{LoyaltyMember.Tier}}</code> instead of <code>{{NewTier}}</code> if field not in event.</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Points balance in email doesn't match loyalty system</h4>
+                                    <p><strong>Symptom:</strong> Member sees different balance in email vs portal</p>
+                                    <p><strong>Solution:</strong> Data Cloud syncs every 15 minutes. Add disclaimer: "Balance as of {{SyncTimestamp}}"</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Expiration query includes already-redeemed points</h4>
+                                    <p><strong>Symptom:</strong> Members get expiration alerts for points they already used</p>
+                                    <p><strong>Solution:</strong> Add filter <code>JournalEntry.Balance > 0</code> to exclude redeemed transactions</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>When to Escalate</h3>
+                        <ul>
+                            <li><strong>Custom loyalty events:</strong> If business needs events not in standard Loyalty Management (e.g., "Member Referred Friend"), engage Data Cloud developer to create custom event stream</li>
+                            <li><strong>Complex tier logic:</strong> If tier qualification requires custom calculation, engage Loyalty Management consultant</li>
+                            <li><strong>API integrations:</strong> If loyalty data comes from external system (not Salesforce Loyalty Management), engage integration architect</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz -->
+            <section class="lesson-section quiz">
+                <div class="section-header">
+                    <span class="section-badge quiz">✅ KNOWLEDGE CHECK</span>
+                    <h2>Module 7 Quiz</h2>
+                    <p class="section-duration">5 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Test your understanding before moving to Module 8:</p>
+
+                    <div class="quiz-question">
+                        <p><strong>1. Which DMO tracks individual points transactions (accruals, redemptions, expirations)?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1"> A) LoyaltyProgramMember</label>
+                            <label><input type="radio" name="q1"> B) JournalEntry</label>
+                            <label><input type="radio" name="q1"> C) LoyaltyMemberTier</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>2. What triggers the "Member Tier Changed" event?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2"> A) When a member's loyalty tier is upgraded or downgraded in Loyalty Management</label>
+                            <label><input type="radio" name="q2"> B) When a member earns points</label>
+                            <label><input type="radio" name="q2"> C) When a member joins the loyalty program</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>3. Why use batch ingestion instead of real-time events for points expiration reminders?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3"> A) Because expiration reminders 30 days in advance don't need immediate delivery</label>
+                            <label><input type="radio" name="q3"> B) Because real-time events are more expensive</label>
+                            <label><input type="radio" name="q3"> C) Because batch is more accurate</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>4. What's a best practice when celebrating tier upgrades?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4"> A) Send the same generic message to all members regardless of tier</label>
+                            <label><input type="radio" name="q4"> B) Use real-time events and personalize with new tier benefits</label>
+                            <label><input type="radio" name="q4"> C) Wait 7 days to send the celebration to give them time to explore</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-answers" style="display:none;">
+                        <h3>Answers:</h3>
+                        <p>1. B) JournalEntry</p>
+                        <p>2. A) When a member's loyalty tier is upgraded or downgraded in Loyalty Management</p>
+                        <p>3. A) Because expiration reminders 30 days in advance don't need immediate delivery</p>
+                        <p>4. B) Use real-time events and personalize with new tier benefits</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="document.querySelector('.quiz-answers').style.display='block'; this.style.display='none';">
+                        Show Answers
+                    </button>
+                </div>
+            </section>
+
+            <!-- Module Summary -->
+            <section class="module-summary">
+                <h2>🎉 Module 7 Complete!</h2>
+                <p>Excellent work! You've mastered loyalty integration for NTO Rewards.</p>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>✅ What You Learned</h3>
+                        <ul>
+                            <li>Loyalty DMOs: Program Member, Tier, Promotions, JournalEntry</li>
+                            <li>Real-time loyalty events vs batch data ingestion</li>
+                            <li>Transaction history queries for expiring points</li>
+                            <li>Event-triggered flows for tier upgrades and milestones</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h3>🛠️ What You Built</h3>
+                        <ul>
+                            <li>Tier upgrade celebration flow with personalized messages</li>
+                            <li>Points expiration reminder campaign with 30-day lead time</li>
+                            <li>Decision logic for Gold vs Silver upgrade messaging</li>
+                            <li>Query to identify members with expiring points</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="next-module">
+                    <h3>🚀 Next Up: Module 8 - Analytics & Reporting</h3>
+                    <p>Now you'll learn to measure campaign success and calculate loyalty ROI. You'll build performance dashboards, analyze journey metrics, and demonstrate the business value of NTO Rewards.</p>
+                    <a href="module-08-analytics.html" class="btn-primary btn-large">Continue to Module 8 →</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="training-footer">
+        <div class="container">
+            <p>MC Next Training: The NTO Rewards Journey | Module 7 of 8</p>
+            <p><a href="module-06-flows.html">← Previous Module</a> | <a href="../index.html">Back to Home</a> | <a href="module-08-analytics.html">Next Module →</a></p>
+        </div>
+    </footer>
+
+    <script src="../scripts/training.js"></script>
+</body>
+</html>

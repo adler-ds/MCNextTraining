@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5: Content Builder | MC Next Training</title>
+    <link rel="stylesheet" href="../styles/training.css">
+</head>
+<body>
+    <nav class="training-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">🏔️ MC Next Training</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="module-01-data-foundation.html">Module 1</a>
+                <a href="module-02-segmentation.html">Module 2</a>
+                <a href="module-05-content-builder.html" class="active">Module 5</a>
+                <a href="../resources.html">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="module-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> ›
+                <a href="../index.html#level-2">Level 2: Practitioner</a> ›
+                <span>Module 5</span>
+            </div>
+            <h1>Module 5: Content Builder</h1>
+            <p class="module-subtitle">Creating personalized emails, forms, and landing pages</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p class="progress-text">Progress: 0% Complete</p>
+
+            <div class="module-meta">
+                <span class="meta-item">⏱️ <strong>2.5 hours</strong></span>
+                <span class="meta-item">🎯 <strong>3 Labs</strong></span>
+                <span class="meta-item">📸 <strong>9 Screenshots</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-content">
+
+            <!-- NTO Rewards Context -->
+            <section class="nto-context">
+                <div class="context-header">
+                    <span class="context-icon">🏔️</span>
+                    <h2>NTO Rewards Context</h2>
+                </div>
+                <div class="context-body">
+                    <p><strong>The Scenario:</strong> NTO's marketing team needs to create branded, personalized email content for their loyalty members. Each member tier (Bronze, Silver, Gold) should see content relevant to their benefits. The team also needs a preference center where members can control their communication preferences.</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Email Templates</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Tier Variations</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Content Blocks</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">35%</div>
+                            <div class="stat-label">Open Rate Target</div>
+                        </div>
+                    </div>
+
+                    <p><strong>Your Challenge:</strong> Build reusable email templates with NTO's branding, add dynamic content blocks that show different promotions based on member tier, and create a preference center landing page where members can opt in/out of different communication channels.</p>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2>🎯 What You'll Learn</h2>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <span class="objective-icon">📧</span>
+                        <h3>Email Builder</h3>
+                        <p>Drag-and-drop email creation with NTO branding and personalization</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🎨</span>
+                        <h3>Dynamic Content</h3>
+                        <p>Show different content based on member tier and Data Graph fields</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">📝</span>
+                        <h3>Forms & Landing Pages</h3>
+                        <p>Build preference centers with multi-channel opt-ins</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🤖</span>
+                        <h3>AI Features</h3>
+                        <p>Einstein Send Time Optimization and generative AI content assistance</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Lesson -->
+            <section class="lesson-section core-lesson">
+                <div class="section-header">
+                    <span class="section-badge core">📖 CORE LESSON</span>
+                    <h2>Understanding Content Builder</h2>
+                    <p class="section-duration">Required • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <h3>The Five Key Concepts</h3>
+                    <p>Content Builder is your one-stop shop for creating all marketing content in MC Next. Let's understand the core building blocks:</p>
+
+                    <div class="concept-card">
+                        <div class="concept-number">1</div>
+                        <div class="concept-content">
+                            <h4>Email Builder (Drag-and-Drop)</h4>
+                            <p>MC Next uses a modern drag-and-drop email builder that doesn't require coding knowledge. You add <strong>content blocks</strong> (text, images, buttons, spacers) to build your layout.</p>
+                            <ul>
+                                <li><strong>Responsive by default:</strong> Emails automatically adapt to mobile/desktop</li>
+                                <li><strong>Brand Builder integration:</strong> Colors, fonts, logos from your brand kit</li>
+                                <li><strong>Personalization:</strong> Insert merge fields from Data Graph (name, tier, points)</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Key Insight:</strong> All emails must reference a Data Graph. The graph determines which personalization fields are available (e.g., {{Individual.FirstName}}, {{LoyaltyMember.Tier}}).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">2</div>
+                        <div class="concept-content">
+                            <h4>Dynamic Content Blocks</h4>
+                            <p>Dynamic content lets you show <strong>different content to different people</strong> within the same email template, based on rules.</p>
+                            <p><strong>Example for NTO:</strong></p>
+                            <div class="analogy-box">
+                                <strong>Rule:</strong> If Member Tier = Gold → Show "Premium Trail Access + Free Shipping"<br>
+                                <strong>Rule:</strong> If Member Tier = Silver → Show "Trail Access + $5 Shipping"<br>
+                                <strong>Rule:</strong> If Member Tier = Bronze → Show "Trial Trail Access Available"
+                            </div>
+                            <p>One email template, three experiences!</p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">3</div>
+                        <div class="concept-content">
+                            <h4>Brand Builder & Template Library</h4>
+                            <p><strong>Brand Builder:</strong> Centrally manage NTO's brand assets (logo, colors, fonts) so all emails look consistent.</p>
+                            <p><strong>Template Library:</strong> Save email layouts as templates for reuse. NTO has:</p>
+                            <ul>
+                                <li><strong>NTO_Welcome_Template:</strong> For new member onboarding</li>
+                                <li><strong>NTO_Trail_Promo:</strong> For engagement trail invitations</li>
+                                <li><strong>NTO_Transactional:</strong> For order confirmations and receipts</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Best Practice:</strong> Use naming conventions like <code>NTO_[Type]_[Purpose]_v[#]</code> to keep your content library organized.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">4</div>
+                        <div class="concept-content">
+                            <h4>Forms & Landing Pages</h4>
+                            <p>MC Next includes a form builder for data capture and preference management.</p>
+                            <p><strong>Use cases for NTO:</strong></p>
+                            <ul>
+                                <li><strong>Preference Center:</strong> Let members choose email, SMS, WhatsApp opt-ins</li>
+                                <li><strong>Event Registration:</strong> Sign up for trail challenges</li>
+                                <li><strong>Profile Update:</strong> Change email address or phone number</li>
+                            </ul>
+                            <p>Forms are embedded in <strong>landing pages</strong> with NTO branding. When a member submits, data flows back to Data Cloud and updates their Individual record.</p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">5</div>
+                        <div class="concept-content">
+                            <h4>Reusable Content Blocks</h4>
+                            <p>Create content blocks once and reuse them across multiple emails. Common blocks for NTO:</p>
+                            <ul>
+                                <li><strong>Header block:</strong> NTO logo + navigation</li>
+                                <li><strong>Footer block:</strong> Social links, address, unsubscribe link (required!)</li>
+                                <li><strong>Tier benefits block:</strong> Dynamic content showing benefits by tier</li>
+                                <li><strong>CTA block:</strong> Branded "Shop Now" or "Join Trail" button</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Pro Tip:</strong> If you update a reusable block, all emails using it get the update. Perfect for changing a promo or fixing a typo!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="watch-video">
+                        <h3>📺 Watch: Content Builder Tour (8 min)</h3>
+                        <p>Before the lab, watch this walkthrough of the Content Builder interface.</p>
+                        <div class="video-placeholder">
+                            <p>🎥 Video: Building Your First Email in MC Next</p>
+                            <p><em>Note: Link to existing Vidyard video or create placeholder</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 1 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 1</span>
+                    <h2>Create Welcome Email Template</h2>
+                    <p class="section-duration">Hands-on • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Build a branded welcome email for new NTO Rewards members with tier-based personalization. Sarah Johnson (Silver tier) and Marcus Chen (Gold tier) should see different benefit messaging.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Create email template with NTO branding (colors, logo, fonts)</li>
+                                <li>Add personalization merge fields (FirstName, Tier, PointsBalance)</li>
+                                <li>Build dynamic content block showing tier-specific benefits</li>
+                                <li>Preview for Bronze, Silver, and Gold tier members</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Navigate to Content Builder</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From the MC Next app, click <strong>Content</strong> in the left navigation.</p>
+                                <p>Click <strong>Create</strong> → <strong>Email</strong>.</p>
+                                <p>Select <strong>Start from Scratch</strong> (we'll build custom layout).</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod5-step1-content-nav.jpg"
+                                         alt="Content Builder navigation"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Content menu showing Email creation option</p>
+                                    <p class="screenshot-meta">📸 <code>mod5-step1-content-nav.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Set Up Email with Data Graph</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>You'll enter the Email Builder interface. First, configure the basics:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>NTO_Welcome_Email_v1</code></li>
+                                    <li><strong>Subject Line:</strong> <code>Welcome to NTO Rewards, {{Individual.FirstName}}!</code></li>
+                                    <li><strong>From Name:</strong> <code>NTO Rewards Team</code></li>
+                                    <li><strong>From Email:</strong> <code>rewards@ntomail.com</code></li>
+                                    <li><strong>Data Graph:</strong> Select <code>NTO_Rewards_Personalization</code> (the graph you built in Module 3)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod5-step2-email-builder.jpg"
+                                         alt="Email Builder settings interface"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Email Builder with Data Graph selection</p>
+                                    <p class="screenshot-meta">📸 <code>mod5-step2-email-builder.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Choosing the Data Graph now makes those fields available for merge fields throughout the email.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Build Email Layout with NTO Branding</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Now drag and drop content blocks to build the email:</p>
+                                <ol>
+                                    <li><strong>Header Image:</strong> Drag an Image block. Upload NTO logo (or use from Brand Builder assets).</li>
+                                    <li><strong>Hero Text:</strong> Drag a Text block. Add: <code>"Welcome to NTO Rewards, {{Individual.FirstName}}!"</code></li>
+                                    <li><strong>Body Paragraph:</strong> Add another Text block with welcome message.</li>
+                                    <li><strong>CTA Button:</strong> Drag a Button block. Text: "Explore Your Benefits". Link to: <code>https://www.nto.com/rewards-portal</code></li>
+                                    <li><strong>Footer:</strong> Add social icons, address, and unsubscribe link (required by law!).</li>
+                                </ol>
+
+                                <p><strong>Apply NTO brand colors:</strong></p>
+                                <ul>
+                                    <li>Select the hero text, change color to NTO Blue (#0176D3)</li>
+                                    <li>Select the button, change background to NTO Orange (#FF6B35)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod5-step3-template-design.jpg"
+                                         alt="Email template with NTO branding"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Complete email layout with header, body, CTA, and footer</p>
+                                    <p class="screenshot-meta">📸 <code>mod5-step3-template-design.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Add Personalization Merge Fields</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Let's make this email personal! Click into any text block and click the <strong>Personalization</strong> icon (looks like {})</p>
+                                <p>You'll see all fields from your Data Graph. Add these:</p>
+                                <ul>
+                                    <li><strong>First Name:</strong> <code>{{Individual.FirstName}}</code> (already done in hero)</li>
+                                    <li><strong>Member Tier:</strong> Add a line: <code>"You're a {{LoyaltyMember.Tier}} member!"</code></li>
+                                    <li><strong>Points Balance:</strong> Add: <code>"Current Points: {{LoyaltyMember.PointsBalance}}"</code></li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod5-step4-personalization.jpg"
+                                         alt="Merge field picker showing Data Graph fields"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Inserting personalization tokens from NTO Rewards Data Graph</p>
+                                    <p class="screenshot-meta">📸 <code>mod5-step4-personalization.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Result:</strong> Sarah Johnson will see "Welcome to NTO Rewards, Sarah! You're a Silver member! Current Points: 2,450"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 1 Checkpoint</h3>
+                        <p>Before moving to Lab 2, verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Your email has NTO branding (logo, colors)</li>
+                            <li>✓ You've added personalization for FirstName, Tier, Points</li>
+                            <li>✓ You have a clear CTA button</li>
+                            <li>✓ Footer includes unsubscribe link</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 2 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 2</span>
+                    <h2>Add Dynamic Content for Tier-Based Promotions</h2>
+                    <p class="section-duration">Hands-on • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Enhance the welcome email with a dynamic content block that shows different engagement trail promotions based on member tier. Gold members see premium trails, Silver sees standard trails, Bronze sees trial access.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Create dynamic content block with 3 tier variations</li>
+                                <li>Gold tier: Show "Summit Seeker Trail" promo</li>
+                                <li>Silver tier: Show "Valley Explorer Trail" promo</li>
+                                <li>Bronze tier: Show "Beginner Trail Trial" promo</li>
+                                <li>Preview email as each tier to verify content switches</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Insert Dynamic Content Block</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>In your email (from Lab 1), add a new section below the welcome text.</p>
+                                <p>From the content blocks panel, drag in a <strong>Dynamic Content</strong> block.</p>
+                                <p>You'll be prompted to set up rules. Click <strong>Create Rules</strong>.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod5-lab2-step1-dynamic-block.jpg"
+                                         alt="Dynamic content block in email builder"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Dynamic Content block added to email template</p>
+                                    <p class="screenshot-meta">📸 <code>mod5-lab2-step1-dynamic-block.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Configure Tier-Based Rules</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Set up three content variations based on <code>LoyaltyMember.Tier</code>:</p>
+
+                                <p><strong>Rule 1: Gold Tier</strong></p>
+                                <ul>
+                                    <li><strong>Condition:</strong> <code>LoyaltyMember.Tier equals "Gold"</code></li>
+                                    <li><strong>Content:</strong></li>
+                                </ul>
+                                <div class="code-block">
+                                    <strong>🏔️ Your Exclusive Trail: Summit Seeker</strong><br>
+                                    As a Gold member, you have access to our most challenging trails with premium rewards.<br>
+                                    Complete 10 activities in 30 days and earn 5,000 bonus points + free shipping for life!<br>
+                                    [Join Summit Seeker Trail →]
+                                </div>
+
+                                <p><strong>Rule 2: Silver Tier</strong></p>
+                                <ul>
+                                    <li><strong>Condition:</strong> <code>LoyaltyMember.Tier equals "Silver"</code></li>
+                                    <li><strong>Content:</strong></li>
+                                </ul>
+                                <div class="code-block">
+                                    <strong>🌲 Your Trail: Valley Explorer</strong><br>
+                                    Perfect for intermediate adventurers! Complete 7 activities in 30 days.<br>
+                                    Earn 2,000 bonus points + $5 shipping on your next order.<br>
+                                    [Join Valley Explorer Trail →]
+                                </div>
+
+                                <p><strong>Rule 3 (Default): Bronze Tier</strong></p>
+                                <ul>
+                                    <li><strong>Condition:</strong> Default (everyone else)</li>
+                                    <li><strong>Content:</strong></li>
+                                </ul>
+                                <div class="code-block">
+                                    <strong>🥾 Try Your First Trail: Beginner's Adventure</strong><br>
+                                    New to trails? Start with 3 easy activities in 30 days.<br>
+                                    Earn 500 bonus points and unlock Silver tier benefits!<br>
+                                    [Try Your First Trail →]
+                                </div>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod5-lab2-step2-rules.jpg"
+                                         alt="Dynamic content rules configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Three tier-based rules with different trail promotions</p>
+                                    <p class="screenshot-meta">📸 <code>mod5-lab2-step2-rules.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Always have a "Default" rule as the fallback for any members who don't match other conditions.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Preview & Test Dynamic Content</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click the <strong>Preview</strong> button in the top right.</p>
+                                <p>Use the <strong>Test Data</strong> dropdown to select different members:</p>
+                                <ul>
+                                    <li><strong>Sarah Johnson</strong> (Silver) → Should see "Valley Explorer Trail"</li>
+                                    <li><strong>Marcus Chen</strong> (Gold) → Should see "Summit Seeker Trail"</li>
+                                    <li><strong>Elena Rodriguez</strong> (Bronze) → Should see "Beginner's Adventure"</li>
+                                </ul>
+
+                                <p>Verify that the content block changes for each tier!</p>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Success!</strong> You now have one email template that delivers three personalized experiences based on loyalty tier.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 2 Checkpoint</h3>
+                        <p>Verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Dynamic content block has 3 tier-based variations</li>
+                            <li>✓ Gold members see Summit Seeker promo</li>
+                            <li>✓ Silver members see Valley Explorer promo</li>
+                            <li>✓ Bronze members see Beginner Adventure promo</li>
+                            <li>✓ Preview confirms content switches correctly</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 3 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 3</span>
+                    <h2>Build Preference Center Form & Landing Page</h2>
+                    <p class="section-duration">Hands-on • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Create a preference center where NTO Rewards members can control their communication preferences. Members should be able to opt in/out of Email, SMS, and WhatsApp channels.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Build form with checkboxes for Email, SMS, WhatsApp consent</li>
+                                <li>Create branded landing page to host the form</li>
+                                <li>Publish landing page and get shareable URL</li>
+                                <li>Test form submission (data should update in Data Cloud)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Create Preference Center Form</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From Content Builder, click <strong>Create</strong> → <strong>Form</strong>.</p>
+                                <p>Name: <code>NTO_Preference_Center_Form</code></p>
+                                <p>Drag the following fields from the left panel:</p>
+                                <ul>
+                                    <li><strong>Text field:</strong> Email Address (pre-filled from Individual.Email)</li>
+                                    <li><strong>Checkbox:</strong> "I want to receive promotional emails"</li>
+                                    <li><strong>Checkbox:</strong> "I want to receive SMS messages"</li>
+                                    <li><strong>Checkbox:</strong> "I want to receive WhatsApp messages"</li>
+                                    <li><strong>Submit button:</strong> "Update My Preferences"</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod5-lab3-step1-form-builder.jpg"
+                                         alt="Form builder with preference checkboxes"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Preference center form with multi-channel consent options</p>
+                                    <p class="screenshot-meta">📸 <code>mod5-lab3-step1-form-builder.jpg</code></p>
+                                </div>
+
+                                <p><strong>Map form fields to Data Cloud:</strong></p>
+                                <ul>
+                                    <li>Email checkbox → <code>Individual.HasOptedOutOfEmail</code> (inverse logic)</li>
+                                    <li>SMS checkbox → <code>ContactPointConsent.ConsentCapturedSource</code> (SMS channel)</li>
+                                    <li>WhatsApp checkbox → <code>ContactPointConsent.ConsentCapturedSource</code> (WhatsApp channel)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Build Landing Page</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Now create a landing page to host this form.</p>
+                                <p>Click <strong>Create</strong> → <strong>Landing Page</strong>.</p>
+                                <p>Name: <code>NTO_Preference_Center</code></p>
+                                <p>Use a simple layout:</p>
+                                <ul>
+                                    <li><strong>Header:</strong> NTO logo + "Communication Preferences"</li>
+                                    <li><strong>Body text:</strong> "Manage how you hear from NTO Rewards"</li>
+                                    <li><strong>Form block:</strong> Drag in the form you just created</li>
+                                    <li><strong>Footer:</strong> Privacy policy link + contact info</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod5-lab3-step2-landing-page.jpg"
+                                         alt="Landing page with embedded preference form"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Branded preference center landing page</p>
+                                    <p class="screenshot-meta">📸 <code>mod5-lab3-step2-landing-page.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Publish & Get URL</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click <strong>Publish</strong> in the top right.</p>
+                                <p>You'll get a unique URL like:</p>
+                                <div class="code-block">
+                                    https://cloud.nto.com/preference-center
+                                </div>
+
+                                <p><strong>Now add this URL to all your emails!</strong></p>
+                                <p>In your welcome email footer, add a link: <code>Manage Preferences</code> → Link to this URL.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod5-lab3-step3-publish.jpg"
+                                         alt="Published landing page with public URL"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Landing page published with shareable URL</p>
+                                    <p class="screenshot-meta">📸 <code>mod5-lab3-step3-publish.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Result:</strong> Members can now control their own consent preferences, and the data flows back to Data Cloud automatically!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 3 Checkpoint</h3>
+                        <p>Verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Form has Email, SMS, WhatsApp checkboxes</li>
+                            <li>✓ Landing page is branded with NTO colors/logo</li>
+                            <li>✓ Page is published with public URL</li>
+                            <li>✓ Preference link is added to email footer</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Section -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Deep Dive: AI Features & Approval Workflows</h2>
+                    <p class="section-duration">Optional • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Content ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <h3>Einstein AI Features in Content Builder</h3>
+                        <p>MC Next includes several AI-powered features to optimize content performance:</p>
+
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <h4>Send Time Optimization (STO)</h4>
+                                <p>Einstein analyzes each recipient's engagement history and sends at their optimal time.</p>
+                                <p><strong>Use when:</strong> You have at least 3 months of email history.</p>
+                                <p><strong>Benefit:</strong> 15-20% lift in open rates for NTO campaigns.</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Einstein Metrics Guard</h4>
+                                <p>AI predicts email performance BEFORE you send. Warns if subject line will underperform.</p>
+                                <p><strong>Example:</strong> "Subject too long (150 chars) - consider shortening to 50."</p>
+                                <p><strong>Benefit:</strong> Catch mistakes before they impact deliverability.</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Generative AI Content Assistant</h4>
+                                <p>Generate subject lines, body copy, and CTAs using AI prompts.</p>
+                                <p><strong>Example prompt:</strong> "Write a welcome email for new Gold tier loyalty members, highlighting exclusive benefits."</p>
+                                <p><strong>Note:</strong> Always review and edit AI-generated content!</p>
+                            </div>
+                        </div>
+
+                        <h3>Content Approval Workflows</h3>
+                        <p>For regulated industries or large teams, MC Next supports approval workflows using CMS (Content Management System) roles:</p>
+                        <ul>
+                            <li><strong>Content Creator:</strong> Builds emails, marks "Ready for Review"</li>
+                            <li><strong>Content Reviewer:</strong> Approves or rejects with feedback</li>
+                            <li><strong>Content Publisher:</strong> Final publish after approval</li>
+                        </ul>
+                        <p><strong>NTO use case:</strong> Legal team must approve all loyalty program terms mentioned in emails.</p>
+
+                        <h3>Template Governance & Naming Conventions</h3>
+                        <p>As your content library grows, governance becomes critical. Best practices:</p>
+                        <ul>
+                            <li><strong>Naming:</strong> <code>[Brand]_[Type]_[Purpose]_v[#]</code> → <code>NTO_Email_Welcome_v2</code></li>
+                            <li><strong>Folders:</strong> Organize by campaign or lifecycle stage (Acquisition, Onboarding, Retention)</li>
+                            <li><strong>Version control:</strong> Always increment version number, never overwrite live templates</li>
+                            <li><strong>Archive old content:</strong> Move unused templates to "Archive" folder after 6 months</li>
+                        </ul>
+
+                        <h3>Accessibility Best Practices</h3>
+                        <p>Ensure your emails are accessible to all members:</p>
+                        <ul>
+                            <li><strong>Alt text:</strong> Add descriptive alt text to all images ("NTO logo" not "image1.jpg")</li>
+                            <li><strong>Color contrast:</strong> Ensure text has sufficient contrast ratio (4.5:1 minimum)</li>
+                            <li><strong>Link text:</strong> Use descriptive links ("View your rewards" not "Click here")</li>
+                            <li><strong>Semantic HTML:</strong> Use proper heading structure (H1, H2, H3)</li>
+                        </ul>
+
+                        <div class="further-reading">
+                            <h4>📚 Further Reading</h4>
+                            <ul>
+                                <li><a href="#">Einstein Send Time Optimization Guide</a></li>
+                                <li><a href="#">Content Approval Workflows in MC Next</a></li>
+                                <li><a href="#">Email Accessibility Standards (WCAG 2.1)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Notes -->
+            <section class="lesson-section implementation">
+                <div class="section-header">
+                    <span class="section-badge implementation">🏗️ IMPLEMENTATION NOTES</span>
+                    <h2>For Implementation Teams</h2>
+                    <p class="section-duration">Optional • 15 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Implementation Notes ▼
+                    </button>
+
+                    <div class="implementation-content">
+                        <h3>Discovery Questions for Customers</h3>
+                        <p>When scoping content requirements, ask:</p>
+                        <div class="question-grid">
+                            <div class="question-card">
+                                <strong>Q:</strong> Do you have existing brand guidelines (logo, colors, fonts)?
+                                <p><em>Why it matters:</em> Determines whether to use Brand Builder or custom HTML.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> How many email templates do you currently use?
+                                <p><em>Why it matters:</em> Migration effort (rebuilding templates in MC Next).</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Do you need content approval workflows?
+                                <p><em>Why it matters:</em> Requires CMS role setup and training.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> What personalization fields are most important?
+                                <p><em>Why it matters:</em> Determines Data Graph structure.</p>
+                            </div>
+                        </div>
+
+                        <h3>Template Migration Strategy</h3>
+                        <p>If migrating from Marketing Cloud Classic or another ESP:</p>
+                        <ul>
+                            <li><strong>Audit existing templates:</strong> Catalog all active templates (often 50-100+)</li>
+                            <li><strong>Prioritize:</strong> Rebuild high-volume templates first (welcome series, newsletters)</li>
+                            <li><strong>Test personalization:</strong> Verify all merge fields work in new Data Graph structure</li>
+                            <li><strong>Parallel run:</strong> Keep old system running during migration for validation</li>
+                        </ul>
+
+                        <h3>Performance Optimization</h3>
+                        <div class="timeline-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Optimization</th>
+                                        <th>Impact</th>
+                                        <th>Implementation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Image compression</td>
+                                        <td>Faster load times</td>
+                                        <td>Keep images under 200KB, use WebP format</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reusable content blocks</td>
+                                        <td>Faster template creation</td>
+                                        <td>Build header/footer blocks once, reuse everywhere</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dynamic content caching</td>
+                                        <td>Faster send times</td>
+                                        <td>Pre-render common variations (tier-based content)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Form pre-fill from Data Cloud</td>
+                                        <td>Higher completion rates</td>
+                                        <td>Auto-populate email address for known users</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Common Pitfalls & Solutions</h3>
+                        <div class="pitfall-list">
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Forgetting unsubscribe link</h4>
+                                    <p><strong>Symptom:</strong> Email fails send validation</p>
+                                    <p><strong>Solution:</strong> Always include unsubscribe link in footer (required by CAN-SPAM).</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Dynamic content rules overlap</h4>
+                                    <p><strong>Symptom:</strong> Wrong content shown to some recipients</p>
+                                    <p><strong>Solution:</strong> Use mutually exclusive conditions and always have a Default rule.</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Preference center not updating Data Cloud</h4>
+                                    <p><strong>Symptom:</strong> Consent changes don't suppress sends</p>
+                                    <p><strong>Solution:</strong> Verify form fields map correctly to ContactPointConsent DMO.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>When to Escalate</h3>
+                        <ul>
+                            <li><strong>Custom HTML needs:</strong> If brand requires complex layouts beyond drag-and-drop, engage front-end developer</li>
+                            <li><strong>Multi-language content:</strong> If global campaigns need translation, engage localization team</li>
+                            <li><strong>Complex approval workflows:</strong> If more than 2 approval steps needed, engage admin for custom workflow</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz -->
+            <section class="lesson-section quiz">
+                <div class="section-header">
+                    <span class="section-badge quiz">✅ KNOWLEDGE CHECK</span>
+                    <h2>Module 5 Quiz</h2>
+                    <p class="section-duration">5 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Test your understanding before moving to Module 6:</p>
+
+                    <div class="quiz-question">
+                        <p><strong>1. What determines which personalization fields are available in an email?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1"> A) The email template you choose</label>
+                            <label><input type="radio" name="q1"> B) The Data Graph you select for the email</label>
+                            <label><input type="radio" name="q1"> C) The segment you're sending to</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>2. What is the purpose of dynamic content blocks?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2"> A) To make emails load faster</label>
+                            <label><input type="radio" name="q2"> B) To show different content to different people based on rules</label>
+                            <label><input type="radio" name="q2"> C) To automatically translate emails to different languages</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>3. Why is a preference center important?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3"> A) It's required by law to give customers control over communications</label>
+                            <label><input type="radio" name="q3"> B) It makes emails look more professional</label>
+                            <label><input type="radio" name="q3"> C) It improves email deliverability rates</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>4. True or False: Reusable content blocks automatically update in all emails when you edit them.</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4"> True</label>
+                            <label><input type="radio" name="q4"> False</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-answers" style="display:none;">
+                        <h3>Answers:</h3>
+                        <p>1. B) The Data Graph you select for the email</p>
+                        <p>2. B) To show different content to different people based on rules</p>
+                        <p>3. A) It's required by law to give customers control over communications</p>
+                        <p>4. True</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="document.querySelector('.quiz-answers').style.display='block'; this.style.display='none';">
+                        Show Answers
+                    </button>
+                </div>
+            </section>
+
+            <!-- Module Summary -->
+            <section class="module-summary">
+                <h2>🎉 Module 5 Complete!</h2>
+                <p>Outstanding work! You've mastered Content Builder for NTO Rewards.</p>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>✅ What You Learned</h3>
+                        <ul>
+                            <li>How to build branded emails with drag-and-drop Email Builder</li>
+                            <li>Adding personalization merge fields from Data Graphs</li>
+                            <li>Creating dynamic content blocks for tier-based messaging</li>
+                            <li>Building forms and landing pages for preference management</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h3>🛠️ What You Built</h3>
+                        <ul>
+                            <li>NTO Welcome email template with tier personalization</li>
+                            <li>Dynamic content showing 3 different trail promotions</li>
+                            <li>Preference center form with multi-channel consent</li>
+                            <li>Branded landing page with shareable URL</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="next-module">
+                    <h3>🚀 Next Up: Module 6 - Flows & Automation</h3>
+                    <p>Now that you have content ready, it's time to automate! You'll build three journeys: a Welcome Journey, an Engagement Trail Promotion flow, and an A/B test experiment.</p>
+                    <a href="module-06-flows.html" class="btn-primary btn-large">Continue to Module 6 →</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="training-footer">
+        <div class="container">
+            <p>MC Next Training: The NTO Rewards Journey | Module 5 of 8</p>
+            <p><a href="module-04-consent.html">← Previous Module</a> | <a href="../index.html">Back to Home</a> | <a href="module-06-flows.html">Next Module →</a></p>
+        </div>
+    </footer>
+
+    <script src="../scripts/training.js"></script>
+</body>
+</html>
