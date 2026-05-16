@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: Segmentation | MC Next Training</title>
+    <link rel="stylesheet" href="../styles/training.css">
+</head>
+<body>
+    <nav class="training-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">🏔️ MC Next Training</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="module-01-data-foundation.html">Module 1</a>
+                <a href="module-02-segmentation.html" class="active">Module 2</a>
+                <a href="module-03-data-graphs.html">Module 3</a>
+                <a href="../resources.html">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="module-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> ›
+                <a href="../index.html#level-2">Level 2: Practitioner</a> ›
+                <span>Module 2</span>
+            </div>
+            <h1>Module 2: Segmentation</h1>
+            <p class="module-subtitle">Finding the right audiences for NTO Rewards campaigns</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p class="progress-text">Progress: 0% Complete</p>
+
+            <div class="module-meta">
+                <span class="meta-item">⏱️ <strong>2 hours</strong></span>
+                <span class="meta-item">🎯 <strong>2 Labs</strong></span>
+                <span class="meta-item">📸 <strong>7 Screenshots</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-content">
+
+            <!-- NTO Rewards Context -->
+            <section class="nto-context">
+                <div class="context-header">
+                    <span class="context-icon">🏔️</span>
+                    <h2>NTO Rewards Context</h2>
+                </div>
+                <div class="context-body">
+                    <p><strong>The Scenario:</strong> NTO's marketing team needs to create targeted campaigns for different loyalty member groups. Rather than sending the same message to all 500K members, they want to personalize based on member behavior, tier status, and engagement trail participation.</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">50K</div>
+                            <div class="stat-label">New Members (&lt;30 days)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">75K</div>
+                            <div class="stat-label">Gold Tier Members</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">120K</div>
+                            <div class="stat-label">Trail Eligible</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Target Segments</div>
+                        </div>
+                    </div>
+
+                    <p><strong>Your Challenge:</strong> Build three high-value segments for NTO: New Members (for welcome campaigns), Gold Tier Members (for VIP offers), and Spring Challenge Eligible members (for engagement trail promotions). You'll use Segment Builder to create dynamic audiences that refresh automatically.</p>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2>🎯 What You'll Learn</h2>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <span class="objective-icon">🔍</span>
+                        <h3>Segment Builder</h3>
+                        <p>How to create dynamic audiences using Data Cloud attributes</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">📚</span>
+                        <h3>Attribute Library</h3>
+                        <p>Navigating DMOs and fields for segmentation criteria</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">⚙️</span>
+                        <h3>Rule Groups & Logic</h3>
+                        <p>Building complex segments with AND/OR logic</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🚀</span>
+                        <h3>Activation & Publishing</h3>
+                        <p>Publishing segments and scheduling refreshes</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Lesson -->
+            <section class="lesson-section core-lesson">
+                <div class="section-header">
+                    <span class="section-badge core">📖 CORE LESSON</span>
+                    <h2>Understanding Segmentation</h2>
+                    <p class="section-duration">Required • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <h3>The Five Key Concepts</h3>
+                    <p>Segmentation is the foundation of targeted marketing in MC Next. Let's understand how to find the right audiences:</p>
+
+                    <div class="concept-card">
+                        <div class="concept-number">1</div>
+                        <div class="concept-content">
+                            <h4>Segment Builder</h4>
+                            <p>Segment Builder is the visual interface for creating audiences in Data Cloud. It allows you to:</p>
+                            <ul>
+                                <li><strong>Filter:</strong> Select records based on attribute values (e.g., Tier = "Gold")</li>
+                                <li><strong>Combine:</strong> Use multiple criteria with AND/OR logic</li>
+                                <li><strong>Preview:</strong> See count and sample records before publishing</li>
+                                <li><strong>Publish:</strong> Make the segment available to MC Next for campaigns</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Key Insight:</strong> Segments are dynamic! They refresh automatically based on your schedule, so as new members join or change tiers, your segment updates without manual work.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">2</div>
+                        <div class="concept-content">
+                            <h4>Attribute Library</h4>
+                            <p>The Attribute Library shows all available DMO fields you can segment on. For NTO, this includes:</p>
+                            <ul>
+                                <li><strong>Individual DMO:</strong> FirstName, LastName, Email, City, State</li>
+                                <li><strong>Loyalty Program Member DMO:</strong> MemberTier, PointsBalance, EnrollmentDate, MemberStatus</li>
+                                <li><strong>Loyalty Promotion Enrollment DMO:</strong> PromotionName, EnrollmentDate, Status</li>
+                            </ul>
+                            <div class="analogy-box">
+                                <strong>🛒 Analogy:</strong> The Attribute Library is like a menu at a restaurant. You pick the ingredients (fields) you want to create your dish (segment).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">3</div>
+                        <div class="concept-content">
+                            <h4>Rule Groups (AND vs OR Logic)</h4>
+                            <p>Rule Groups let you combine multiple criteria:</p>
+                            <p><strong>AND Logic:</strong> All conditions must be true</p>
+                            <div class="code-block">
+                                Example: MemberTier = "Gold" AND PointsBalance &gt; 5000<br>
+                                Result: Only Gold members with more than 5000 points
+                            </div>
+                            <p><strong>OR Logic:</strong> Any condition can be true</p>
+                            <div class="code-block">
+                                Example: MemberTier = "Gold" OR PointsBalance &gt; 10000<br>
+                                Result: Gold members OR anyone with 10K+ points (even if Bronze/Silver)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">4</div>
+                        <div class="concept-content">
+                            <h4>Publishing & Activation</h4>
+                            <p>Before a segment can be used in campaigns, it must be <strong>published</strong> and <strong>activated</strong>:</p>
+                            <ul>
+                                <li><strong>Published:</strong> Segment calculation runs and generates member list</li>
+                                <li><strong>Activated:</strong> Segment is available in MC Next for flows and journeys</li>
+                                <li><strong>Refresh Schedule:</strong> How often segment recalculates (hourly, daily, weekly)</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Key Insight:</strong> Segments can take 5-30 minutes for first publish (depending on size). Schedule refreshes strategically - hourly for fast-moving segments (new members), daily for stable ones (tier-based).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">5</div>
+                        <div class="concept-content">
+                            <h4>Nested Segments</h4>
+                            <p>You can use existing segments as criteria for new segments:</p>
+                            <p><strong>Example:</strong> Create a "High-Value Gold Members" segment that includes:</p>
+                            <ul>
+                                <li>Members in the "Gold Tier Members" segment (existing)</li>
+                                <li>AND PointsBalance &gt; 10000</li>
+                                <li>AND Last Purchase within 30 days</li>
+                            </ul>
+                            <p>This creates segment hierarchies for more sophisticated targeting.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 1 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 1</span>
+                    <h2>Build Three NTO Member Segments</h2>
+                    <p class="section-duration">Hands-on • 60 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Create three segments that NTO's marketing team will use for targeted campaigns. Each segment serves a different purpose in the customer journey.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Build "New Members" segment (enrolled within 30 days)</li>
+                                <li>Build "Gold Tier Members" segment (top-tier members)</li>
+                                <li>Build "Spring Challenge Eligible" segment (complex criteria)</li>
+                                <li>Preview each segment and verify member counts</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Navigate to Segment Builder</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From Data Cloud, click on <strong>Segments</strong> in the left navigation.</p>
+                                <p>Click the <strong>New</strong> button to create your first segment.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod2-step1-segment-builder.jpg"
+                                         alt="Segment Builder navigation interface"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Segment Builder with New button highlighted</p>
+                                    <p class="screenshot-meta">📸 <code>mod2-step1-segment-builder.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Create "New Members" Segment</h4>
+                            </div>
+                            <div class="step-content">
+                                <p><strong>Segment Name:</strong> <code>NTO - New Members</code></p>
+                                <p><strong>Description:</strong> Members enrolled within the last 30 days</p>
+
+                                <p><strong>Criteria:</strong></p>
+                                <ul>
+                                    <li>DMO: <strong>Loyalty Program Member</strong></li>
+                                    <li>Field: <strong>EnrollmentDate</strong></li>
+                                    <li>Operator: <strong>Greater than or equal to</strong></li>
+                                    <li>Value: <strong>TODAY() - 30</strong> (relative date)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod2-step2-new-members.jpg"
+                                         alt="New Members segment with enrollment date filter"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Segment criteria showing enrollment date within 30 days</p>
+                                    <p class="screenshot-meta">📸 <code>mod2-step2-new-members.jpg</code></p>
+                                </div>
+
+                                <p>Click <strong>Preview</strong> to see the member count. You should see approximately 50,000 members.</p>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Using relative dates like TODAY() - 30 ensures the segment stays current. It will always show members from the last 30 days, not a fixed date.
+                                </div>
+
+                                <p>Click <strong>Save</strong> to save the segment (we'll publish later).</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Create "Gold Tier Members" Segment</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click <strong>New</strong> again to create a second segment.</p>
+
+                                <p><strong>Segment Name:</strong> <code>NTO - Gold Tier Members</code></p>
+                                <p><strong>Description:</strong> All active Gold tier loyalty members</p>
+
+                                <p><strong>Criteria:</strong></p>
+                                <ul>
+                                    <li>DMO: <strong>Loyalty Program Member</strong></li>
+                                    <li>Field: <strong>MemberTier</strong></li>
+                                    <li>Operator: <strong>Equals</strong></li>
+                                    <li>Value: <strong>Gold</strong></li>
+                                </ul>
+
+                                <p><strong>Add a second rule (AND logic):</strong></p>
+                                <ul>
+                                    <li>Field: <strong>MemberStatus</strong></li>
+                                    <li>Operator: <strong>Equals</strong></li>
+                                    <li>Value: <strong>Active</strong></li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod2-step3-gold-tier.jpg"
+                                         alt="Gold Tier segment with tier and status criteria"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Gold Tier segment showing MemberTier = Gold AND MemberStatus = Active</p>
+                                    <p class="screenshot-meta">📸 <code>mod2-step3-gold-tier.jpg</code></p>
+                                </div>
+
+                                <p>Preview the segment. You should see approximately 75,000 Gold members.</p>
+                                <p>Click <strong>Save</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Create "Spring Challenge Eligible" Segment (Complex)</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Now let's build a more complex segment with multiple rule groups.</p>
+
+                                <p><strong>Segment Name:</strong> <code>NTO - Spring Challenge Eligible</code></p>
+                                <p><strong>Description:</strong> Members eligible for Spring Hiking Challenge engagement trail</p>
+
+                                <p><strong>Eligibility Requirements:</strong></p>
+                                <ul>
+                                    <li>Must be Silver OR Gold tier (not Bronze)</li>
+                                    <li>AND PointsBalance &gt;= 1000</li>
+                                    <li>AND NOT already enrolled in "Spring Hiking Challenge" promotion</li>
+                                </ul>
+
+                                <p><strong>Rule Group 1 (Tier - OR logic):</strong></p>
+                                <ul>
+                                    <li>MemberTier <strong>Equals</strong> Silver</li>
+                                    <li><strong>OR</strong> MemberTier <strong>Equals</strong> Gold</li>
+                                </ul>
+
+                                <p><strong>Rule Group 2 (Points - AND logic with Group 1):</strong></p>
+                                <ul>
+                                    <li>PointsBalance <strong>Greater than or equal to</strong> 1000</li>
+                                </ul>
+
+                                <p><strong>Rule Group 3 (Exclude already enrolled - AND NOT logic):</strong></p>
+                                <ul>
+                                    <li>Navigate to <strong>Loyalty Promotion Enrollment</strong> related DMO</li>
+                                    <li>PromotionName <strong>Not Equals</strong> "Spring Hiking Challenge"</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod2-step4-trail-eligible.jpg"
+                                         alt="Spring Challenge Eligible complex segment with multiple rule groups"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Complex segment with OR logic for tiers, AND logic for points, and exclusion criteria</p>
+                                    <p class="screenshot-meta">📸 <code>mod2-step4-trail-eligible.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 This is real-world segmentation!</strong> You're combining multiple DMOs (Loyalty Program Member + Loyalty Promotion Enrollment) with AND/OR/NOT logic to find exactly the right audience.
+                                </div>
+
+                                <p>Preview the segment. You should see approximately 120,000 eligible members.</p>
+                                <p>Click <strong>Save</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 1 Checkpoint</h3>
+                        <p>Before moving to Lab 2, verify you have:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Created three saved segments</li>
+                            <li>✓ Previewed each segment and seen realistic member counts</li>
+                            <li>✓ Used both simple and complex rule group logic</li>
+                            <li>✓ Navigated across multiple DMOs (Loyalty Member + Promotion Enrollment)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 2 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 2</span>
+                    <h2>Publish Segments & Configure Activation</h2>
+                    <p class="section-duration">Hands-on • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Take your saved segments and publish them so they're available in MC Next for campaigns. Configure refresh schedules appropriate for each use case.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Publish all three segments</li>
+                                <li>Configure appropriate refresh schedules</li>
+                                <li>Activate segments for MC Next consumption</li>
+                                <li>Verify segments appear in Flow Builder</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Publish "New Members" Segment</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From the Segments list, click on <strong>NTO - New Members</strong>.</p>
+                                <p>Click the <strong>Publish</strong> button.</p>
+
+                                <p><strong>Publishing Configuration:</strong></p>
+                                <ul>
+                                    <li><strong>Refresh Schedule:</strong> Daily at 6:00 AM</li>
+                                    <li><strong>Reason:</strong> New member enrollments happen throughout the day, but daily refresh is sufficient for welcome campaigns</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod2-lab2-step1-activation.jpg"
+                                         alt="Segment activation settings with refresh schedule"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Publish dialog with daily refresh schedule selected</p>
+                                    <p class="screenshot-meta">📸 <code>mod2-lab2-step1-activation.jpg</code></p>
+                                </div>
+
+                                <p>Click <strong>Publish</strong>. The segment will begin calculating. This may take 5-10 minutes for 50K members.</p>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> First publish is always slowest. Subsequent refreshes are incremental and much faster.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Publish "Gold Tier Members" Segment</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click on <strong>NTO - Gold Tier Members</strong> and click <strong>Publish</strong>.</p>
+
+                                <p><strong>Publishing Configuration:</strong></p>
+                                <ul>
+                                    <li><strong>Refresh Schedule:</strong> Weekly on Mondays at 3:00 AM</li>
+                                    <li><strong>Reason:</strong> Tier changes don't happen frequently (usually quarterly), so weekly refresh is sufficient</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod2-lab2-step2-schedule.jpg"
+                                         alt="Publishing schedule configuration showing weekly refresh"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Weekly refresh schedule for stable segment</p>
+                                    <p class="screenshot-meta">📸 <code>mod2-lab2-step2-schedule.jpg</code></p>
+                                </div>
+
+                                <p>Click <strong>Publish</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Publish "Spring Challenge Eligible" Segment</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click on <strong>NTO - Spring Challenge Eligible</strong> and click <strong>Publish</strong>.</p>
+
+                                <p><strong>Publishing Configuration:</strong></p>
+                                <ul>
+                                    <li><strong>Refresh Schedule:</strong> Daily at 8:00 AM</li>
+                                    <li><strong>Reason:</strong> As members enroll in the trail, they should be excluded from future invitations. Daily refresh ensures accurate targeting.</li>
+                                </ul>
+
+                                <p>Click <strong>Publish</strong>.</p>
+
+                                <p>Once published, click on the segment to view results:</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod2-lab2-step3-results.jpg"
+                                         alt="Segment results showing member count and sample records"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Published segment showing 120,342 members with preview of sample records</p>
+                                    <p class="screenshot-meta">📸 <code>mod2-lab2-step3-results.jpg</code></p>
+                                </div>
+
+                                <p>You should see:</p>
+                                <ul>
+                                    <li>Total member count (e.g., 120,342)</li>
+                                    <li>Last refresh timestamp</li>
+                                    <li>Sample records (first 10 members with names, tiers, points)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Verify Segments in MC Next</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Now let's verify these segments are available in MC Next.</p>
+
+                                <p>Navigate to <strong>Marketing Cloud Next</strong> from the App Launcher.</p>
+                                <p>Go to <strong>Flows</strong> and create a new flow (we'll delete this - just testing).</p>
+                                <p>Add a <strong>Segment Trigger</strong> element.</p>
+                                <p>In the segment picker, you should see all three segments:</p>
+                                <ul>
+                                    <li>NTO - New Members</li>
+                                    <li>NTO - Gold Tier Members</li>
+                                    <li>NTO - Spring Challenge Eligible</li>
+                                </ul>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Success!</strong> Your segments are now ready to use in campaigns. In Module 6 (Flows & Automation), you'll build journeys that trigger off these segments.
+                                </div>
+
+                                <p><em>Discard the test flow - we were just verifying activation.</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 2 Checkpoint</h3>
+                        <p>Verify you understand:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ How to publish a segment</li>
+                            <li>✓ How to configure refresh schedules (and why different schedules matter)</li>
+                            <li>✓ How to verify segments are available in MC Next</li>
+                            <li>✓ How to view segment results and member counts</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Section -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Advanced Segmentation Strategies</h2>
+                    <p class="section-duration">Optional • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Content ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <h3>Calculated Insights (Aggregate Metrics)</h3>
+                        <p>Calculated Insights allow you to segment based on aggregate metrics like "Total purchases in last 90 days" or "Average points earned per month".</p>
+
+                        <p><strong>Example Use Case:</strong> Create a "Frequent Shoppers" segment</p>
+                        <ul>
+                            <li>Create Calculated Insight: <code>TotalPurchases_90Days</code></li>
+                            <li>Formula: COUNT(Orders) WHERE OrderDate &gt;= TODAY() - 90</li>
+                            <li>Use in segment: TotalPurchases_90Days &gt;= 5</li>
+                        </ul>
+
+                        <h3>Nested Segments for Hierarchy</h3>
+                        <p>Build segment hierarchies for more sophisticated targeting:</p>
+                        <ul>
+                            <li><strong>Base Segment:</strong> "Active Members" (MemberStatus = Active)</li>
+                            <li><strong>Tier Segments:</strong> "Active Bronze", "Active Silver", "Active Gold" (include "Active Members" + tier filter)</li>
+                            <li><strong>Behavior Segments:</strong> "High-Value Gold" (include "Active Gold" + purchase criteria)</li>
+                        </ul>
+                        <p><strong>Benefit:</strong> If you update the base "Active Members" definition, all child segments inherit the change.</p>
+
+                        <h3>Refresh Strategy Considerations</h3>
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <h4>Hourly Refresh</h4>
+                                <p><strong>Use when:</strong> Real-time data is critical (abandoned cart, real-time event triggers)</p>
+                                <p><strong>Cost:</strong> Higher compute consumption</p>
+                                <p><strong>Example:</strong> "Cart Abandoned - Last Hour" segment for immediate recovery emails</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Daily Refresh</h4>
+                                <p><strong>Use when:</strong> Daily campaign cadence (morning batch sends)</p>
+                                <p><strong>Cost:</strong> Moderate compute consumption</p>
+                                <p><strong>Example:</strong> "New Members", "Birthday Today" segments</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Weekly Refresh</h4>
+                                <p><strong>Use when:</strong> Data changes slowly (tier assignments, demographic changes)</p>
+                                <p><strong>Cost:</strong> Low compute consumption</p>
+                                <p><strong>Example:</strong> "Gold Members", "Inactive Members (90+ days)"</p>
+                            </div>
+                        </div>
+
+                        <h3>Multi-Object Segmentation</h3>
+                        <p>Advanced segments can span multiple DMOs with relationship traversal:</p>
+                        <ul>
+                            <li><strong>Individual</strong> → <strong>Loyalty Program Member</strong> → <strong>Loyalty Ledger</strong></li>
+                            <li>Filter on ledger transactions: "Members who redeemed points in last 30 days"</li>
+                            <li>Aggregate: SUM(PointsRedeemed) WHERE TransactionDate &gt;= TODAY() - 30 &gt; 1000</li>
+                        </ul>
+
+                        <h3>Performance Optimization Tips</h3>
+                        <ul>
+                            <li><strong>Use indexed fields:</strong> Common filters like MemberTier, MemberStatus are indexed for fast queries</li>
+                            <li><strong>Avoid excessive relationship traversal:</strong> More than 3 DMO hops can slow segment calculation</li>
+                            <li><strong>Use calculated insights for complex aggregations:</strong> Pre-calculate aggregate metrics rather than computing on-the-fly in segments</li>
+                            <li><strong>Schedule refreshes during off-peak hours:</strong> 2-6 AM for best performance</li>
+                        </ul>
+
+                        <div class="further-reading">
+                            <h4>📚 Further Reading</h4>
+                            <ul>
+                                <li><a href="#">Data Cloud Segmentation Best Practices</a></li>
+                                <li><a href="#">Calculated Insights Documentation</a></li>
+                                <li><a href="#">Segment Performance Tuning Guide</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Notes -->
+            <section class="lesson-section implementation">
+                <div class="section-header">
+                    <span class="section-badge implementation">🏗️ IMPLEMENTATION NOTES</span>
+                    <h2>For Implementation Teams</h2>
+                    <p class="section-duration">Optional • 15 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Implementation Notes ▼
+                    </button>
+
+                    <div class="implementation-content">
+                        <h3>Discovery Questions for Segmentation Strategy</h3>
+                        <div class="question-grid">
+                            <div class="question-card">
+                                <strong>Q:</strong> How many segments do you anticipate creating?
+                                <p><em>Why it matters:</em> Data Cloud has segment limits (varies by SKU). Plan for segment hierarchy to reduce count.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> What are your most common segmentation criteria?
+                                <p><em>Why it matters:</em> Identify candidates for Calculated Insights (pre-compute complex aggregations).</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Do you need real-time segmentation or is daily sufficient?
+                                <p><em>Why it matters:</em> Determines refresh schedule strategy and compute consumption.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Do you have segments that overlap significantly?
+                                <p><em>Why it matters:</em> Use nested segments to avoid duplication and maintain consistency.</p>
+                            </div>
+                        </div>
+
+                        <h3>Segment Naming Conventions</h3>
+                        <p>Establish a naming convention to keep segments organized as they grow:</p>
+                        <div class="code-block">
+                            [Brand/Program] - [Category] - [Description]<br><br>
+
+                            Examples:<br>
+                            NTO - Loyalty - New Members<br>
+                            NTO - Loyalty - Gold Tier<br>
+                            NTO - Engagement - Trail Participants<br>
+                            NTO - Retention - At Risk (90 Days Inactive)<br>
+                            NTO - Reactivation - Lapsed (180+ Days)
+                        </div>
+
+                        <h3>Testing Segments Before Production Use</h3>
+                        <ol>
+                            <li><strong>Preview:</strong> Always preview segment before publishing</li>
+                            <li><strong>Validate counts:</strong> Compare to expected audience size</li>
+                            <li><strong>Sample records:</strong> Review first 10 records - do they match criteria?</li>
+                            <li><strong>Test flow:</strong> Create a test flow targeting the segment (send to internal team first)</li>
+                            <li><strong>Monitor first refresh:</strong> Check that refresh completes successfully</li>
+                        </ol>
+
+                        <h3>Common Pitfalls & Solutions</h3>
+                        <div class="pitfall-list">
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Segment returns zero members</h4>
+                                    <p><strong>Causes:</strong> Field mapping issue, data not synced, overly restrictive criteria</p>
+                                    <p><strong>Solution:</strong> Remove criteria one-by-one to identify which is excluding all members</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Segment refresh fails</h4>
+                                    <p><strong>Causes:</strong> Timeout (too complex), related DMO missing data, formula error</p>
+                                    <p><strong>Solution:</strong> Simplify segment logic, check Data Cloud logs, verify all DMO relationships exist</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Segment not appearing in MC Next</h4>
+                                    <p><strong>Causes:</strong> Not published, activation not complete, permission issue</p>
+                                    <p><strong>Solution:</strong> Verify segment status = "Active", check user has MC Next access, wait 5 min for sync</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Segment Lifecycle Management</h3>
+                        <ul>
+                            <li><strong>Archive unused segments:</strong> After campaign ends, deactivate segment to reduce compute</li>
+                            <li><strong>Document segment purpose:</strong> Use description field to note which campaigns use the segment</li>
+                            <li><strong>Annual segment audit:</strong> Review all segments, remove duplicates/unused</li>
+                            <li><strong>Version control:</strong> If updating critical segment logic, create new version first (test before replacing production)</li>
+                        </ul>
+
+                        <h3>When to Escalate</h3>
+                        <ul>
+                            <li><strong>Performance issues:</strong> If segment refresh takes &gt;2 hours, engage Data Cloud architect for optimization</li>
+                            <li><strong>Complex calculated insights:</strong> For multi-DMO aggregations with custom formulas, consult with data team</li>
+                            <li><strong>Real-time requirements:</strong> If hourly refresh isn't fast enough, consider streaming segments (requires architecture discussion)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz -->
+            <section class="lesson-section quiz">
+                <div class="section-header">
+                    <span class="section-badge quiz">✅ KNOWLEDGE CHECK</span>
+                    <h2>Module 2 Quiz</h2>
+                    <p class="section-duration">5 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Test your understanding before moving to Module 3:</p>
+
+                    <div class="quiz-question">
+                        <p><strong>1. What is the difference between AND and OR logic in segment rule groups?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1"> A) There is no difference</label>
+                            <label><input type="radio" name="q1"> B) AND requires all conditions to be true; OR requires any condition to be true</label>
+                            <label><input type="radio" name="q1"> C) OR requires all conditions to be true; AND requires any condition to be true</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>2. Why use relative dates (like TODAY() - 30) instead of fixed dates?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2"> A) Relative dates are faster to calculate</label>
+                            <label><input type="radio" name="q2"> B) Relative dates ensure the segment stays current with each refresh</label>
+                            <label><input type="radio" name="q2"> C) Fixed dates are not supported in Segment Builder</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>3. What refresh schedule is most appropriate for a "Gold Tier Members" segment?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3"> A) Hourly (tier changes are frequent)</label>
+                            <label><input type="radio" name="q3"> B) Daily (tier changes are moderately frequent)</label>
+                            <label><input type="radio" name="q3"> C) Weekly (tier changes are infrequent)</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>4. True or False: A segment must be both published AND activated to be available in MC Next.</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4"> True</label>
+                            <label><input type="radio" name="q4"> False</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-answers" style="display:none;">
+                        <h3>Answers:</h3>
+                        <p>1. B) AND requires all conditions to be true; OR requires any condition to be true</p>
+                        <p>2. B) Relative dates ensure the segment stays current with each refresh</p>
+                        <p>3. C) Weekly (tier changes are infrequent)</p>
+                        <p>4. True</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="document.querySelector('.quiz-answers').style.display='block'; this.style.display='none';">
+                        Show Answers
+                    </button>
+                </div>
+            </section>
+
+            <!-- Module Summary -->
+            <section class="module-summary">
+                <h2>🎉 Module 2 Complete!</h2>
+                <p>Congratulations! You've mastered segmentation for NTO Rewards campaigns.</p>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>✅ What You Learned</h3>
+                        <ul>
+                            <li>How to use Segment Builder to create dynamic audiences</li>
+                            <li>Navigating the Attribute Library across multiple DMOs</li>
+                            <li>Building complex segments with AND/OR/NOT logic</li>
+                            <li>Publishing segments and configuring refresh schedules</li>
+                            <li>Activating segments for MC Next consumption</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h3>🛠️ What You Built</h3>
+                        <ul>
+                            <li>"New Members" segment (50K members, daily refresh)</li>
+                            <li>"Gold Tier Members" segment (75K members, weekly refresh)</li>
+                            <li>"Spring Challenge Eligible" segment (120K members, complex criteria)</li>
+                            <li>Published and activated all segments for campaigns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="next-module">
+                    <h3>🚀 Next Up: Module 3 - Data Graphs</h3>
+                    <p>Now that you can find the right audiences, you'll learn how to personalize messages for them using Data Graphs - the bridge between Data Cloud and your email content!</p>
+                    <a href="module-03-data-graphs.html" class="btn-primary btn-large">Continue to Module 3 →</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="training-footer">
+        <div class="container">
+            <p>MC Next Training: The NTO Rewards Journey | Module 2 of 9</p>
+            <p><a href="../index.html">Back to Home</a> | <a href="../resources.html">Resources</a></p>
+        </div>
+    </footer>
+
+    <script src="../scripts/training.js"></script>
+</body>
+</html>

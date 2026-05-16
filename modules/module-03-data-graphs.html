@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3: Data Graphs | MC Next Training</title>
+    <link rel="stylesheet" href="../styles/training.css">
+</head>
+<body>
+    <nav class="training-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">🏔️ MC Next Training</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="module-01-data-foundation.html">Module 1</a>
+                <a href="module-02-segmentation.html">Module 2</a>
+                <a href="module-03-data-graphs.html" class="active">Module 3</a>
+                <a href="../resources.html">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="module-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> ›
+                <a href="../index.html#level-2">Level 2: Practitioner</a> ›
+                <span>Module 3</span>
+            </div>
+            <h1>Module 3: Data Graphs</h1>
+            <p class="module-subtitle">Personalizing emails with NTO loyalty data</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p class="progress-text">Progress: 0% Complete</p>
+
+            <div class="module-meta">
+                <span class="meta-item">⏱️ <strong>2 hours</strong></span>
+                <span class="meta-item">🎯 <strong>2 Labs</strong></span>
+                <span class="meta-item">📸 <strong>6 Screenshots</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-content">
+
+            <!-- NTO Rewards Context -->
+            <section class="nto-context">
+                <div class="context-header">
+                    <span class="context-icon">🏔️</span>
+                    <h2>NTO Rewards Context</h2>
+                </div>
+                <div class="context-body">
+                    <p><strong>The Scenario:</strong> NTO's marketing team wants to personalize emails with each member's loyalty information. Instead of a generic "Hi Customer", they want "Hi Sarah, you're only 550 points away from Gold tier!" To do this, they need to make Data Cloud fields available in Content Builder.</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Key Loyalty Fields</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Data Graph Needed</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">500K</div>
+                            <div class="stat-label">Members to Personalize</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">Real-time</div>
+                            <div class="stat-label">Data Freshness</div>
+                        </div>
+                    </div>
+
+                    <p><strong>Your Challenge:</strong> Create the "NTO Rewards Personalization" Data Graph that exposes loyalty fields (tier, points, enrollment date, trail participation) to Email Builder. Test the graph by previewing an email with real member data.</p>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2>🎯 What You'll Learn</h2>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <span class="objective-icon">🔗</span>
+                        <h3>Data Graph Architecture</h3>
+                        <p>How Data Graphs bridge Data Cloud and Content Builder</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">📋</span>
+                        <h3>Field Selection</h3>
+                        <p>Choosing which DMO fields to expose for personalization</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">⚡</span>
+                        <h3>Consumption Considerations</h3>
+                        <p>Understanding Data Graph limits and performance</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🗑️</span>
+                        <h3>The Deletion Problem</h3>
+                        <p>How Data Graphs handle deleted/missing data</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Lesson -->
+            <section class="lesson-section core-lesson">
+                <div class="section-header">
+                    <span class="section-badge core">📖 CORE LESSON</span>
+                    <h2>Understanding Data Graphs</h2>
+                    <p class="section-duration">Required • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <h3>The Five Key Concepts</h3>
+                    <p>Data Graphs are the bridge between your unified data and personalized content. Let's understand how they work:</p>
+
+                    <div class="concept-card">
+                        <div class="concept-number">1</div>
+                        <div class="concept-content">
+                            <h4>What is a Data Graph?</h4>
+                            <p>A Data Graph is a curated subset of Data Cloud fields that you make available to Content Builder for personalization.</p>
+                            <div class="analogy-box">
+                                <strong>🛒 Analogy:</strong> Think of Data Cloud as a warehouse with thousands of products. A Data Graph is the display shelf you put in your store - you only show the products (fields) customers (marketers) actually need.
+                            </div>
+                            <p><strong>Why not expose everything?</strong></p>
+                            <ul>
+                                <li><strong>Simplicity:</strong> Marketers don't want 500 fields - just the 5-10 they use regularly</li>
+                                <li><strong>Performance:</strong> Each field in a Data Graph is "hydrated" at send time (real-time lookup)</li>
+                                <li><strong>Governance:</strong> Control which fields are available (don't expose SSN, sensitive data)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">2</div>
+                        <div class="concept-content">
+                            <h4>Data Graph Architecture</h4>
+                            <p>Here's how Data Graphs work in the send flow:</p>
+                            <div class="data-model-visual">
+                                <div class="dmo-box">
+                                    <strong>Step 1</strong><br>
+                                    Segment identifies<br>
+                                    Sarah Johnson<br>
+                                    (Unified Individual)
+                                </div>
+                                <div class="merge-arrow">→</div>
+                                <div class="dmo-box">
+                                    <strong>Step 2</strong><br>
+                                    Data Graph looks up<br>
+                                    her loyalty data<br>
+                                    (tier, points)
+                                </div>
+                                <div class="merge-arrow">→</div>
+                                <div class="dmo-box">
+                                    <strong>Step 3</strong><br>
+                                    Email merges<br>
+                                    personalized content<br>
+                                    "Hi Sarah, Silver member"
+                                </div>
+                            </div>
+                            <p>This happens <strong>at send time</strong> - data is fresh and up-to-date!</p>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">3</div>
+                        <div class="concept-content">
+                            <h4>Field Selection Strategy</h4>
+                            <p>When creating a Data Graph, you'll select fields from related DMOs. For NTO Rewards, we want:</p>
+                            <ul>
+                                <li><strong>From Individual DMO:</strong> FirstName, LastName, Email (identity fields)</li>
+                                <li><strong>From Loyalty Program Member DMO:</strong> MemberTier, PointsBalance, EnrollmentDate, MemberStatus</li>
+                                <li><strong>From Loyalty Promotion Enrollment DMO:</strong> PromotionName, EnrollmentDate (for trail participation)</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Key Insight:</strong> Start small! Add 5-10 fields for your first Data Graph. You can always add more later. Too many fields makes Content Builder overwhelming and can impact performance.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">4</div>
+                        <div class="concept-content">
+                            <h4>Consumption & Performance Considerations</h4>
+                            <p>Every Data Graph lookup consumes API calls. Here's what to know:</p>
+                            <ul>
+                                <li><strong>Real-time lookup:</strong> At send time, MC Next calls Data Cloud for each recipient's data</li>
+                                <li><strong>Consumption:</strong> Each send = 1 API call per recipient (500K send = 500K API calls)</li>
+                                <li><strong>Rate limits:</strong> Data Cloud has throughput limits (varies by SKU)</li>
+                                <li><strong>Caching:</strong> Data Graph responses are cached for short periods (reduces duplicate lookups)</li>
+                            </ul>
+                            <div class="warning">
+                                <strong>⚠️ Important:</strong> For high-volume sends (1M+ emails), coordinate with Data Cloud team to ensure you have sufficient API capacity. Pre-warming may be needed.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">5</div>
+                        <div class="concept-content">
+                            <h4>The Deletion Problem (and Default Values)</h4>
+                            <p>What happens if a field is missing or a related record is deleted?</p>
+                            <p><strong>Example:</strong> Sarah is in your segment, but her Loyalty Program Member record was deleted.</p>
+                            <ul>
+                                <li><strong>Without default:</strong> Email shows "Hi , you have  points" (blank merge fields)</li>
+                                <li><strong>With default:</strong> Email shows "Hi Member, join our loyalty program today!" (fallback content)</li>
+                            </ul>
+                            <p><strong>Best Practice:</strong> Always set default values for Data Graph fields:</p>
+                            <div class="code-block">
+                                FirstName: "Valued Customer"<br>
+                                MemberTier: "Member"<br>
+                                PointsBalance: "0"
+                            </div>
+                            <div class="key-insight">
+                                <strong>💡 Pro Tip:</strong> Test your emails with records that have missing data to see how defaults render!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 1 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 1</span>
+                    <h2>Create "NTO Rewards Personalization" Data Graph</h2>
+                    <p class="section-duration">Hands-on • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Build a Data Graph that exposes NTO's loyalty fields to Content Builder. You'll select fields from Individual and Loyalty Program Member DMOs, set default values, and preview the data.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Create Data Graph with name, tier, points, enrollment date</li>
+                                <li>Set appropriate default values for all fields</li>
+                                <li>Add trail participation fields (related DMO)</li>
+                                <li>Preview Data Graph with sample members</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Navigate to Data Graphs</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From Data Cloud, click on <strong>Data Graphs</strong> in the left navigation.</p>
+                                <p>Click the <strong>New</strong> button to create your first Data Graph.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod3-step1-data-graph-nav.jpg"
+                                         alt="Data Graphs navigation interface"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Data Graphs page with New button</p>
+                                    <p class="screenshot-meta">📸 <code>mod3-step1-data-graph-nav.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Configure Data Graph Basics</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>In the "New Data Graph" dialog, enter:</p>
+
+                                <p><strong>Data Graph Name:</strong> <code>NTO Rewards Personalization</code></p>
+                                <p><strong>API Name:</strong> <code>NTO_Rewards_Personalization</code> (auto-generated)</p>
+                                <p><strong>Description:</strong> Core loyalty fields for email personalization (tier, points, enrollment, trails)</p>
+
+                                <p><strong>Root Object:</strong> Select <strong>Unified Individual</strong></p>
+                                <p><em>Why? All emails are sent to Unified Individuals, so this is always your starting point.</em></p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod3-step2-new-graph.jpg"
+                                         alt="Create new Data Graph dialog with name and root object"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">New Data Graph configuration with Unified Individual as root</p>
+                                    <p class="screenshot-meta">📸 <code>mod3-step2-new-graph.jpg</code></p>
+                                </div>
+
+                                <p>Click <strong>Next</strong> to proceed to field selection.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Add Loyalty Program Member Fields</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>You'll see a tree view of related DMOs. Expand <strong>Loyalty Program Member</strong>.</p>
+
+                                <p><strong>Select these fields (check the boxes):</strong></p>
+                                <ul>
+                                    <li><strong>MemberTier__c</strong> (Gold, Silver, Bronze)</li>
+                                    <li><strong>PointsBalance__c</strong> (current points)</li>
+                                    <li><strong>EnrollmentDate__c</strong> (when they joined)</li>
+                                    <li><strong>MemberStatus__c</strong> (Active, Inactive)</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod3-step3-add-loyalty.jpg"
+                                         alt="Adding Loyalty Program Member DMO to Data Graph"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Loyalty Program Member expanded with fields selected</p>
+                                    <p class="screenshot-meta">📸 <code>mod3-step3-add-loyalty.jpg</code></p>
+                                </div>
+
+                                <p><strong>Also add these Individual fields:</strong></p>
+                                <ul>
+                                    <li><strong>FirstName</strong></li>
+                                    <li><strong>LastName</strong></li>
+                                    <li><strong>Email</strong></li>
+                                </ul>
+
+                                <p>You should now have 7 fields selected total.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Set Default Values</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>For each field, you'll see a <strong>"Default Value"</strong> column. Set these defaults:</p>
+
+                                <div class="code-block">
+                                    <strong>FirstName:</strong> Valued Member<br>
+                                    <strong>LastName:</strong> (leave blank - will use FirstName fallback)<br>
+                                    <strong>Email:</strong> (leave blank - required field, won't be missing)<br>
+                                    <strong>MemberTier__c:</strong> Member<br>
+                                    <strong>PointsBalance__c:</strong> 0<br>
+                                    <strong>EnrollmentDate__c:</strong> (leave blank)<br>
+                                    <strong>MemberStatus__c:</strong> Active
+                                </div>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod3-step4-field-selection.jpg"
+                                         alt="Field selection with default values configured"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Data Graph fields with default values set</p>
+                                    <p class="screenshot-meta">📸 <code>mod3-step4-field-selection.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>💡 Why these defaults?</strong> If someone is in your email segment but their loyalty record is missing, they'll see friendly fallback content instead of blank fields. "Hi Valued Member" is better than "Hi ,"!
+                                </div>
+
+                                <p>Click <strong>Save</strong> to create the Data Graph.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 1 Checkpoint</h3>
+                        <p>Before moving to Lab 2, verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Data Graph is saved with name "NTO Rewards Personalization"</li>
+                            <li>✓ 7 fields are included (name, email, tier, points, enrollment, status)</li>
+                            <li>✓ Default values are set for key fields</li>
+                            <li>✓ Data Graph status shows "Active"</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 2 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 2</span>
+                    <h2>Test Personalization with Email Preview</h2>
+                    <p class="section-duration">Hands-on • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Now that your Data Graph is active, test it by creating a simple email and previewing with real member data. You'll see how merge fields pull live data from Data Cloud.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Preview Data Graph with sample member records</li>
+                                <li>Create test email with Data Graph merge fields</li>
+                                <li>Preview email with different member profiles (Bronze, Silver, Gold)</li>
+                                <li>Review consumption metrics for Data Graph</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Preview Data Graph Data</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From the Data Graphs page, click on <strong>NTO Rewards Personalization</strong>.</p>
+                                <p>Click the <strong>Preview</strong> button.</p>
+
+                                <p>Enter a test Unified Individual ID (you can get one from your "New Members" segment):</p>
+                                <ul>
+                                    <li>Go to Segments → NTO - New Members → View Members</li>
+                                    <li>Copy any Unified Individual ID</li>
+                                    <li>Paste into Data Graph preview</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod3-lab2-step1-preview.jpg"
+                                         alt="Data Graph preview showing sample member data"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Preview showing: Sarah Johnson, Silver tier, 2,450 points, Enrolled 2026-04-15</p>
+                                    <p class="screenshot-meta">📸 <code>mod3-lab2-step1-preview.jpg</code></p>
+                                </div>
+
+                                <p>You should see all 7 fields populated with real data:</p>
+                                <ul>
+                                    <li>FirstName: Sarah</li>
+                                    <li>LastName: Johnson</li>
+                                    <li>Email: sarah.johnson@email.com</li>
+                                    <li>MemberTier: Silver</li>
+                                    <li>PointsBalance: 2450</li>
+                                    <li>EnrollmentDate: 2026-04-15</li>
+                                    <li>MemberStatus: Active</li>
+                                </ul>
+
+                                <p><strong>Try a few more IDs</strong> to see different tiers and point balances!</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Create Test Email with Merge Fields</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Navigate to <strong>Content Builder</strong> in MC Next.</p>
+                                <p>Create a new email (we'll build proper templates in Module 5 - this is just for testing).</p>
+
+                                <p><strong>Email Name:</strong> <code>Data Graph Test Email</code></p>
+
+                                <p><strong>Subject Line:</strong></p>
+                                <div class="code-block">
+                                    %%FirstName%%, you have %%PointsBalance%% points!
+                                </div>
+
+                                <p><strong>Email Body (simple HTML):</strong></p>
+                                <div class="code-block">
+                                    Hi %%FirstName%% %%LastName%%,<br><br>
+
+                                    Thank you for being a %%MemberTier%% member of NTO Rewards!<br><br>
+
+                                    Your current points balance: %%PointsBalance%% points<br>
+                                    Member since: %%EnrollmentDate%%<br><br>
+
+                                    Keep exploring the outdoors!<br>
+                                    - The NTO Team
+                                </div>
+
+                                <p>Click <strong>Preview</strong> and select a test subscriber (use Sarah Johnson's Unified Individual ID).</p>
+
+                                <p>You should see:</p>
+                                <div class="code-block">
+                                    Hi Sarah Johnson,<br><br>
+
+                                    Thank you for being a Silver member of NTO Rewards!<br><br>
+
+                                    Your current points balance: 2450 points<br>
+                                    Member since: 2026-04-15<br><br>
+
+                                    Keep exploring the outdoors!<br>
+                                    - The NTO Team
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Magic!</strong> All that data came from Data Cloud in real-time. If Sarah's points change tomorrow, the next email she gets will show the updated balance automatically!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Test with Different Member Profiles</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Preview the same email with different member profiles to see tier-specific personalization:</p>
+
+                                <p><strong>Bronze Member Preview:</strong></p>
+                                <div class="code-block">
+                                    Hi Marcus Chen,<br>
+                                    Thank you for being a Bronze member...<br>
+                                    Points balance: 450 points
+                                </div>
+
+                                <p><strong>Gold Member Preview:</strong></p>
+                                <div class="code-block">
+                                    Hi Elena Rodriguez,<br>
+                                    Thank you for being a Gold member...<br>
+                                    Points balance: 12,850 points
+                                </div>
+
+                                <p><strong>Member with Missing Data (test your defaults):</strong></p>
+                                <p>Try previewing with a Unified Individual who isn't a loyalty member yet.</p>
+                                <div class="code-block">
+                                    Hi Valued Member,<br>
+                                    Thank you for being a Member member...<br>
+                                    Points balance: 0 points
+                                </div>
+
+                                <p><em>(Your default values are working!)</em></p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Review Data Graph Consumption Metrics</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Back in Data Cloud, go to <strong>Data Graphs</strong> and click on your graph.</p>
+                                <p>Click the <strong>Consumption</strong> tab.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod3-lab2-step2-consumption.jpg"
+                                         alt="Data Graph consumption metrics dashboard"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Consumption metrics showing API calls, average response time, success rate</p>
+                                    <p class="screenshot-meta">📸 <code>mod3-lab2-step2-consumption.jpg</code></p>
+                                </div>
+
+                                <p>You'll see metrics like:</p>
+                                <ul>
+                                    <li><strong>Total API Calls:</strong> Number of lookups (should show your preview tests)</li>
+                                    <li><strong>Average Response Time:</strong> How fast lookups are (typically 50-200ms)</li>
+                                    <li><strong>Success Rate:</strong> % of successful lookups (should be near 100%)</li>
+                                    <li><strong>Error Rate:</strong> Any failed lookups (investigate if &gt;1%)</li>
+                                </ul>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Monitor consumption metrics after your first large send. If you see high error rates or slow response times, you may need to optimize your Data Graph or increase API capacity.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 2 Checkpoint</h3>
+                        <p>Verify you understand:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ How to preview Data Graph data for specific members</li>
+                            <li>✓ How to use Data Graph fields in email merge fields</li>
+                            <li>✓ How default values appear when data is missing</li>
+                            <li>✓ Where to monitor Data Graph consumption metrics</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Section -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Deep Dive: Data Graph Optimization</h2>
+                    <p class="section-duration">Optional • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Content ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <h3>Multi-Object Data Graphs</h3>
+                        <p>You can traverse multiple DMO relationships in a single Data Graph:</p>
+                        <p><strong>Example: Full NTO Member Profile Graph</strong></p>
+                        <ul>
+                            <li><strong>Unified Individual</strong> → FirstName, LastName, Email</li>
+                            <li><strong>→ Loyalty Program Member</strong> → Tier, Points, Enrollment Date</li>
+                            <li><strong>→ Loyalty Promotion Enrollment</strong> → Trail Name, Status, Completion %</li>
+                            <li><strong>→ Loyalty Ledger (last transaction)</strong> → Last Points Earned, Transaction Date</li>
+                        </ul>
+                        <p><strong>Use Case:</strong> "Hi Sarah, you earned 250 points on May 10th and you're 40% done with the Spring Hiking Challenge!"</p>
+
+                        <h3>Relationship Paths & Performance</h3>
+                        <p>Each relationship traversal adds query complexity:</p>
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <h4>1-Hop (Fast)</h4>
+                                <p>Unified Individual → Loyalty Program Member</p>
+                                <p><strong>Response Time:</strong> 50-100ms</p>
+                                <p><strong>Use for:</strong> Core personalization fields</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>2-Hop (Moderate)</h4>
+                                <p>Unified Individual → Loyalty Member → Promotion Enrollment</p>
+                                <p><strong>Response Time:</strong> 100-300ms</p>
+                                <p><strong>Use for:</strong> Engagement-specific data</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>3+ Hops (Slow)</h4>
+                                <p>Multiple deep relationships</p>
+                                <p><strong>Response Time:</strong> 300ms+</p>
+                                <p><strong>Use sparingly:</strong> Consider Calculated Insights instead</p>
+                            </div>
+                        </div>
+
+                        <h3>Data Graph vs Calculated Insights</h3>
+                        <p><strong>When to use Data Graph:</strong></p>
+                        <ul>
+                            <li>Simple field lookups (name, tier, points)</li>
+                            <li>1-2 relationship hops</li>
+                            <li>Data needs to be real-time fresh</li>
+                        </ul>
+                        <p><strong>When to use Calculated Insight:</strong></p>
+                        <ul>
+                            <li>Complex aggregations (SUM, COUNT, AVG)</li>
+                            <li>Historical data (last 90 days purchase total)</li>
+                            <li>Doesn't need to be real-time (daily refresh is OK)</li>
+                        </ul>
+                        <p><strong>Example:</strong> "Total Points Earned Last 90 Days" - calculate once daily as a Calculated Insight, then include that insight field in your Data Graph.</p>
+
+                        <h3>Handling One-to-Many Relationships</h3>
+                        <p><strong>Problem:</strong> One member might have multiple Loyalty Promotion Enrollments. Which one do you show?</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li><strong>Filter in Data Graph:</strong> "Most recent enrollment only"</li>
+                            <li><strong>Use Content Builder logic:</strong> IF statements to show different trails based on status</li>
+                            <li><strong>Create separate Data Graphs:</strong> One per promotion type</li>
+                        </ul>
+
+                        <h3>Performance Optimization Tips</h3>
+                        <ul>
+                            <li><strong>Keep field count low:</strong> Each field adds to response payload size</li>
+                            <li><strong>Use indexed fields when possible:</strong> MemberTier, MemberStatus are indexed</li>
+                            <li><strong>Cache at send time:</strong> MC Next caches Data Graph responses during batch sends</li>
+                            <li><strong>Monitor consumption dashboard:</strong> Set alerts for response time &gt;500ms or error rate &gt;2%</li>
+                        </ul>
+
+                        <div class="further-reading">
+                            <h4>📚 Further Reading</h4>
+                            <ul>
+                                <li><a href="#">Data Graph Best Practices (Salesforce Help)</a></li>
+                                <li><a href="#">Personalization at Scale with Data Graphs</a></li>
+                                <li><a href="#">Data Graph vs Calculated Insights Decision Guide</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Notes -->
+            <section class="lesson-section implementation">
+                <div class="section-header">
+                    <span class="section-badge implementation">🏗️ IMPLEMENTATION NOTES</span>
+                    <h2>For Implementation Teams</h2>
+                    <p class="section-duration">Optional • 15 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Implementation Notes ▼
+                    </button>
+
+                    <div class="implementation-content">
+                        <h3>Discovery: Start Small Strategy</h3>
+                        <p>When planning Data Graphs with customers, recommend starting with a single, simple graph:</p>
+                        <div class="question-grid">
+                            <div class="question-card">
+                                <strong>Phase 1: Core Personalization</strong>
+                                <p>Name, email, tier, points (5-10 fields max)</p>
+                                <p><em>Timeline:</em> Week 1-2</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Phase 2: Engagement Data</strong>
+                                <p>Add promotion enrollment, activity completion</p>
+                                <p><em>Timeline:</em> Week 3-4</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Phase 3: Historical/Calculated</strong>
+                                <p>Lifetime value, purchase history, behavioral scores</p>
+                                <p><em>Timeline:</em> Month 2+</p>
+                            </div>
+                        </div>
+
+                        <h3>Data Graph Naming Conventions</h3>
+                        <div class="code-block">
+                            [Brand/Program] - [Purpose] - [Version]<br><br>
+
+                            Examples:<br>
+                            NTO Rewards - Core Personalization - v1<br>
+                            NTO Rewards - Trail Engagement - v1<br>
+                            NTO Retail - Purchase History - v2<br>
+                            Global - Contact Info - v1
+                        </div>
+                        <p><em>Why versioning?</em> If you need to make breaking changes, create a new version while old campaigns still use v1.</p>
+
+                        <h3>Expansion Planning: When to Add Fields</h3>
+                        <p><strong>Add fields when:</strong></p>
+                        <ul>
+                            <li>Marketing team has specific use case (new campaign type)</li>
+                            <li>Field is used in 3+ email templates (reusable)</li>
+                            <li>Data is available and reliable in Data Cloud</li>
+                        </ul>
+                        <p><strong>Don't add fields when:</strong></p>
+                        <ul>
+                            <li>It's a one-time campaign (use different approach)</li>
+                            <li>Data quality is poor (&gt;20% missing values)</li>
+                            <li>Field is sensitive/PII without clear approval</li>
+                        </ul>
+
+                        <h3>Testing Strategy Before Production</h3>
+                        <ol>
+                            <li><strong>Preview with 10+ test records:</strong> Bronze, Silver, Gold members + edge cases</li>
+                            <li><strong>Test missing data:</strong> Verify defaults render correctly</li>
+                            <li><strong>Performance test:</strong> Send to 1K recipients, check consumption metrics</li>
+                            <li><strong>Pilot campaign:</strong> Send to internal team first (50-100 people)</li>
+                            <li><strong>Monitor first production send:</strong> Watch consumption dashboard for errors</li>
+                        </ol>
+
+                        <h3>Common Pitfalls & Solutions</h3>
+                        <div class="pitfall-list">
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Merge fields showing "%%FieldName%%"</h4>
+                                    <p><strong>Cause:</strong> Data Graph not activated, or wrong field API name</p>
+                                    <p><strong>Solution:</strong> Verify Data Graph status = Active, check exact field API name (case-sensitive!)</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: High error rate in consumption metrics</h4>
+                                    <p><strong>Causes:</strong> Segment includes non-loyalty members, relationship path broken, API timeout</p>
+                                    <p><strong>Solution:</strong> Filter segment to only include records with loyalty data, check DMO relationships</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Slow send times (throttling)</h4>
+                                    <p><strong>Cause:</strong> Hitting Data Cloud API rate limits</p>
+                                    <p><strong>Solution:</strong> Schedule sends during off-peak hours, increase API capacity (contact Salesforce), optimize Data Graph</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>When to Escalate</h3>
+                        <ul>
+                            <li><strong>Performance issues:</strong> If Data Graph response time &gt;500ms, engage Data Cloud architect</li>
+                            <li><strong>High-volume sends:</strong> For 1M+ recipient sends, coordinate with Salesforce (pre-warming)</li>
+                            <li><strong>Complex relationships:</strong> If need 4+ DMO hops, consult architecture team for alternatives</li>
+                            <li><strong>Multi-org scenarios:</strong> If Data Cloud spans multiple orgs, engage Professional Services</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz -->
+            <section class="lesson-section quiz">
+                <div class="section-header">
+                    <span class="section-badge quiz">✅ KNOWLEDGE CHECK</span>
+                    <h2>Module 3 Quiz</h2>
+                    <p class="section-duration">5 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Test your understanding before moving to Module 4:</p>
+
+                    <div class="quiz-question">
+                        <p><strong>1. What is the primary purpose of a Data Graph?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1"> A) To store data in Data Cloud</label>
+                            <label><input type="radio" name="q1"> B) To expose curated Data Cloud fields for personalization in Content Builder</label>
+                            <label><input type="radio" name="q1"> C) To segment audiences for campaigns</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>2. When does a Data Graph lookup occur?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2"> A) When the segment is published</label>
+                            <label><input type="radio" name="q2"> B) At send time (real-time lookup for each recipient)</label>
+                            <label><input type="radio" name="q2"> C) Once daily during scheduled refresh</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>3. Why should you set default values for Data Graph fields?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3"> A) Default values improve Data Graph performance</label>
+                            <label><input type="radio" name="q3"> B) To provide fallback content when data is missing or deleted</label>
+                            <label><input type="radio" name="q3"> C) Default values are required for all fields (system requirement)</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>4. True or False: You should always expose every available Data Cloud field in your Data Graph for maximum flexibility.</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4"> True</label>
+                            <label><input type="radio" name="q4"> False</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-answers" style="display:none;">
+                        <h3>Answers:</h3>
+                        <p>1. B) To expose curated Data Cloud fields for personalization in Content Builder</p>
+                        <p>2. B) At send time (real-time lookup for each recipient)</p>
+                        <p>3. B) To provide fallback content when data is missing or deleted</p>
+                        <p>4. False (Start small - only expose fields marketers need. Too many fields overwhelms users and impacts performance)</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="document.querySelector('.quiz-answers').style.display='block'; this.style.display='none';">
+                        Show Answers
+                    </button>
+                </div>
+            </section>
+
+            <!-- Module Summary -->
+            <section class="module-summary">
+                <h2>🎉 Module 3 Complete!</h2>
+                <p>Congratulations! You've mastered Data Graphs and can now personalize emails with live loyalty data.</p>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>✅ What You Learned</h3>
+                        <ul>
+                            <li>How Data Graphs bridge Data Cloud and Content Builder</li>
+                            <li>Field selection strategy (start small, expand purposefully)</li>
+                            <li>Default values for handling missing data gracefully</li>
+                            <li>Real-time lookup architecture and consumption considerations</li>
+                            <li>How to monitor Data Graph performance metrics</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h3>🛠️ What You Built</h3>
+                        <ul>
+                            <li>"NTO Rewards Personalization" Data Graph with 7 fields</li>
+                            <li>Preview tested with Bronze, Silver, and Gold members</li>
+                            <li>Test email demonstrating live data merge fields</li>
+                            <li>Verified consumption metrics and performance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="next-module">
+                    <h3>🚀 Next Up: Module 4 - Consent Management</h3>
+                    <p>Before sending personalized campaigns, you need to respect member preferences. Learn how to configure consent management for email, SMS, and WhatsApp!</p>
+                    <a href="module-04-consent.html" class="btn-primary btn-large">Continue to Module 4 →</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="training-footer">
+        <div class="container">
+            <p>MC Next Training: The NTO Rewards Journey | Module 3 of 9</p>
+            <p><a href="../index.html">Back to Home</a> | <a href="../resources.html">Resources</a></p>
+        </div>
+    </footer>
+
+    <script src="../scripts/training.js"></script>
+</body>
+</html>

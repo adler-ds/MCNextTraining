@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: Consent Management | MC Next Training</title>
+    <link rel="stylesheet" href="../styles/training.css">
+</head>
+<body>
+    <nav class="training-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">🏔️ MC Next Training</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="module-01-data-foundation.html">Module 1</a>
+                <a href="module-02-segmentation.html">Module 2</a>
+                <a href="module-03-data-graphs.html">Module 3</a>
+                <a href="module-04-consent.html" class="active">Module 4</a>
+                <a href="../resources.html">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="module-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> ›
+                <a href="../index.html#level-2">Level 2: Practitioner</a> ›
+                <span>Module 4</span>
+            </div>
+            <h1>Module 4: Consent Management</h1>
+            <p class="module-subtitle">Respecting member communication preferences</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p class="progress-text">Progress: 0% Complete</p>
+
+            <div class="module-meta">
+                <span class="meta-item">⏱️ <strong>1.5 hours</strong></span>
+                <span class="meta-item">🎯 <strong>2 Labs</strong></span>
+                <span class="meta-item">📸 <strong>5 Screenshots</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-content">
+
+            <!-- NTO Rewards Context -->
+            <section class="nto-context">
+                <div class="context-header">
+                    <span class="context-icon">🏔️</span>
+                    <h2>NTO Rewards Context</h2>
+                </div>
+                <div class="context-body">
+                    <p><strong>The Scenario:</strong> NTO wants to reach loyalty members across multiple channels - email for newsletters, SMS for time-sensitive trail updates, and WhatsApp for rich media content. They need to respect each member's channel preferences and comply with GDPR/CCPA regulations.</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Communication Channels</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">500K</div>
+                            <div class="stat-label">Members to Manage</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">90 Days</div>
+                            <div class="stat-label">Consent Cache TTL</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Compliance Required</div>
+                        </div>
+                    </div>
+
+                    <p><strong>Your Challenge:</strong> Configure consent management for email, SMS, and WhatsApp channels. Create a branded preference center where members can update their preferences. Understand the consent cache layer and safe operating patterns to avoid compliance issues.</p>
+                </div>
+            </section>
+
+            <!-- Learning Objectives -->
+            <section class="learning-objectives">
+                <h2>🎯 What You'll Learn</h2>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <span class="objective-icon">📋</span>
+                        <h3>Consent DMO</h3>
+                        <p>Understanding Communication Subscription Consent data model</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">⚡</span>
+                        <h3>Consent Cache Layer</h3>
+                        <p>How MC Next caches consent for performance (90-day TTL)</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">✅</span>
+                        <h3>Safe Operating Patterns</h3>
+                        <p>Best practices to avoid sending to opted-out members</p>
+                    </div>
+                    <div class="objective-card">
+                        <span class="objective-icon">🎨</span>
+                        <h3>Preference Center</h3>
+                        <p>Customizing preference pages with NTO branding</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Lesson -->
+            <section class="lesson-section core-lesson">
+                <div class="section-header">
+                    <span class="section-badge core">📖 CORE LESSON</span>
+                    <h2>Understanding Consent Management</h2>
+                    <p class="section-duration">Required • 20 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <h3>The Five Key Concepts</h3>
+                    <p>Consent management is critical for compliance and customer trust. Let's understand how it works in MC Next:</p>
+
+                    <div class="concept-card">
+                        <div class="concept-number">1</div>
+                        <div class="concept-content">
+                            <h4>Communication Subscription Consent DMO</h4>
+                            <p>This is the Data Cloud object that stores consent status for each channel:</p>
+                            <ul>
+                                <li><strong>Individual ID:</strong> Links to the person</li>
+                                <li><strong>Channel:</strong> Email, SMS, WhatsApp, etc.</li>
+                                <li><strong>Consent Status:</strong> OptIn, OptOut, NotSet</li>
+                                <li><strong>Consent Date:</strong> When preference was last updated</li>
+                                <li><strong>Consent Source:</strong> Where it came from (Preference Center, API, Import)</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Key Insight:</strong> Each person can have multiple consent records - one per channel. Sarah might opt-in to Email but opt-out of SMS.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">2</div>
+                        <div class="concept-content">
+                            <h4>Consent Cache Layer (90-Day TTL)</h4>
+                            <p>For performance, MC Next doesn't check Data Cloud for every send. Instead, it caches consent status:</p>
+                            <div class="data-model-visual">
+                                <div class="dmo-box">
+                                    <strong>Step 1</strong><br>
+                                    Member updates<br>
+                                    preference<br>
+                                    (OptOut)
+                                </div>
+                                <div class="merge-arrow">→</div>
+                                <div class="dmo-box">
+                                    <strong>Step 2</strong><br>
+                                    Writes to<br>
+                                    Data Cloud<br>
+                                    (immediate)
+                                </div>
+                                <div class="merge-arrow">→</div>
+                                <div class="dmo-box">
+                                    <strong>Step 3</strong><br>
+                                    MC Next cache<br>
+                                    updates<br>
+                                    (within minutes)
+                                </div>
+                            </div>
+                            <p><strong>TTL (Time to Live):</strong> Cache entries expire after 90 days and refresh from Data Cloud.</p>
+                            <div class="warning">
+                                <strong>⚠️ Critical:</strong> If consent data in Data Cloud is deleted, the cache still holds it for up to 90 days. This is the "deletion problem" - see Advanced section for details.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">3</div>
+                        <div class="concept-content">
+                            <h4>Safe Operating Patterns</h4>
+                            <p>To stay compliant, follow these patterns:</p>
+                            <ul>
+                                <li><strong>Pattern 1: Segment Filtering</strong> - Exclude opted-out members in your segment criteria (don't rely on MC Next to filter at send time)</li>
+                                <li><strong>Pattern 2: Preference Center First</strong> - Always provide a preference center link in emails (legal requirement in many regions)</li>
+                                <li><strong>Pattern 3: Re-permission Campaigns</strong> - Periodically ask inactive members to reconfirm consent (recommended annually)</li>
+                                <li><strong>Pattern 4: Audit Trail</strong> - Log all consent changes with timestamp and source (required for GDPR)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">4</div>
+                        <div class="concept-content">
+                            <h4>Channel-Specific Consent</h4>
+                            <p>Different channels have different consent requirements:</p>
+                            <ul>
+                                <li><strong>Email:</strong> Most permissive - implied consent often acceptable (transactional emails don't require opt-in)</li>
+                                <li><strong>SMS:</strong> Strict opt-in required (TCPA in US) - must have explicit consent with clear terms</li>
+                                <li><strong>WhatsApp:</strong> Requires opt-in + phone number verification + 24-hour message window</li>
+                            </ul>
+                            <div class="key-insight">
+                                <strong>💡 Pro Tip:</strong> For SMS and WhatsApp, use double opt-in (confirm via the channel itself) for extra protection.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="concept-number">5</div>
+                        <div class="concept-content">
+                            <h4>Preference Center Architecture</h4>
+                            <p>The Preference Center is a web page where members manage their subscriptions:</p>
+                            <ul>
+                                <li><strong>Hosted by:</strong> MC Next (Salesforce-hosted URL)</li>
+                                <li><strong>Authenticated by:</strong> Email + subscriber key (no login required)</li>
+                                <li><strong>Customizable:</strong> Branding, fields, layout</li>
+                                <li><strong>Writes to:</strong> Communication Subscription Consent DMO</li>
+                            </ul>
+                            <p><strong>Preference Center Link:</strong> Every marketing email should include a link like:</p>
+                            <div class="code-block">
+                                Update your preferences: %%preference_center_url%%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 1 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 1</span>
+                    <h2>Configure Channel Consent</h2>
+                    <p class="section-duration">Hands-on • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Set up consent management for NTO's three communication channels: Email, SMS, and WhatsApp. Create communication subscriptions that members can opt into or out of.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Create Email subscription: "NTO Rewards Newsletter"</li>
+                                <li>Create SMS subscription: "Trail Updates & Alerts"</li>
+                                <li>Create WhatsApp subscription: "Member Offers"</li>
+                                <li>Verify consent records in Data Cloud</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Navigate to Consent Setup</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From MC Next, navigate to <strong>Setup</strong> → <strong>Consent Management</strong>.</p>
+                                <p>You'll see the Consent Settings page with options for managing communication subscriptions.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod4-step1-consent-setup.jpg"
+                                         alt="Consent management settings page"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Consent Management setup page</p>
+                                    <p class="screenshot-meta">📸 <code>mod4-step1-consent-setup.jpg</code></p>
+                                </div>
+
+                                <p>Click <strong>Communication Subscriptions</strong> in the left sidebar.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Create Email Subscription</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click <strong>New Communication Subscription</strong>.</p>
+
+                                <p><strong>Subscription Details:</strong></p>
+                                <ul>
+                                    <li><strong>Name:</strong> <code>NTO Rewards Newsletter</code></li>
+                                    <li><strong>Description:</strong> Monthly newsletter with trail highlights, member stories, and exclusive offers</li>
+                                    <li><strong>Channel:</strong> <code>Email</code></li>
+                                    <li><strong>Default Consent:</strong> <code>OptIn</code> (for NTO, new members automatically get newsletter)</li>
+                                    <li><strong>Category:</strong> <code>Marketing</code></li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod4-step2-channel-config.jpg"
+                                         alt="Email subscription configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Creating Email subscription with OptIn default</p>
+                                    <p class="screenshot-meta">📸 <code>mod4-step2-channel-config.jpg</code></p>
+                                </div>
+
+                                <p>Click <strong>Save</strong>.</p>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> "Default Consent" only applies to NEW records. Existing members' consent status won't change.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Create SMS Subscription</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click <strong>New Communication Subscription</strong> again.</p>
+
+                                <p><strong>Subscription Details:</strong></p>
+                                <ul>
+                                    <li><strong>Name:</strong> <code>Trail Updates & Alerts</code></li>
+                                    <li><strong>Description:</strong> Time-sensitive trail updates, weather alerts, and challenge reminders via SMS</li>
+                                    <li><strong>Channel:</strong> <code>SMS</code></li>
+                                    <li><strong>Default Consent:</strong> <code>OptOut</code> (SMS requires explicit opt-in - don't default to OptIn!)</li>
+                                    <li><strong>Category:</strong> <code>Marketing</code></li>
+                                    <li><strong>Keywords:</strong> <code>JOIN, STOP, HELP</code> (required for SMS compliance)</li>
+                                </ul>
+
+                                <p><strong>Legal Disclaimer (required for SMS):</strong></p>
+                                <div class="code-block">
+                                    Msg & data rates may apply. Reply STOP to unsubscribe, HELP for help.
+                                </div>
+
+                                <p>Click <strong>Save</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Create WhatsApp Subscription</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click <strong>New Communication Subscription</strong>.</p>
+
+                                <p><strong>Subscription Details:</strong></p>
+                                <ul>
+                                    <li><strong>Name:</strong> <code>Member Offers</code></li>
+                                    <li><strong>Description:</strong> Exclusive member-only offers and product launches via WhatsApp with rich media</li>
+                                    <li><strong>Channel:</strong> <code>WhatsApp</code></li>
+                                    <li><strong>Default Consent:</strong> <code>OptOut</code> (requires explicit opt-in)</li>
+                                    <li><strong>Category:</strong> <code>Marketing</code></li>
+                                </ul>
+
+                                <p>Click <strong>Save</strong>.</p>
+
+                                <p>You should now see all three subscriptions in the list:</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod4-step3-subscriptions.jpg"
+                                         alt="List of communication subscriptions"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Three communication subscriptions: Email (OptIn), SMS (OptOut), WhatsApp (OptOut)</p>
+                                    <p class="screenshot-meta">📸 <code>mod4-step3-subscriptions.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">5</span>
+                                <h4>Verify Consent Records in Data Cloud</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Navigate to <strong>Data Cloud</strong> → <strong>Query</strong>.</p>
+
+                                <p>Run this query to see consent records:</p>
+                                <div class="code-block">
+                                    SELECT <br>
+                                    &nbsp;&nbsp;IndividualId,<br>
+                                    &nbsp;&nbsp;Channel,<br>
+                                    &nbsp;&nbsp;ConsentStatus,<br>
+                                    &nbsp;&nbsp;ConsentDate,<br>
+                                    &nbsp;&nbsp;SubscriptionName<br>
+                                    FROM CommunicationSubscriptionConsent__dlm<br>
+                                    LIMIT 10
+                                </div>
+
+                                <p>You should see consent records for members who have preferences set. New members with default opt-in to newsletter will show:</p>
+                                <ul>
+                                    <li>Channel: Email</li>
+                                    <li>ConsentStatus: OptIn</li>
+                                    <li>SubscriptionName: NTO Rewards Newsletter</li>
+                                </ul>
+
+                                <div class="key-insight">
+                                    <strong>💡 Key Insight:</strong> This DMO is the source of truth for consent. Any external system (website, mobile app) should write consent changes here via API.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 1 Checkpoint</h3>
+                        <p>Before moving to Lab 2, verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Three communication subscriptions created (Email, SMS, WhatsApp)</li>
+                            <li>✓ Email defaults to OptIn; SMS and WhatsApp default to OptOut</li>
+                            <li>✓ Can query consent records in Data Cloud</li>
+                            <li>✓ Understand the relationship between subscriptions and consent records</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 2 -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 2</span>
+                    <h2>Customize Preference Center</h2>
+                    <p class="section-duration">Hands-on • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>Customize the NTO preference center with branding, custom fields, and subscription options. Test the preference center and verify that updates write back to Data Cloud.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Apply NTO branding (logo, colors)</li>
+                                <li>Add subscription checkboxes for all three channels</li>
+                                <li>Test preference center with test member</li>
+                                <li>Verify consent changes in Data Cloud</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Navigate to Preference Center Designer</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From MC Next Setup → <strong>Consent Management</strong> → <strong>Preference Center</strong>.</p>
+                                <p>Click <strong>Customize Preference Center</strong>.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod4-lab2-step1-preference-page.jpg"
+                                         alt="Preference Center designer interface"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Preference Center customization page with drag-and-drop builder</p>
+                                    <p class="screenshot-meta">📸 <code>mod4-lab2-step1-preference-page.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Apply NTO Branding</h4>
+                            </div>
+                            <div class="step-content">
+                                <p><strong>Header Settings:</strong></p>
+                                <ul>
+                                    <li><strong>Logo:</strong> Upload NTO logo (or use placeholder)</li>
+                                    <li><strong>Header Text:</strong> <code>Manage Your NTO Rewards Preferences</code></li>
+                                    <li><strong>Background Color:</strong> <code>#032d60</code> (NTO Dark Blue)</li>
+                                </ul>
+
+                                <p><strong>Body Settings:</strong></p>
+                                <ul>
+                                    <li><strong>Primary Color:</strong> <code>#f26522</code> (NTO Orange)</li>
+                                    <li><strong>Font:</strong> <code>Salesforce Sans</code></li>
+                                    <li><strong>Intro Text:</strong></li>
+                                </ul>
+                                <div class="code-block">
+                                    Stay connected with NTO Rewards! Update your communication preferences below.<br>
+                                    We respect your choices and will only send you content you want to receive.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Add Subscription Checkboxes</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>In the preference center builder, add three subscription options:</p>
+
+                                <p><strong>Option 1: Email Newsletter</strong></p>
+                                <ul>
+                                    <li><strong>Label:</strong> NTO Rewards Newsletter</li>
+                                    <li><strong>Description:</strong> Monthly newsletter with trail highlights and exclusive offers</li>
+                                    <li><strong>Linked Subscription:</strong> NTO Rewards Newsletter</li>
+                                    <li><strong>Default Checked:</strong> Yes (already opted in)</li>
+                                </ul>
+
+                                <p><strong>Option 2: SMS Alerts</strong></p>
+                                <ul>
+                                    <li><strong>Label:</strong> Trail Updates & Alerts (SMS)</li>
+                                    <li><strong>Description:</strong> Get time-sensitive trail updates via text message. Standard rates apply.</li>
+                                    <li><strong>Linked Subscription:</strong> Trail Updates & Alerts</li>
+                                    <li><strong>Default Checked:</strong> No (requires explicit opt-in)</li>
+                                </ul>
+
+                                <p><strong>Option 3: WhatsApp Offers</strong></p>
+                                <ul>
+                                    <li><strong>Label:</strong> Member Offers (WhatsApp)</li>
+                                    <li><strong>Description:</strong> Receive exclusive member-only offers via WhatsApp</li>
+                                    <li><strong>Linked Subscription:</strong> Member Offers</li>
+                                    <li><strong>Default Checked:</strong> No</li>
+                                </ul>
+
+                                <p><strong>Footer:</strong></p>
+                                <div class="code-block">
+                                    Questions? Contact us at support@nto.com<br>
+                                    Northern Trail Outfitters | Privacy Policy | Terms of Service
+                                </div>
+
+                                <p>Click <strong>Save & Publish</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Test Preference Center</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Copy the preference center URL from the settings page.</p>
+                                <p>It will look like: <code>https://mc-next.salesforce.com/prefs/XXXXXXXXX</code></p>
+
+                                <p>Open the URL in a new browser tab.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod4-lab2-step2-preview.jpg"
+                                         alt="Branded preference center with NTO styling"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Preference center with NTO branding, three subscription checkboxes, and footer</p>
+                                    <p class="screenshot-meta">📸 <code>mod4-lab2-step2-preview.jpg</code></p>
+                                </div>
+
+                                <p><strong>Test the form:</strong></p>
+                                <ol>
+                                    <li>Enter a test email (use one from your NTO segments)</li>
+                                    <li>Check/uncheck subscription boxes</li>
+                                    <li>Click <strong>Update Preferences</strong></li>
+                                    <li>You should see a confirmation message: "Your preferences have been updated!"</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">5</span>
+                                <h4>Verify Consent Changes in Data Cloud</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Go back to Data Cloud Query and run:</p>
+                                <div class="code-block">
+                                    SELECT <br>
+                                    &nbsp;&nbsp;IndividualId,<br>
+                                    &nbsp;&nbsp;Channel,<br>
+                                    &nbsp;&nbsp;ConsentStatus,<br>
+                                    &nbsp;&nbsp;ConsentDate,<br>
+                                    &nbsp;&nbsp;ConsentSource<br>
+                                    FROM CommunicationSubscriptionConsent__dlm<br>
+                                    WHERE IndividualId = 'YOUR_TEST_INDIVIDUAL_ID'<br>
+                                    ORDER BY ConsentDate DESC
+                                </div>
+
+                                <p>You should see updated records with:</p>
+                                <ul>
+                                    <li><strong>ConsentDate:</strong> Just now (timestamp of your preference update)</li>
+                                    <li><strong>ConsentSource:</strong> "Preference Center"</li>
+                                    <li><strong>ConsentStatus:</strong> OptIn or OptOut (matching your checkbox selections)</li>
+                                </ul>
+
+                                <div class="key-insight">
+                                    <strong>🎉 Success!</strong> Preference center updates flow directly to Data Cloud. Within minutes, MC Next's consent cache will also update, and the member won't receive messages on opted-out channels.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 2 Checkpoint</h3>
+                        <p>Verify you understand:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ How to customize preference center with branding</li>
+                            <li>✓ How to add subscription checkboxes for each channel</li>
+                            <li>✓ How to test preference center and verify updates</li>
+                            <li>✓ How consent changes flow from Preference Center → Data Cloud → Cache</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Section -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Deep Dive: Consent Cache & Bi-Directional Sync</h2>
+                    <p class="section-duration">Optional • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Content ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <h3>The Consent Cache vs DMO Priority Problem</h3>
+                        <p>Understanding the two-tiered consent system is critical for compliance:</p>
+
+                        <p><strong>Tier 1: Data Cloud (DMO) - Source of Truth</strong></p>
+                        <ul>
+                            <li>Communication Subscription Consent DMO stores all consent records</li>
+                            <li>Written to by: Preference Center, API imports, data streams</li>
+                            <li>Query latency: 100-500ms (real-time lookup)</li>
+                        </ul>
+
+                        <p><strong>Tier 2: MC Next Cache - Performance Layer</strong></p>
+                        <ul>
+                            <li>In-memory cache of consent status for fast sends</li>
+                            <li>Refreshes from DMO every few minutes (not real-time)</li>
+                            <li>TTL: 90 days (entries expire and are re-fetched)</li>
+                            <li>Query latency: &lt;10ms (ultra-fast)</li>
+                        </ul>
+
+                        <p><strong>The Problem Scenario:</strong></p>
+                        <ol>
+                            <li>Member opts out via preference center (writes to DMO)</li>
+                            <li>Their consent record in Data Cloud is accidentally deleted (data cleanup script)</li>
+                            <li>MC Next cache still has "OptOut" status (from before deletion)</li>
+                            <li>Cache expires after 90 days, tries to refresh from DMO</li>
+                            <li>DMO has no record → defaults to "NotSet" → member might get emails again!</li>
+                        </ol>
+
+                        <div class="warning">
+                            <strong>⚠️ Critical:</strong> Never delete consent records from Data Cloud. If you need to "reset" consent, write a new record with ConsentStatus = "NotSet", don't delete the record.
+                        </div>
+
+                        <h3>Bi-Directional Sync Roadmap</h3>
+                        <p>Currently (2026), consent sync is:</p>
+                        <ul>
+                            <li><strong>Preference Center → Data Cloud:</strong> Real-time (works great)</li>
+                            <li><strong>Data Cloud → MC Next Cache:</strong> Near real-time (few minutes)</li>
+                            <li><strong>External System → Data Cloud:</strong> Via API (your responsibility)</li>
+                        </ul>
+
+                        <p><strong>Roadmap (check current release notes):</strong></p>
+                        <ul>
+                            <li>Bi-directional sync with CRM (Contact.HasOptedOutOfEmail syncs to/from Consent DMO)</li>
+                            <li>Real-time consent API webhooks (notify external systems of opt-outs)</li>
+                            <li>Consent analytics dashboard (track opt-in/out trends)</li>
+                        </ul>
+
+                        <h3>Supported vs Unsupported Consent Methods</h3>
+                        <p><strong>Supported (Safe) Methods:</strong></p>
+                        <ul>
+                            <li>✓ Preference Center updates</li>
+                            <li>✓ Data Cloud API writes to Consent DMO</li>
+                            <li>✓ Data Streams importing consent from source systems</li>
+                            <li>✓ Journey Builder "Update Consent" activity</li>
+                        </ul>
+
+                        <p><strong>Unsupported (Risky) Methods:</strong></p>
+                        <ul>
+                            <li>✗ Directly updating CRM fields (won't sync to Consent DMO automatically)</li>
+                            <li>✗ Deleting consent records (breaks cache refresh)</li>
+                            <li>✗ Manually editing Consent DMO via SQL (no audit trail)</li>
+                        </ul>
+
+                        <h3>Drift Risk: When CRM and Data Cloud Disagree</h3>
+                        <p>Common scenario:</p>
+                        <ul>
+                            <li>Sales team updates Contact.HasOptedOutOfEmail in CRM</li>
+                            <li>But this doesn't automatically sync to Consent DMO (unless you build custom integration)</li>
+                            <li>Now CRM says "OptOut" but Data Cloud says "OptIn" → member gets email → complaint!</li>
+                        </ul>
+
+                        <p><strong>Solution Options:</strong></p>
+                        <ol>
+                            <li><strong>Single Source of Truth:</strong> Use only Consent DMO (disable CRM opt-out fields)</li>
+                            <li><strong>Custom Sync:</strong> Build Flow/Apex to sync CRM → Consent DMO on field change</li>
+                            <li><strong>Preference Center Only:</strong> Direct all opt-out links to Preference Center (don't allow CRM edits)</li>
+                        </ol>
+
+                        <div class="further-reading">
+                            <h4>📚 Further Reading</h4>
+                            <ul>
+                                <li><a href="#">Consent Management Best Practices (Salesforce Help)</a></li>
+                                <li><a href="#">GDPR Compliance Checklist for MC Next</a></li>
+                                <li><a href="#">Consent Cache Architecture Deep Dive</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Notes -->
+            <section class="lesson-section implementation">
+                <div class="section-header">
+                    <span class="section-badge implementation">🏗️ IMPLEMENTATION NOTES</span>
+                    <h2>For Implementation Teams</h2>
+                    <p class="section-duration">Optional • 15 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Implementation Notes ▼
+                    </button>
+
+                    <div class="implementation-content">
+                        <h3>Discovery Questions for Consent Strategy</h3>
+                        <div class="question-grid">
+                            <div class="question-card">
+                                <strong>Q:</strong> Where do you currently store consent/opt-out data?
+                                <p><em>Why it matters:</em> Determines migration strategy to Consent DMO.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Do you have existing unsubscribe/preference pages?
+                                <p><em>Why it matters:</em> May need to redirect old URLs to new Preference Center.</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> What regions do you operate in? (GDPR, CCPA, CASL, etc.)
+                                <p><em>Why it matters:</em> Different compliance requirements (opt-in vs opt-out default).</p>
+                            </div>
+                            <div class="question-card">
+                                <strong>Q:</strong> Do you have transactional emails that should bypass consent?
+                                <p><em>Why it matters:</em> Order confirmations, password resets shouldn't check marketing consent.</p>
+                            </div>
+                        </div>
+
+                        <h3>Supported vs Unsupported Consent Methods</h3>
+                        <p><strong>Supported (Recommended):</strong></p>
+                        <ul>
+                            <li>Preference Center (built-in, audit trail, compliant)</li>
+                            <li>Data Cloud API (for custom integrations)</li>
+                            <li>Journey Builder "Update Consent" activity</li>
+                        </ul>
+
+                        <p><strong>Unsupported (Avoid):</strong></p>
+                        <ul>
+                            <li>Direct CRM field updates (no sync to Consent DMO)</li>
+                            <li>Email unsubscribe links to custom pages (loses audit trail)</li>
+                            <li>Manual imports without ConsentSource/ConsentDate (compliance risk)</li>
+                        </ul>
+
+                        <h3>Migration Strategy for Existing Consent Data</h3>
+                        <ol>
+                            <li><strong>Audit current state:</strong> Where is consent stored now? (CRM fields, legacy ESP, CSV files?)</li>
+                            <li><strong>Export consent records:</strong> Get historical opt-in/out data with timestamps</li>
+                            <li><strong>Transform data:</strong> Map to Consent DMO format (IndividualId, Channel, ConsentStatus, ConsentDate, ConsentSource)</li>
+                            <li><strong>Import via Data Stream:</strong> Load historical consent into Data Cloud</li>
+                            <li><strong>Validate:</strong> Query Consent DMO to confirm all records imported</li>
+                            <li><strong>Cutover:</strong> Redirect all new consent changes to Preference Center</li>
+                        </ol>
+
+                        <h3>Common Pitfalls & Solutions</h3>
+                        <div class="pitfall-list">
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Member opted out but still getting emails</h4>
+                                    <p><strong>Causes:</strong> Cache not refreshed, segment doesn't filter on consent, wrong subscription linked</p>
+                                    <p><strong>Solution:</strong> Check cache refresh status, verify segment excludes opted-out members, confirm subscription mapping</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: Preference center updates not persisting</h4>
+                                    <p><strong>Causes:</strong> IndividualId mismatch, Consent DMO not writable, duplicate records</p>
+                                    <p><strong>Solution:</strong> Verify email maps to correct Unified Individual, check Data Cloud permissions</p>
+                                </div>
+                            </div>
+                            <div class="pitfall-card">
+                                <span class="pitfall-icon">⚠️</span>
+                                <div class="pitfall-content">
+                                    <h4>Pitfall: CRM and Data Cloud consent out of sync</h4>
+                                    <p><strong>Causes:</strong> No bi-directional sync configured, sales team updating CRM fields</p>
+                                    <p><strong>Solution:</strong> Build sync automation (Flow/Apex) or make Consent DMO the single source of truth</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>When to Escalate</h3>
+                        <ul>
+                            <li><strong>Complex compliance requirements:</strong> Multi-region with different opt-in/out rules → engage legal team</li>
+                            <li><strong>Large consent data migration:</strong> 10M+ consent records → engage Data Cloud team for bulk import strategy</li>
+                            <li><strong>Custom consent workflows:</strong> Double opt-in, age verification, parental consent → consult with architecture team</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz -->
+            <section class="lesson-section quiz">
+                <div class="section-header">
+                    <span class="section-badge quiz">✅ KNOWLEDGE CHECK</span>
+                    <h2>Module 4 Quiz</h2>
+                    <p class="section-duration">5 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>Test your understanding before moving to Module 5:</p>
+
+                    <div class="quiz-question">
+                        <p><strong>1. What is the TTL (Time to Live) for the MC Next consent cache?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1"> A) 24 hours</label>
+                            <label><input type="radio" name="q1"> B) 7 days</label>
+                            <label><input type="radio" name="q1"> C) 90 days</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>2. Which channel requires the most restrictive consent (explicit opt-in)?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2"> A) Email (implied consent often OK)</label>
+                            <label><input type="radio" name="q2"> B) SMS (TCPA requires explicit opt-in)</label>
+                            <label><input type="radio" name="q2"> C) Push notifications</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>3. What happens if you delete a consent record from Data Cloud?</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3"> A) MC Next cache immediately removes it (syncs instantly)</label>
+                            <label><input type="radio" name="q3"> B) Cache keeps it for up to 90 days, then tries to refresh (deletion problem)</label>
+                            <label><input type="radio" name="q3"> C) Deletion is prevented (Data Cloud won't allow it)</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p><strong>4. True or False: Every marketing email should include a preference center link.</strong></p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4"> True</label>
+                            <label><input type="radio" name="q4"> False</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-answers" style="display:none;">
+                        <h3>Answers:</h3>
+                        <p>1. C) 90 days</p>
+                        <p>2. B) SMS (TCPA requires explicit opt-in)</p>
+                        <p>3. B) Cache keeps it for up to 90 days, then tries to refresh (deletion problem)</p>
+                        <p>4. True (legal requirement in most regions)</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="document.querySelector('.quiz-answers').style.display='block'; this.style.display='none';">
+                        Show Answers
+                    </button>
+                </div>
+            </section>
+
+            <!-- Module Summary -->
+            <section class="module-summary">
+                <h2>🎉 Module 4 Complete!</h2>
+                <p>Congratulations! You've configured consent management to respect member preferences and stay compliant.</p>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>✅ What You Learned</h3>
+                        <ul>
+                            <li>Communication Subscription Consent DMO structure</li>
+                            <li>How the consent cache layer works (90-day TTL)</li>
+                            <li>Channel-specific consent requirements (Email, SMS, WhatsApp)</li>
+                            <li>Safe operating patterns to avoid compliance issues</li>
+                            <li>The deletion problem and how to avoid it</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h3>🛠️ What You Built</h3>
+                        <ul>
+                            <li>Three communication subscriptions (Email, SMS, WhatsApp)</li>
+                            <li>Branded NTO Rewards preference center</li>
+                            <li>Tested preference updates and verified in Data Cloud</li>
+                            <li>Understood consent cache refresh flow</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="next-module">
+                    <h3>🚀 Next Up: Module 5 - Content Builder</h3>
+                    <p>Now that consent is configured, you're ready to create beautiful, personalized emails! Learn Email Builder, dynamic content, and AI-powered features.</p>
+                    <a href="module-05-content-builder.html" class="btn-primary btn-large">Continue to Module 5 →</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="training-footer">
+        <div class="container">
+            <p>MC Next Training: The NTO Rewards Journey | Module 4 of 9</p>
+            <p><a href="../index.html">Back to Home</a> | <a href="../resources.html">Resources</a></p>
+        </div>
+    </footer>
+
+    <script src="../scripts/training.js"></script>
+</body>
+</html>
