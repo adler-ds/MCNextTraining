@@ -15,6 +15,11 @@
                 <a href="module-01-data-foundation.html">Module 1</a>
                 <a href="module-02-segmentation.html" class="active">Module 2</a>
                 <a href="module-03-data-graphs.html">Module 3</a>
+                <a href="module-04-consent.html">Module 4</a>
+                <a href="module-05-content-builder.html">Module 5</a>
+                <a href="module-06-flows.html">Module 6</a>
+                <a href="module-07-loyalty-integration.html">Module 7</a>
+                <a href="module-08-analytics.html">Module 8</a>
                 <a href="../resources.html">Resources</a>
             </div>
         </div>
@@ -255,10 +260,26 @@
                                 <h4>Create "New Members" Segment</h4>
                             </div>
                             <div class="step-content">
-                                <p><strong>Segment Name:</strong> <code>NTO - New Members</code></p>
-                                <p><strong>Description:</strong> Members enrolled within the last 30 days</p>
+                                <p>After clicking <strong>New</strong>, the <strong>New Segment</strong> dialog appears. Complete it as follows:</p>
+                                <ol>
+                                    <li>Select <strong>Use a Visual Builder</strong>.</li>
+                                    <li>Select <strong>Standard Segment</strong>.</li>
+                                    <li>Click <strong>Next</strong>.</li>
+                                    <li><strong>Segment On:</strong> select <strong>Profile Object → Loyalty Program Member</strong>.</li>
+                                    <li><strong>Segment Name:</strong> <code>New Members</code></li>
+                                    <li><strong>Description:</strong> <code>Members enrolled within the last 30 days</code></li>
+                                    <li>Click <strong>Next</strong> to open the segment canvas.</li>
+                                </ol>
 
-                                <p><strong>Criteria:</strong></p>
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod2-step2-new-segment-dialog.jpg"
+                                         alt="New Segment dialog with Visual Builder and Standard Segment selected"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">New Segment dialog: Use a Visual Builder + Standard Segment, Segment On = Loyalty Program Member</p>
+                                    <p class="screenshot-meta">📸 <code>mod2-step2-new-segment-dialog.jpg</code></p>
+                                </div>
+
+                                <p><strong>Add the filter criteria:</strong></p>
                                 <ul>
                                     <li>DMO: <strong>Loyalty Program Member</strong></li>
                                     <li>Field: <strong>EnrollmentDate</strong></li>
@@ -291,22 +312,32 @@
                                 <h4>Create "Gold Tier Members" Segment</h4>
                             </div>
                             <div class="step-content">
-                                <p>Click <strong>New</strong> again to create a second segment.</p>
+                                <p>Click <strong>New</strong> again to create a second segment, then complete the <strong>New Segment</strong> dialog:</p>
+                                <ol>
+                                    <li>Select <strong>Use a Visual Builder</strong>.</li>
+                                    <li>Select <strong>Standard Segment</strong>.</li>
+                                    <li>Click <strong>Next</strong>.</li>
+                                    <li><strong>Segment On:</strong> select <strong>Profile Object → Loyalty Program Member</strong>.</li>
+                                    <li><strong>Segment Name:</strong> <code>Gold Tier Members</code></li>
+                                    <li><strong>Description:</strong> <code>All active Gold tier loyalty members</code></li>
+                                    <li>Click <strong>Next</strong> to open the segment canvas.</li>
+                                </ol>
 
-                                <p><strong>Segment Name:</strong> <code>NTO - Gold Tier Members</code></p>
-                                <p><strong>Description:</strong> All active Gold tier loyalty members</p>
+                                <div class="key-insight">
+                                    <strong>💡 Note:</strong> Member tier and status are not stored directly on the Loyalty Program Member DMO — they live on related DMOs. In the Segment Builder you'll navigate to the related DMO to reach these attributes (the same way Step 4 reaches promotion data).
+                                </div>
 
-                                <p><strong>Criteria:</strong></p>
+                                <p><strong>Criteria (Tier — via related tier DMO):</strong></p>
                                 <ul>
-                                    <li>DMO: <strong>Loyalty Program Member</strong></li>
-                                    <li>Field: <strong>MemberTier</strong></li>
+                                    <li>Navigate to the related <strong>member tier DMO</strong> ⚠️ <em>[verify exact DMO name in org]</em></li>
+                                    <li>Field: <strong>MemberTier</strong> ⚠️ <em>[verify field/DMO]</em></li>
                                     <li>Operator: <strong>Equals</strong></li>
                                     <li>Value: <strong>Gold</strong></li>
                                 </ul>
 
-                                <p><strong>Add a second rule (AND logic):</strong></p>
+                                <p><strong>Add a second rule (AND logic — member status):</strong></p>
                                 <ul>
-                                    <li>Field: <strong>MemberStatus</strong></li>
+                                    <li>Field: <strong>MemberStatus</strong> ⚠️ <em>[verify field/DMO]</em></li>
                                     <li>Operator: <strong>Equals</strong></li>
                                     <li>Value: <strong>Active</strong></li>
                                 </ul>
@@ -333,8 +364,16 @@
                             <div class="step-content">
                                 <p>Now let's build a more complex segment with multiple rule groups.</p>
 
-                                <p><strong>Segment Name:</strong> <code>NTO - Spring Challenge Eligible</code></p>
-                                <p><strong>Description:</strong> Members eligible for Spring Hiking Challenge engagement trail</p>
+                                <p>Click <strong>New</strong>, then complete the <strong>New Segment</strong> dialog:</p>
+                                <ol>
+                                    <li>Select <strong>Use a Visual Builder</strong>.</li>
+                                    <li>Select <strong>Standard Segment</strong>.</li>
+                                    <li>Click <strong>Next</strong>.</li>
+                                    <li><strong>Segment On:</strong> select <strong>Profile Object → Loyalty Program Member</strong>.</li>
+                                    <li><strong>Segment Name:</strong> <code>Spring Challenge Eligible</code></li>
+                                    <li><strong>Description:</strong> <code>Members eligible for Spring Hiking Challenge engagement trail</code></li>
+                                    <li>Click <strong>Next</strong> to open the segment canvas.</li>
+                                </ol>
 
                                 <p><strong>Eligibility Requirements:</strong></p>
                                 <ul>
@@ -343,18 +382,24 @@
                                     <li>AND NOT already enrolled in "Spring Hiking Challenge" promotion</li>
                                 </ul>
 
-                                <p><strong>Rule Group 1 (Tier - OR logic):</strong></p>
+                                <div class="key-insight">
+                                    <strong>💡 Note:</strong> This segment spans <strong>multiple related DMOs</strong> — tier, points, and promotion enrollment each live on a different DMO from Loyalty Program Member. In the Segment Builder each rule group below navigates to the appropriate related DMO to reach its attributes (a join across related DMOs), rather than filtering flat fields on a single DMO.
+                                </div>
+
+                                <p><strong>Rule Group 1 (Tier — OR logic, via related tier DMO):</strong></p>
                                 <ul>
-                                    <li>MemberTier <strong>Equals</strong> Silver</li>
+                                    <li>Navigate to the related <strong>member tier DMO</strong> ⚠️ <em>[verify exact DMO name in org]</em></li>
+                                    <li>MemberTier <strong>Equals</strong> Silver ⚠️ <em>[verify field/DMO]</em></li>
                                     <li><strong>OR</strong> MemberTier <strong>Equals</strong> Gold</li>
                                 </ul>
 
-                                <p><strong>Rule Group 2 (Points - AND logic with Group 1):</strong></p>
+                                <p><strong>Rule Group 2 (Points — AND logic with Group 1, via related points/currency DMO):</strong></p>
                                 <ul>
-                                    <li>PointsBalance <strong>Greater than or equal to</strong> 1000</li>
+                                    <li>Navigate to the related <strong>points/currency DMO</strong> ⚠️ <em>[verify exact DMO name in org]</em></li>
+                                    <li>PointsBalance <strong>Greater than or equal to</strong> 1000 ⚠️ <em>[verify field/DMO]</em></li>
                                 </ul>
 
-                                <p><strong>Rule Group 3 (Exclude already enrolled - AND NOT logic):</strong></p>
+                                <p><strong>Rule Group 3 (Exclude already enrolled — AND NOT logic):</strong></p>
                                 <ul>
                                     <li>Navigate to <strong>Loyalty Promotion Enrollment</strong> related DMO</li>
                                     <li>PromotionName <strong>Not Equals</strong> "Spring Hiking Challenge"</li>
@@ -425,7 +470,7 @@
                                 <h4>Publish "New Members" Segment</h4>
                             </div>
                             <div class="step-content">
-                                <p>From the Segments list, click on <strong>NTO - New Members</strong>.</p>
+                                <p>From the Segments list, click on <strong>New Members</strong>.</p>
                                 <p>Click the <strong>Publish</strong> button.</p>
 
                                 <p><strong>Publishing Configuration:</strong></p>
@@ -457,7 +502,7 @@
                                 <h4>Publish "Gold Tier Members" Segment</h4>
                             </div>
                             <div class="step-content">
-                                <p>Click on <strong>NTO - Gold Tier Members</strong> and click <strong>Publish</strong>.</p>
+                                <p>Click on <strong>Gold Tier Members</strong> and click <strong>Publish</strong>.</p>
 
                                 <p><strong>Publishing Configuration:</strong></p>
                                 <ul>
@@ -484,7 +529,7 @@
                                 <h4>Publish "Spring Challenge Eligible" Segment</h4>
                             </div>
                             <div class="step-content">
-                                <p>Click on <strong>NTO - Spring Challenge Eligible</strong> and click <strong>Publish</strong>.</p>
+                                <p>Click on <strong>Spring Challenge Eligible</strong> and click <strong>Publish</strong>.</p>
 
                                 <p><strong>Publishing Configuration:</strong></p>
                                 <ul>
@@ -527,9 +572,9 @@
                                 <p>Add a <strong>Segment Trigger</strong> element.</p>
                                 <p>In the segment picker, you should see all three segments:</p>
                                 <ul>
-                                    <li>NTO - New Members</li>
-                                    <li>NTO - Gold Tier Members</li>
-                                    <li>NTO - Spring Challenge Eligible</li>
+                                    <li>New Members</li>
+                                    <li>Gold Tier Members</li>
+                                    <li>Spring Challenge Eligible</li>
                                 </ul>
 
                                 <div class="key-insight">

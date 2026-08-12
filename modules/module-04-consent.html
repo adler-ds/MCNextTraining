@@ -16,6 +16,10 @@
                 <a href="module-02-segmentation.html">Module 2</a>
                 <a href="module-03-data-graphs.html">Module 3</a>
                 <a href="module-04-consent.html" class="active">Module 4</a>
+                <a href="module-05-content-builder.html">Module 5</a>
+                <a href="module-06-flows.html">Module 6</a>
+                <a href="module-07-loyalty-integration.html">Module 7</a>
+                <a href="module-08-analytics.html">Module 8</a>
                 <a href="../resources.html">Resources</a>
             </div>
         </div>
@@ -370,19 +374,20 @@
                                 <h4>Verify Consent Records in Data Cloud</h4>
                             </div>
                             <div class="step-content">
-                                <p>Navigate to <strong>Data Cloud</strong> → <strong>Query</strong>.</p>
+                                <p>Open the <strong>Query Editor</strong> app (from the App Launcher) and create a <strong>new query</strong> for <strong>Training</strong>.</p>
 
                                 <p>Run this query to see consent records:</p>
                                 <div class="code-block">
                                     SELECT <br>
-                                    &nbsp;&nbsp;IndividualId,<br>
-                                    &nbsp;&nbsp;Channel,<br>
-                                    &nbsp;&nbsp;ConsentStatus,<br>
-                                    &nbsp;&nbsp;ConsentDate,<br>
-                                    &nbsp;&nbsp;SubscriptionName<br>
-                                    FROM CommunicationSubscriptionConsent__dlm<br>
+                                    &nbsp;&nbsp;ssot__IndividualId__c,<br>
+                                    &nbsp;&nbsp;ssot__Channel__c,<br>
+                                    &nbsp;&nbsp;ssot__ConsentStatus__c,<br>
+                                    &nbsp;&nbsp;ssot__ConsentDate__c,<br>
+                                    &nbsp;&nbsp;ssot__SubscriptionName__c<br>
+                                    FROM "ssot__CommunicationSubscriptionConsent__dlm"<br>
                                     LIMIT 10
                                 </div>
+                                <p class="screenshot-meta">⚠️ Column names shown with the <code>ssot__</code> prefix as placeholders — verify exact field names against the DMO in the org.</p>
 
                                 <p>You should see consent records for members who have preferences set. New members with default opt-in to newsletter will show:</p>
                                 <ul>
@@ -565,18 +570,19 @@
                                 <h4>Verify Consent Changes in Data Cloud</h4>
                             </div>
                             <div class="step-content">
-                                <p>Go back to Data Cloud Query and run:</p>
+                                <p>In the <strong>Query Editor</strong> app, create a <strong>new query</strong> for <strong>Training</strong> and run:</p>
                                 <div class="code-block">
                                     SELECT <br>
-                                    &nbsp;&nbsp;IndividualId,<br>
-                                    &nbsp;&nbsp;Channel,<br>
-                                    &nbsp;&nbsp;ConsentStatus,<br>
-                                    &nbsp;&nbsp;ConsentDate,<br>
-                                    &nbsp;&nbsp;ConsentSource<br>
-                                    FROM CommunicationSubscriptionConsent__dlm<br>
-                                    WHERE IndividualId = 'YOUR_TEST_INDIVIDUAL_ID'<br>
-                                    ORDER BY ConsentDate DESC
+                                    &nbsp;&nbsp;ssot__IndividualId__c,<br>
+                                    &nbsp;&nbsp;ssot__Channel__c,<br>
+                                    &nbsp;&nbsp;ssot__ConsentStatus__c,<br>
+                                    &nbsp;&nbsp;ssot__ConsentDate__c,<br>
+                                    &nbsp;&nbsp;ssot__ConsentSource__c<br>
+                                    FROM "ssot__CommunicationSubscriptionConsent__dlm"<br>
+                                    WHERE ssot__IndividualId__c = 'YOUR_TEST_INDIVIDUAL_ID'<br>
+                                    ORDER BY ssot__ConsentDate__c DESC
                                 </div>
+                                <p class="screenshot-meta">⚠️ Column names shown with the <code>ssot__</code> prefix as placeholders — verify exact field names against the DMO in the org.</p>
 
                                 <p>You should see updated records with:</p>
                                 <ul>

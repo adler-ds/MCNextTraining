@@ -14,7 +14,12 @@
                 <a href="../index.html">Home</a>
                 <a href="module-01-data-foundation.html" class="active">Module 1</a>
                 <a href="module-02-segmentation.html">Module 2</a>
-                <a href="#" class="disabled">Module 3</a>
+                <a href="module-03-data-graphs.html">Module 3</a>
+                <a href="module-04-consent.html">Module 4</a>
+                <a href="module-05-content-builder.html">Module 5</a>
+                <a href="module-06-flows.html">Module 6</a>
+                <a href="module-07-loyalty-integration.html">Module 7</a>
+                <a href="module-08-analytics.html">Module 8</a>
                 <a href="../resources.html">Resources</a>
             </div>
         </div>
@@ -38,7 +43,7 @@
             <div class="module-meta">
                 <span class="meta-item">⏱️ <strong>2 hours</strong></span>
                 <span class="meta-item">🎯 <strong>2 Labs</strong></span>
-                <span class="meta-item">📸 <strong>8 Screenshots</strong></span>
+                <span class="meta-item">📸 <strong>12 Screenshots</strong></span>
             </div>
         </div>
     </div>
@@ -74,7 +79,7 @@
                         </div>
                     </div>
 
-                    <p><strong>Your Challenge:</strong> NTO's customer data lives in Sales Cloud (Contacts, Leads, Orders). Their loyalty data lives in Salesforce Loyalty Management (Members, Tiers, Points, Promotions). You need to unify this data so marketing can target and personalize based on both customer AND loyalty information.</p>
+                    <p><strong>Your Challenge:</strong> NTO's customer and loyalty data lives in Salesforce (Person Accounts, Orders, Loyalty Members with tiers and points). But marketing needs MORE than just CRM and loyalty data. You need to bring in behavioral data (website visits, email engagement, cart abandonment) and external data (in-store purchases, mobile app activity) to create a complete 360° view. That's where Data Cloud comes in - unifying Salesforce data with all these external touchpoints for true omnichannel personalization.</p>
                 </div>
             </section>
 
@@ -95,7 +100,7 @@
                     <div class="objective-card">
                         <span class="objective-icon">👤</span>
                         <h3>Unified Individual</h3>
-                        <p>The foundation of all MC Next marketing</p>
+                        <p>The foundation of all MC Next</p>
                     </div>
                     <div class="objective-card">
                         <span class="objective-icon">🏆</span>
@@ -115,7 +120,7 @@
 
                 <div class="lesson-content">
                     <h3>The Five Key Concepts</h3>
-                    <p>Before we dive into the hands-on labs, let's understand the foundation that powers MC Next marketing:</p>
+                    <p>Before we dive into the hands-on labs, let's understand the foundation that powers MC Next:</p>
 
                     <div class="concept-card">
                         <div class="concept-number">1</div>
@@ -123,9 +128,10 @@
                             <h4>Data Streams</h4>
                             <p>Data Streams are the pipelines that bring data into Data Cloud. For NTO, we have multiple streams:</p>
                             <ul>
-                                <li><strong>CRM Data:</strong> Contacts, Leads, Accounts, Orders from Sales Cloud</li>
-                                <li><strong>Loyalty Data:</strong> Program Members, Tiers, Points, Promotions from Loyalty Management</li>
-                                <li><strong>Behavioral Data:</strong> Web activity, email engagement, purchases</li>
+                                <li><strong>Salesforce CRM:</strong> Person Accounts, Orders from Sales Cloud</li>
+                                <li><strong>Salesforce Loyalty:</strong> Loyalty Program Members (tiers, points, promotions) - extends the Person Account</li>
+                                <li><strong>Behavioral Data:</strong> Website visits, email engagement, cart abandonment from external systems</li>
+                                <li><strong>External Transactions:</strong> In-store POS purchases, mobile app activity</li>
                             </ul>
                             <div class="key-insight">
                                 <strong>💡 Key Insight:</strong> If data isn't in Data Cloud, it won't be available in MC Next! Data Streams are your data highway.
@@ -149,14 +155,15 @@
                         <div class="concept-number">3</div>
                         <div class="concept-content">
                             <h4>Identity Resolution (IDR)</h4>
-                            <p>Identity Resolution is the process that identifies which records represent the same person and links them together.</p>
+                            <p>Identity Resolution is the process that identifies which records across different systems represent the same person and links them together.</p>
                             <p><strong>Example:</strong> Sarah Johnson might appear as:</p>
                             <ul>
-                                <li>A Contact in Sales Cloud (sarah.johnson@email.com)</li>
-                                <li>A Loyalty Member (Member ID: LM-12345, same email)</li>
-                                <li>A website visitor (cookie ID: ABC123, same email)</li>
+                                <li>A Person Account in Sales Cloud (sarah.johnson@email.com) with her Loyalty Member extension (Silver tier, 2,450 points)</li>
+                                <li>A website visitor tracked by cookie (cookie ID: ABC123, browsing hiking gear)</li>
+                                <li>A mobile app user (device ID: XYZ789, tracking trail progress)</li>
+                                <li>An in-store shopper (POS transaction ID, purchasing from retail location)</li>
                             </ul>
-                            <p>IDR says "These are all the same person!" and creates a Unified Individual.</p>
+                            <p>IDR says "These are all the same person across channels!" and creates a Unified Individual.</p>
                         </div>
                     </div>
 
@@ -164,26 +171,28 @@
                         <div class="concept-number">4</div>
                         <div class="concept-content">
                             <h4>Unified Individual</h4>
-                            <p>The Unified Individual is the single, consolidated view of a person across all your systems. It's what you'll segment on and send to in MC Next.</p>
+                            <p>The Unified Individual is the single, consolidated view of a person across all your systems - both Salesforce and external. It's what you'll segment on and send to in MC Next.</p>
                             <div class="data-model-visual">
                                 <div class="visual-header">Sarah Johnson's Unified Individual</div>
                                 <div class="visual-body">
                                     <div class="source-record">
-                                        <strong>CRM Contact</strong><br>
-                                        Name: Sarah Johnson<br>
+                                        <strong>Salesforce</strong><br>
+                                        Person Account: Sarah Johnson<br>
                                         Email: sarah.johnson@email.com<br>
-                                        Last Purchase: 2026-04-15
+                                        Loyalty: Silver, 2,450 points<br>
+                                        Last Order: 2026-04-15
                                     </div>
                                     <div class="merge-arrow">→ UNIFIED → </div>
                                     <div class="source-record">
-                                        <strong>Loyalty Member</strong><br>
-                                        Member ID: LM-12345<br>
-                                        Tier: Silver<br>
-                                        Points: 2,450
+                                        <strong>External Channels</strong><br>
+                                        Web: Browsed hiking boots (today)<br>
+                                        Email: Opened spring promo (yesterday)<br>
+                                        Store: Purchased tent ($299, last week)<br>
+                                        App: Completed "Peak Challenge" trail
                                     </div>
                                 </div>
                                 <div class="visual-result">
-                                    <strong>Result:</strong> One Unified Individual with complete customer + loyalty data
+                                    <strong>Result:</strong> One Unified Individual with Salesforce + behavioral + external data
                                 </div>
                             </div>
                         </div>
@@ -193,9 +202,9 @@
                         <div class="concept-number">5</div>
                         <div class="concept-content">
                             <h4>Individual DMO & Loyalty Program Member DMO</h4>
-                            <p><strong>Individual DMO:</strong> The source person record (Contact, Lead, etc.)</p>
-                            <p><strong>Loyalty Program Member DMO:</strong> The loyalty-specific data for that person</p>
-                            <p>These are <em>related</em> DMOs. When you build segments and Data Graphs, you'll navigate these relationships to pull in both customer and loyalty data.</p>
+                            <p><strong>Individual DMO:</strong> The person record from Salesforce (Person Account in B2C)</p>
+                            <p><strong>Loyalty Program Member DMO:</strong> The loyalty extension data (tier, points, enrollments) - connected to the Individual via standard Salesforce relationships</p>
+                            <p>These DMOs are already related in Salesforce. When you build segments and Data Graphs, you'll navigate these relationships plus connections to behavioral and external data sources.</p>
                             <div class="relationship-diagram">
                                 <div class="dmo-box">Unified Individual</div>
                                 <div class="arrow-down">↓</div>
@@ -209,11 +218,12 @@
                     </div>
 
                     <div class="watch-video">
-                        <h3>📺 Watch: Data Foundation Overview (10 min)</h3>
+                        <h3>📺 Watch: Data Foundation Overview (5 min)</h3>
                         <p>Before the lab, watch this video explanation of Data Streams, Identity Resolution, and the Unified Individual.</p>
                         <div class="video-placeholder">
-                            <p>🎥 Video: Data Cloud Fundamentals for MC Next</p>
-                            <p><em>Note: Link to existing Vidyard video or create placeholder</em></p>
+                            <p>🎥 <a href="https://salesforce.vidyard.com/watch/KddFg4Y4K8d5Uz3gme2y9T" target="_blank">Unified Marketing: Performance & Analytics Strategy</a></p>
+                            <p><strong>⏱️ Watch from 4:53 to 9:45</strong></p>
+                            <p><em>Topics: Data Cloud (Data 360) implementation, unified data architecture, standardized Data Model Objects</em></p>
                         </div>
                     </div>
                 </div>
@@ -230,14 +240,14 @@
                 <div class="lesson-content">
                     <div class="lab-intro">
                         <h3>🎯 Your Mission</h3>
-                        <p>Explore how NTO's customer and loyalty data flows into Data Cloud, and see Identity Resolution in action creating Unified Individuals.</p>
+                        <p>Explore how NTO's Salesforce data and external behavioral data flows into Data Cloud, and see Identity Resolution in action creating Unified Individuals across all channels.</p>
 
                         <div class="success-criteria">
                             <strong>✅ Success Criteria:</strong>
                             <ul>
-                                <li>View Data Streams for CRM and Loyalty data</li>
-                                <li>Understand Identity Resolution ruleset</li>
-                                <li>Query Unified Individual DMO to see 500K NTO Rewards members</li>
+                                <li>View Data Streams for Salesforce and external behavioral data</li>
+                                <li>Understand Identity Resolution ruleset for cross-channel matching</li>
+                                <li>Query Unified Individual DMO to see 500K NTO Rewards members unified across touchpoints</li>
                             </ul>
                         </div>
                     </div>
@@ -269,37 +279,28 @@
                         <div class="lab-step">
                             <div class="step-header">
                                 <span class="step-number">2</span>
-                                <h4>View Data Streams</h4>
+                                <h4>Check Data Cloud Setup Status</h4>
                             </div>
                             <div class="step-content">
-                                <p>In Data Cloud Setup, navigate to <strong>Data Streams</strong> in the left sidebar.</p>
-                                <p>You'll see a list of all data streams configured for NTO. Look for:</p>
-                                <ul>
-                                    <li><strong>Salesforce CRM:</strong> Bringing in Contacts, Leads, Accounts, Orders</li>
-                                    <li><strong>Loyalty Management:</strong> Bringing in Loyalty Program Members, Tiers, Points</li>
-                                </ul>
+                                <p>On the Data Cloud Setup Home page, check if Data Cloud has been set up for your org.</p>
+                                <p><strong>If Data Cloud is not yet set up:</strong></p>
+                                <ol>
+                                    <li>Scroll down to the <strong>"Set Up Data Cloud"</strong> section</li>
+                                    <li>Click <strong>"Get Started"</strong></li>
+                                    <li>Follow the setup wizard to complete the initial Data Cloud configuration</li>
+                                    <li>Once setup is complete, assign the <strong>Data Cloud Admin</strong> permission set to your user:
+                                        <ul>
+                                            <li>Go to Setup → Users → Permission Sets</li>
+                                            <li>Search for and select <strong>"Data Cloud Admin"</strong></li>
+                                            <li>Click <strong>Manage Assignments</strong> → <strong>Add Assignments</strong></li>
+                                            <li>Select your user and click <strong>Assign</strong></li>
+                                        </ul>
+                                    </li>
+                                    <li>Return to Data Cloud Setup Home</li>
+                                </ol>
 
-                                <div class="screenshot">
-                                    <img src="../screenshots/mod1-step2-data-streams-list.jpg"
-                                         alt="Data Streams list showing CRM and Loyalty streams"
-                                         onerror="this.parentElement.classList.add('placeholder')">
-                                    <p class="caption">Data Streams configuration page showing active streams</p>
-                                    <p class="screenshot-meta">📸 <code>mod1-step2-data-streams-list.jpg</code></p>
-                                </div>
-
-                                <p><strong>Click on the Salesforce CRM stream</strong> to see details:</p>
-                                <ul>
-                                    <li>Which objects are being synced (Contact, Lead, Account, etc.)</li>
-                                    <li>Refresh frequency (how often data syncs)</li>
-                                    <li>Field mappings</li>
-                                </ul>
-
-                                <div class="screenshot">
-                                    <img src="../screenshots/mod1-step3-crm-stream-detail.jpg"
-                                         alt="CRM Data Stream detail showing objects and refresh schedule"
-                                         onerror="this.parentElement.classList.add('placeholder')">
-                                    <p class="caption">CRM Data Stream showing Contact and Lead objects</p>
-                                    <p class="screenshot-meta">📸 <code>mod1-step3-crm-stream-detail.jpg</code></p>
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Initial Data Cloud setup typically takes 5-10 minutes. You'll need to select a Data Space and configure basic settings. The Data Cloud Admin permission set is required to view Data Streams, configure Identity Resolution, and manage Data Cloud settings.
                                 </div>
                             </div>
                         </div>
@@ -308,27 +309,53 @@
                         <div class="lab-step">
                             <div class="step-header">
                                 <span class="step-number">3</span>
-                                <h4>Review Identity Resolution Ruleset</h4>
+                                <h4>Set Up Salesforce CRM Data Stream</h4>
                             </div>
                             <div class="step-content">
-                                <p>In Data Cloud Setup, navigate to <strong>Identity Resolution</strong>.</p>
-                                <p>Review the ruleset configured for NTO. You'll likely see a rule like:</p>
-                                <div class="code-block">
-                                    <strong>Rule:</strong> Email Exact Match<br>
-                                    <strong>Logic:</strong> If Contact.Email = Loyalty_Member.Email → Same person
-                                </div>
-                                <p>This is how Data Cloud knows that Sarah Johnson the Contact and Sarah Johnson the Loyalty Member are the same person.</p>
+                                <p>Now let's bring Salesforce data into Data Cloud by creating a Data Stream.</p>
+
+                                <p><strong>Navigate to Data Streams:</strong></p>
+                                <ol>
+                                    <li>From Data Cloud, click the <strong>Data Streams</strong> tab</li>
+                                    <li>Click <strong>New</strong> to create a new Data Stream</li>
+                                    <li>Select <strong>Salesforce CRM</strong> as the source</li>
+                                    <li>Click <strong>Next</strong></li>
+                                    <li>Select the <strong>Sales</strong> Data Bundle (this includes Person Accounts, Orders, and related objects)</li>
+                                    <li>Click <strong>Next</strong> to continue</li>
+                                    <li>Review the configuration and click <strong>Deploy</strong></li>
+                                    <li>Wait for the deployment to complete</li>
+                                </ol>
 
                                 <div class="screenshot">
-                                    <img src="../screenshots/mod1-step4-identity-resolution.jpg"
-                                         alt="Identity Resolution ruleset configuration"
+                                    <img src="../screenshots/mod1-step2-data-streams-list.jpg"
+                                         alt="Data Streams tab with New button"
                                          onerror="this.parentElement.classList.add('placeholder')">
-                                    <p class="caption">Identity Resolution ruleset showing Email matching rule</p>
-                                    <p class="screenshot-meta">📸 <code>mod1-step4-identity-resolution.jpg</code></p>
+                                    <p class="caption">Data Streams tab - click New to create a stream</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step2-data-streams-list.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>💡 Key Insight:</strong> Data Bundles are pre-configured collections of related objects. The "Sales" bundle includes Person Accounts, Contacts, Leads, Orders, and other sales-related objects, along with their standard field mappings.
+                                </div>
+
+                                <p><strong>Review the Data Stream configuration:</strong></p>
+                                <p>Once created, you can click on the Salesforce CRM stream to see details:</p>
+                                <ul>
+                                    <li>Which objects are being synced (Person Account, Order, Loyalty Program Member, etc.)</li>
+                                    <li>Refresh frequency (how often data syncs)</li>
+                                    <li>Field mappings to DMOs</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step3-crm-stream-detail.jpg"
+                                         alt="CRM Data Stream detail showing objects and refresh schedule"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Salesforce Data Stream showing Person Account and other objects from the Sales bundle</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step3-crm-stream-detail.jpg</code></p>
                                 </div>
 
                                 <div class="pro-tip">
-                                    <strong>💡 Pro Tip:</strong> Identity Resolution can take 4-24 hours for the first run on large datasets. For NTO's 2M customers, it likely ran overnight during setup.
+                                    <strong>💡 Pro Tip:</strong> The initial data sync can take several minutes to hours depending on data volume. For NTO's 2M Person Accounts, expect 1-2 hours for the first sync.
                                 </div>
                             </div>
                         </div>
@@ -337,34 +364,227 @@
                         <div class="lab-step">
                             <div class="step-header">
                                 <span class="step-number">4</span>
+                                <h4>Install Salesforce CDP CRM Loyalty Data Bundle</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Now let's add the Loyalty Management data so we can access member tiers, points, and enrollments using the standard <strong>Salesforce CDP CRM Loyalty</strong> data bundle.</p>
+
+                                <p><strong>Step 4A: Navigate to Salesforce CRM Data Bundles</strong></p>
+                                <ol>
+                                    <li>In Data Cloud Setup, search for <strong>"Salesforce CRM"</strong> in the left sidebar</li>
+                                    <li>Click on <strong>Salesforce CRM</strong> (under the Setup section)</li>
+                                    <li>You'll see two sections:
+                                        <ul>
+                                            <li><strong>Standard Connections</strong> - Your active Salesforce org connection</li>
+                                            <li><strong>Standard Data Bundles</strong> - Pre-configured bundles available for install</li>
+                                        </ul>
+                                    </li>
+                                    <li>Scroll down to the <strong>Standard Data Bundles</strong> section</li>
+                                    <li>Locate <strong>Salesforce CDP CRM Loyalty</strong> in the list</li>
+                                </ol>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step4a-add-data-bundle.jpg"
+                                         alt="Salesforce CRM Setup page showing Standard Data Bundles"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Salesforce CRM Setup showing Standard Data Bundles including Salesforce CDP CRM Loyalty (version 1.8)</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step4a-add-data-bundle.jpg</code></p>
+                                </div>
+
+                                <p><strong>Install the Salesforce CDP CRM Loyalty Bundle:</strong></p>
+                                <ol>
+                                    <li>Click the dropdown menu (⋮) next to <strong>Salesforce CDP CRM Loyalty</strong></li>
+                                    <li>Select <strong>Install</strong></li>
+                                    <li>Review the data bundle details showing the objects that will be added:
+                                        <ul>
+                                            <li>Loyalty Program Member</li>
+                                            <li>Loyalty Ledger</li>
+                                            <li>Loyalty Program</li>
+                                            <li>Loyalty Promotion</li>
+                                            <li>Loyalty Tier</li>
+                                            <li>And related loyalty objects</li>
+                                        </ul>
+                                    </li>
+                                    <li>Click <strong>Install</strong> to confirm</li>
+                                    <li>Wait for the installation to complete - you'll see the <strong>Installed Version</strong> column populate with the version number</li>
+                                </ol>
+
+                                <div class="key-insight">
+                                    <strong>💡 Key Insight:</strong> The Salesforce CDP CRM Loyalty bundle (version 1.8) is a pre-configured data bundle powered by Data Kits. It automatically maps all Salesforce Loyalty Management objects to Data Cloud DMOs, saving you hours of manual configuration work. Once installed, the bundle appears in the "Installed Version" column.
+                                </div>
+
+                                <p><strong>Step 4B: Deploy the Data Kit</strong></p>
+
+                                <p><strong>Navigate to Data Kits:</strong></p>
+                                <ol>
+                                    <li>From Setup, enter <strong>Data Kit</strong> in the Quick Find box</li>
+                                    <li>Under <strong>Developer Tools</strong>, select <strong>Data Kits</strong></li>
+                                    <li>You'll see a list of all available Data Kits in your org</li>
+                                    <li>Locate <strong>Loyalty Management Advanced</strong> in the list (this was installed when you added the Salesforce CDP CRM Loyalty bundle)</li>
+                                    <li>Click on <strong>Loyalty Management Advanced</strong> to open the Data Kit detail page</li>
+                                </ol>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step4b-data-kit-list.jpg"
+                                         alt="Data Kits list in Setup showing Loyalty Management Advanced"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Data Kits list under Developer Tools showing Loyalty Management Advanced</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step4b-data-kit-list.jpg</code></p>
+                                </div>
+
+                                <p><strong>Review Data Kit Contents:</strong></p>
+                                <p>On the Loyalty Management Advanced Data Kit detail page, review:</p>
+                                <ul>
+                                    <li><strong>Data Kit API Name:</strong> sfm_LoyaltyAdvancedDataKit</li>
+                                    <li><strong>Data Stream Bundles (1):</strong> Shows "Loyalty Management: Advanced" bundle
+                                        <ul>
+                                            <li>Type: Bundle</li>
+                                            <li>Connector: Salesforce CRM</li>
+                                            <li>Developer Name: sfm_LoyaltyManagementAdvanced</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Data Models (0):</strong> No custom data models (using standard DMOs)</li>
+                                    <li><strong>Related List Enrichments (0):</strong> No enrichments configured</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step4b-data-kit-detail.jpg"
+                                         alt="Loyalty Management Advanced Data Kit detail page"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Data Kit detail page showing Data Stream Bundle and Data Kit Deploy button</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step4b-data-kit-detail.jpg</code></p>
+                                </div>
+
+                                <p><strong>Get Your Org ID (if needed):</strong></p>
+                                <p>Before deploying, you may need your Salesforce Org ID. Here's how to find it:</p>
+                                <ol>
+                                    <li>Open a new browser tab and go to <strong>Setup</strong></li>
+                                    <li>In the Quick Find box, search for <strong>Company Information</strong></li>
+                                    <li>Select <strong>Company Information</strong> under Company Settings</li>
+                                    <li>Find <strong>Salesforce.com Organization ID</strong> (example: 00Dg70000075qOd)</li>
+                                    <li>Copy this value - you'll need it in the deployment dialog</li>
+                                </ol>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Your Org ID is a unique 15 or 18-character identifier for your Salesforce org. It always starts with "00D". Keep this handy as you may need it for various Data Cloud configurations.
+                                </div>
+
+                                <p><strong>Deploy the Data Kit:</strong></p>
+                                <ol>
+                                    <li>Back on the Loyalty Management Advanced Data Kit page, click the <strong>Data Kit Deploy</strong> button in the top right</li>
+                                    <li>In the Deploy dialog, you'll see:
+                                        <ul>
+                                            <li><strong>Data Space:</strong> Select "default" (or your custom data space if you created one)</li>
+                                            <li><strong>Org ID:</strong> Enter your Salesforce Org ID (the 15-character ID starting with "00D")</li>
+                                        </ul>
+                                    </li>
+                                    <li>The left side shows <strong>sfm_LoyaltyManagement...</strong> indicating the bundle being deployed</li>
+                                    <li>Click the red <strong>Deploy</strong> button to start the deployment</li>
+                                    <li>Click <strong>OK</strong> to confirm the deployment</li>
+                                </ol>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step4b-data-kit-deploy.jpg"
+                                         alt="Data Kit Deploy dialog with Data Space and Org ID fields"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Deploy dialog showing Data Space (default) and Org ID field</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step4b-data-kit-deploy.jpg</code></p>
+                                </div>
+
+                                <p><strong>Monitor Deployment:</strong></p>
+                                <ul>
+                                    <li>After clicking Deploy, you'll see a deployment status message</li>
+                                    <li>The deployment process typically takes <strong>10-30 minutes</strong> depending on:
+                                        <ul>
+                                            <li>Data volume (NTO has 500K loyalty members)</li>
+                                            <li>Number of related objects</li>
+                                            <li>System load</li>
+                                        </ul>
+                                    </li>
+                                    <li>You can check deployment status by clicking the <strong>Deployment History</strong> tab on the Data Kit page</li>
+                                </ul>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Data Kits automate the entire data ingestion and mapping process. Once deployed, the Data Kit handles object selection, field mapping, and DMO creation automatically. You can continue with other work while the deployment runs in the background. For more details, see <a href="https://help.salesforce.com/s/articleView?id=data.c360_a_install_standard_data_bundles_powered_by_data_kits.htm&type=5" target="_blank">Install Standard Data Bundles</a>.
+                                </div>
+
+                                <p><strong>Verify the Data Bundle is Active:</strong></p>
+                                <p>Return to <strong>Data Streams</strong> and verify:</p>
+                                <ul>
+                                    <li>Your <strong>Salesforce CRM</strong> stream now shows additional loyalty objects</li>
+                                    <li>The status shows <strong>"Active"</strong> or <strong>"Syncing"</strong></li>
+                                    <li>You can see Loyalty Program Member, Loyalty Ledger, and other loyalty objects in the object list</li>
+                                </ul>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> The initial data sync can take 1-2 hours for NTO's 500K loyalty members. The Data Kit deployment includes the sync process, so both CRM and Loyalty data will be ingested together. Check the Data Stream status periodically to monitor progress.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">5</span>
+                                <h4>Review Identity Resolution Ruleset</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>In Data Cloud Setup, navigate to <strong>Identity Resolution</strong>.</p>
+                                <p>Review the ruleset configured for NTO. You'll likely see rules like:</p>
+                                <div class="code-block">
+                                    <strong>Rule 1:</strong> Email Exact Match<br>
+                                    <strong>Logic:</strong> If Person_Account.Email = Web_Visitor.Email → Same person<br><br>
+                                    <strong>Rule 2:</strong> Customer ID Match<br>
+                                    <strong>Logic:</strong> If Person_Account.Id = Mobile_User.Customer_ID → Same person
+                                </div>
+                                <p>This is how Data Cloud knows that Sarah Johnson in Salesforce is the same person browsing the website, using the mobile app, and shopping in stores.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step5-identity-resolution.jpg"
+                                         alt="Identity Resolution ruleset configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Identity Resolution ruleset showing Email matching rule</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step5-identity-resolution.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Identity Resolution can take 4-24 hours for the first run on large datasets. For NTO's 2M customers, it likely ran overnight during setup.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">6</span>
                                 <h4>Query the Unified Individual DMO</h4>
                             </div>
                             <div class="step-content">
                                 <p>Now let's see the result: Unified Individuals!</p>
-                                <p>From Data Cloud, navigate to <strong>Query</strong> in the left sidebar.</p>
+                                <p>Open the <strong>Query Editor</strong> app (from the App Launcher) and create a <strong>new query</strong> for <strong>Training</strong>.</p>
                                 <p>Run this query:</p>
                                 <div class="code-block">
                                     SELECT Id, FirstName, LastName, Email<br>
-                                    FROM UnifiedIndividual__dlm<br>
+                                    FROM "ssot__UnifiedIndividual__dlm"<br>
                                     LIMIT 10
                                 </div>
 
                                 <div class="screenshot">
-                                    <img src="../screenshots/mod1-step5-query-workbench.jpg"
-                                         alt="Data Cloud Query interface"
+                                    <img src="../screenshots/mod1-step6-query-workbench.jpg"
+                                         alt="Query Editor app interface"
                                          onerror="this.parentElement.classList.add('placeholder')">
                                     <p class="caption">Query workbench with UnifiedIndividual query</p>
-                                    <p class="screenshot-meta">📸 <code>mod1-step5-query-workbench.jpg</code></p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step6-query-workbench.jpg</code></p>
                                 </div>
 
                                 <p>You should see a list of NTO customers. Each row is a Unified Individual - a person who may have records across multiple systems.</p>
 
                                 <div class="screenshot">
-                                    <img src="../screenshots/mod1-step6-unified-results.jpg"
+                                    <img src="../screenshots/mod1-step7-unified-results.jpg"
                                          alt="Query results showing Unified Individual records"
                                          onerror="this.parentElement.classList.add('placeholder')">
                                     <p class="caption">Query results showing 10 Unified Individuals</p>
-                                    <p class="screenshot-meta">📸 <code>mod1-step6-unified-results.jpg</code></p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step7-unified-results.jpg</code></p>
                                 </div>
                             </div>
                         </div>
@@ -374,9 +594,9 @@
                         <h3>🎉 Lab 1 Checkpoint</h3>
                         <p>Before moving to Lab 2, verify you can answer these questions:</p>
                         <ul class="checkpoint-list">
-                            <li>✓ What are the two main Data Streams NTO has configured?</li>
-                            <li>✓ How does Identity Resolution know two records are the same person?</li>
-                            <li>✓ What is a Unified Individual?</li>
+                            <li>✓ What are the main Data Streams NTO has configured (Salesforce + external)?</li>
+                            <li>✓ How does Identity Resolution match records across different channels?</li>
+                            <li>✓ What is a Unified Individual and why does it span multiple systems?</li>
                             <li>✓ Can you see NTO's customer data in the Query results?</li>
                         </ul>
                     </div>
@@ -394,14 +614,14 @@
                 <div class="lesson-content">
                     <div class="lab-intro">
                         <h3>🎯 Your Mission</h3>
-                        <p>See how Loyalty Management data integrates with customer data. You'll explore the Loyalty Program Member DMO and see tier, points, and enrollment data.</p>
+                        <p>See how Loyalty data extends the Person Account and how it all comes together with behavioral data. You'll explore the Loyalty Program Member DMO and see tier, points, and enrollment data in context.</p>
 
                         <div class="success-criteria">
                             <strong>✅ Success Criteria:</strong>
                             <ul>
-                                <li>View Loyalty Program Member DMO structure</li>
+                                <li>View Loyalty Program Member DMO structure and its relationship to Person Account</li>
                                 <li>Query loyalty data (members, tiers, points)</li>
-                                <li>Understand relationship between Individual and Loyalty Member</li>
+                                <li>Understand how Salesforce CRM + Loyalty data combines with behavioral data in the Unified Individual</li>
                             </ul>
                         </div>
                     </div>
@@ -420,12 +640,14 @@
                                 <p>Search for <strong>"Loyalty Program Member"</strong>.</p>
                                 <p>Click on it to see the DMO structure. Key fields to notice:</p>
                                 <ul>
-                                    <li><strong>Member Tier:</strong> Bronze, Silver, or Gold</li>
-                                    <li><strong>Points Balance:</strong> Current loyalty points</li>
                                     <li><strong>Enrollment Date:</strong> When they joined NTO Rewards</li>
                                     <li><strong>Member Status:</strong> Active, Inactive, etc.</li>
-                                    <li><strong>Lifetime Value:</strong> Total spend as a loyalty member</li>
+                                    <li>Member and program identifiers linking to the loyalty program and the Unified Individual</li>
                                 </ul>
+
+                                <div class="key-insight">
+                                    <strong>💡 Note:</strong> <strong>Member Tier</strong> and <strong>Points Balance</strong> are <em>not</em> stored on the Loyalty Program Member DMO — they live on separate related DMOs (a member-tier DMO and a points/currency DMO). You'll traverse those related DMOs when you need tier or points data. <em>(There is no standard "Lifetime Value" field.)</em>
+                                </div>
 
                                 <div class="screenshot">
                                     <img src="../screenshots/mod1-lab2-step1-loyalty-dmo.jpg"
@@ -448,14 +670,17 @@
                                 <h4>Query Loyalty Member Data</h4>
                             </div>
                             <div class="step-content">
-                                <p>Go back to the Query interface. Run this query:</p>
+                                <p>In the <strong>Query Editor</strong> app, create a <strong>new query</strong> for <strong>Training</strong>, then run:</p>
                                 <div class="code-block">
-                                    SELECT MemberTier__c, PointsBalance__c, EnrollmentDate__c<br>
-                                    FROM LoyaltyProgramMember__dlm<br>
-                                    WHERE MemberTier__c = 'Gold'<br>
+                                    SELECT ssot__EnrollmentDate__c<br>
+                                    FROM "ssot__LoyaltyProgramMember__dlm"<br>
                                     LIMIT 10
                                 </div>
-                                <p>This shows you NTO's Gold tier members - the most valuable loyalty members!</p>
+                                <p>This returns loyalty members with their enrollment dates.</p>
+
+                                <div class="key-insight">
+                                    <strong>⚠️ Tier &amp; points come from separate DMOs:</strong> <code>MemberTier</code> and <code>PointsBalance</code> are <em>not</em> columns on <code>LoyaltyProgramMember__dlm</code>. To filter or return tier/points (e.g. "Gold tier members"), join to the related member-tier and points/currency DMOs. <em>[Confirm the exact related DMO names, their fields, and the join keys in the org, then complete this query.]</em>
+                                </div>
 
                                 <div class="screenshot">
                                     <img src="../screenshots/mod1-lab2-step2-loyalty-query.jpg"
@@ -465,13 +690,18 @@
                                     <p class="screenshot-meta">📸 <code>mod1-lab2-step2-loyalty-query.jpg</code></p>
                                 </div>
 
-                                <p><strong>Try another query</strong> to see tier distribution:</p>
+                                <p><strong>Try another query</strong> to see tier distribution. Because tier lives on a related DMO, this query joins to the member-tier DMO:</p>
                                 <div class="code-block">
-                                    SELECT MemberTier__c, COUNT(*) as MemberCount<br>
-                                    FROM LoyaltyProgramMember__dlm<br>
-                                    GROUP BY MemberTier__c
+                                    SELECT t.ssot__MemberTier__c, COUNT(*) as MemberCount<br>
+                                    FROM "ssot__LoyaltyProgramMember__dlm" m<br>
+                                    JOIN "ssot__LoyaltyMemberTier__dlm" t <span style="color:#c00">⚠️</span><br>
+                                    &nbsp;&nbsp;ON m.ssot__Id__c = t.ssot__LoyaltyProgramMemberId__c <span style="color:#c00">⚠️</span><br>
+                                    GROUP BY t.ssot__MemberTier__c
                                 </div>
                                 <p>This shows you how many members are in each tier (Bronze, Silver, Gold).</p>
+                                <div class="key-insight">
+                                    <strong>⚠️ Verify before running:</strong> the related tier DMO name (<code>ssot__LoyaltyMemberTier__dlm</code> shown as a placeholder), its tier field, and the join key must be confirmed against the org — the exact names may differ.
+                                </div>
                             </div>
                         </div>
 
@@ -483,18 +713,25 @@
                             </div>
                             <div class="step-content">
                                 <p>Now for the magic - let's see customer data AND loyalty data unified!</p>
-                                <p>This requires joining the Individual DMO with Loyalty Program Member DMO:</p>
+                                <p>In the <strong>Query Editor</strong> app, create a <strong>new query</strong> for <strong>Training</strong>. This joins the Individual DMO with the Loyalty Program Member DMO — and, because tier and points live on their own DMOs, joins to those related DMOs as well:</p>
                                 <div class="code-block">
                                     SELECT <br>
-                                    &nbsp;&nbsp;i.FirstName, <br>
-                                    &nbsp;&nbsp;i.LastName, <br>
-                                    &nbsp;&nbsp;i.Email,<br>
-                                    &nbsp;&nbsp;lpm.MemberTier__c,<br>
-                                    &nbsp;&nbsp;lpm.PointsBalance__c<br>
-                                    FROM Individual__dlm i<br>
-                                    JOIN LoyaltyProgramMember__dlm lpm<br>
-                                    &nbsp;&nbsp;ON i.Id = lpm.IndividualId__c<br>
+                                    &nbsp;&nbsp;i.ssot__FirstName__c, <br>
+                                    &nbsp;&nbsp;i.ssot__LastName__c, <br>
+                                    &nbsp;&nbsp;i.ssot__Email__c,<br>
+                                    &nbsp;&nbsp;t.ssot__MemberTier__c, <span style="color:#c00">⚠️</span><br>
+                                    &nbsp;&nbsp;c.ssot__PointsBalance__c <span style="color:#c00">⚠️</span><br>
+                                    FROM "ssot__Individual__dlm" i<br>
+                                    JOIN "ssot__LoyaltyProgramMember__dlm" lpm<br>
+                                    &nbsp;&nbsp;ON i.ssot__Id__c = lpm.ssot__IndividualId__c<br>
+                                    JOIN "ssot__LoyaltyMemberTier__dlm" t <span style="color:#c00">⚠️</span><br>
+                                    &nbsp;&nbsp;ON lpm.ssot__Id__c = t.ssot__LoyaltyProgramMemberId__c<br>
+                                    JOIN "ssot__LoyaltyMemberCurrency__dlm" c <span style="color:#c00">⚠️</span><br>
+                                    &nbsp;&nbsp;ON lpm.ssot__Id__c = c.ssot__LoyaltyProgramMemberId__c<br>
                                     LIMIT 10
+                                </div>
+                                <div class="key-insight">
+                                    <strong>⚠️ Placeholder DMOs/fields:</strong> the tier DMO (<code>ssot__LoyaltyMemberTier__dlm</code>), points/currency DMO (<code>ssot__LoyaltyMemberCurrency__dlm</code>), their fields, and all join keys shown here are placeholders — confirm the actual names against the org before running.
                                 </div>
 
                                 <div class="screenshot">
@@ -517,9 +754,9 @@
                         <p>Verify you understand:</p>
                         <ul class="checkpoint-list">
                             <li>✓ What data lives in the Loyalty Program Member DMO?</li>
-                            <li>✓ How are Individual and Loyalty Member DMOs related?</li>
+                            <li>✓ How are Person Account and Loyalty Member related in Salesforce?</li>
                             <li>✓ Can you query to see customer + loyalty data together?</li>
-                            <li>✓ Why is this unified view important for marketing?</li>
+                            <li>✓ Why does Data Cloud unify this Salesforce data with behavioral/external sources?</li>
                         </ul>
                     </div>
                 </div>
@@ -781,19 +1018,19 @@
                     <div class="summary-card">
                         <h3>✅ What You Learned</h3>
                         <ul>
-                            <li>How Data Streams bring customer & loyalty data into Data Cloud</li>
-                            <li>How Identity Resolution creates Unified Individuals</li>
+                            <li>How Data Streams bring Salesforce and external data into Data Cloud</li>
+                            <li>How Identity Resolution creates Unified Individuals across channels</li>
                             <li>The difference between DLO and DMO</li>
-                            <li>How loyalty data (tiers, points) integrates with customer data</li>
+                            <li>How Loyalty data extends Person Accounts and combines with behavioral data</li>
                         </ul>
                     </div>
                     <div class="summary-card">
                         <h3>🛠️ What You Built</h3>
                         <ul>
-                            <li>Explored NTO's Data Streams (CRM + Loyalty)</li>
-                            <li>Reviewed Identity Resolution ruleset</li>
+                            <li>Explored NTO's Data Streams (Salesforce + external behavioral data)</li>
+                            <li>Reviewed Identity Resolution ruleset for cross-channel matching</li>
                             <li>Queried Unified Individual DMO</li>
-                            <li>Viewed unified customer + loyalty data</li>
+                            <li>Viewed unified Salesforce + behavioral data</li>
                         </ul>
                     </div>
                 </div>
@@ -810,7 +1047,7 @@
 
     <footer class="training-footer">
         <div class="container">
-            <p>MC Next Training: The NTO Rewards Journey | Module 1 of 9</p>
+            <p>MC Next Training: The NTO Rewards Journey | Module 1 of 8</p>
             <p><a href="../index.html">Back to Home</a> | <a href="../resources.html">Resources</a> | <a href="../screenshot-tracker.html">Screenshot Tracker</a></p>
         </div>
     </footer>

@@ -10,26 +10,30 @@ Track all screenshots needed for the hands-on labs across all modules.
 
 ---
 
-## Module 1: The Data Foundation (8 screenshots)
+## Module 1: The Data Foundation (12 screenshots)
 
 ### Lab 1: View NTO's Data Streams & Identity Resolution
 
 | Filename | Description | Status |
 |----------|-------------|--------|
 | `mod1-step1-data-cloud-nav.jpg` | App Launcher with Data Cloud highlighted | ❌ |
-| `mod1-step2-data-streams-list.jpg` | Data Streams list showing CRM and Loyalty streams | ❌ |
-| `mod1-step3-crm-stream-detail.jpg` | CRM Data Stream detail page with field mappings | ❌ |
-| `mod1-step4-identity-resolution.jpg` | Identity Resolution rules showing "Exact Email" matching | ❌ |
-| `mod1-step5-query-workbench.jpg` | Query Workbench with Unified Individual query | ❌ |
-| `mod1-step6-unified-results.jpg` | Query results showing 500K unified individuals | ❌ |
+| `mod1-step2-data-streams-list.jpg` | Data Streams tab with New button | ❌ |
+| `mod1-step3-crm-stream-detail.jpg` | Salesforce CRM Data Stream showing Sales bundle objects | ❌ |
+| `mod1-step4a-add-data-bundle.jpg` | Salesforce CRM Setup page showing Standard Data Bundles with Salesforce CDP CRM Loyalty (v1.8) | ✅ |
+| `mod1-step4b-data-kit-list.jpg` | Data Kits list under Developer Tools showing Loyalty Management Advanced | ✅ |
+| `mod1-step4b-data-kit-detail.jpg` | Loyalty Management Advanced Data Kit detail page with Data Stream Bundles and Deploy button | ✅ |
+| `mod1-step4b-data-kit-deploy.jpg` | Deploy dialog showing Data Space (default) and Org ID field | ✅ |
+| `mod1-step5-identity-resolution.jpg` | Identity Resolution ruleset showing Email matching rule | ❌ |
+| `mod1-step6-query-workbench.jpg` | Query workbench with UnifiedIndividual query | ❌ |
+| `mod1-step7-unified-results.jpg` | Query results showing 10 Unified Individuals | ❌ |
 
 ### Lab 2: Explore NTO's Loyalty Data
 
 | Filename | Description | Status |
 |----------|-------------|--------|
-| `mod1-lab2-step1-loyalty-dmo.jpg` | Loyalty Program Member DMO in Data Model Browser | ❌ |
-| `mod1-lab2-step2-loyalty-query.jpg` | Query joining Individual and Loyalty Program Member | ❌ |
-| `mod1-lab2-step3-unified-view.jpg` | Result showing Sarah Johnson with loyalty data | ❌ |
+| `mod1-lab2-step1-loyalty-dmo.jpg` | Loyalty Program Member DMO showing tier, points, and other fields | ❌ |
+| `mod1-lab2-step2-loyalty-query.jpg` | Query results showing Gold tier loyalty members | ❌ |
+| `mod1-lab2-step3-unified-view.jpg` | Customer names/emails with loyalty tiers and points - fully unified! | ❌ |
 
 ---
 
