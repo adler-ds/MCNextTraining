@@ -42,8 +42,8 @@
 
             <div class="module-meta">
                 <span class="meta-item">⏱️ <strong>3 hours</strong></span>
-                <span class="meta-item">🎯 <strong>3 Labs</strong></span>
-                <span class="meta-item">📸 <strong>10 Screenshots</strong></span>
+                <span class="meta-item">🎯 <strong>4 Labs</strong></span>
+                <span class="meta-item">📸 <strong>14 Screenshots</strong></span>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                     <h2>NTO Rewards Context</h2>
                 </div>
                 <div class="context-body">
-                    <p><strong>The Scenario:</strong> NTO's marketing team needs to automate their member communications. New members should receive a welcome series over 7 days. When members start engagement trails, they should get notifications tailored to their tier. The team also wants to test different messaging to optimize engagement.</p>
+                    <p><strong>The Scenario:</strong> NTO's marketing team needs to automate their member communications. New members should receive a welcome series over 7 days. Members eligible for the Spring Hiking Challenge should be invited to enroll, with a reminder for anyone who hasn't joined yet. When members start engagement trails, they should get notifications tailored to their tier. The team also wants to test different messaging to optimize engagement.</p>
 
                     <div class="stats-grid">
                         <div class="stat-card">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
 
-                    <p><strong>Your Challenge:</strong> Build a welcome journey triggered by segment entry, an engagement trail promotion flow triggered by events, and implement A/B testing with path experimentation to optimize messaging.</p>
+                    <p><strong>Your Challenge:</strong> Build a welcome journey triggered by segment entry, a segment-triggered invitation journey for the "Spring Challenge Eligible" segment, an engagement trail promotion flow triggered by events, and implement A/B testing with path experimentation to optimize messaging.</p>
                 </div>
             </section>
 
@@ -397,6 +397,201 @@
                             <li>✓ Wait elements are 2 days and 5 days</li>
                             <li>✓ Journey is activated and accepting entries</li>
                         </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lab 1B -->
+            <section class="lesson-section lab">
+                <div class="section-header">
+                    <span class="section-badge lab">🧪 LAB 1B</span>
+                    <h2>Build Spring Challenge Invitation Journey</h2>
+                    <p class="section-duration">Hands-on • 45 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <div class="lab-intro">
+                        <h3>🎯 Your Mission</h3>
+                        <p>In Module 2, you built the "Spring Challenge Eligible" segment (~120K members: Silver Tier or Gold Tier, and not already enrolled in the Spring Hiking Challenge promotion). Now put it to work — build a segment-triggered journey that invites those eligible members to join the Spring Hiking Challenge, with a reminder for anyone who hasn't enrolled yet.</p>
+
+                        <div class="success-criteria">
+                            <strong>✅ Success Criteria:</strong>
+                            <ul>
+                                <li>Create segment-triggered journey from "Spring Challenge Eligible"</li>
+                                <li>Add a Day 0 invitation email</li>
+                                <li>Add a Wait element and a follow-up reminder email</li>
+                                <li>Activate the journey</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps">
+                        <h3>📋 Step-by-Step Instructions</h3>
+
+                        <!-- Step 1 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">1</span>
+                                <h4>Create Segment-Triggered Journey</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>From Journeys, click <strong>Create Journey</strong> → <strong>Segment-triggered</strong>.</p>
+                                <p>Name: <code>NTO_Spring_Challenge_Invite_v1</code></p>
+                                <p>Select segment: <code>Spring Challenge Eligible</code> (the complex segment you built in Module 2)</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab-invite-step1-flow.jpg"
+                                         alt="Segment-triggered journey selecting Spring Challenge Eligible"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Creating the invitation journey from the Spring Challenge Eligible segment</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab-invite-step1-flow.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Because "Spring Challenge Eligible" refreshes daily and excludes members already enrolled in the Spring Hiking Challenge, members automatically stop receiving invitations the moment they join — no extra suppression logic needed in the journey itself.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">2</span>
+                                <h4>Add Invitation Email (Day 0)</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Drag an <strong>Email</strong> element onto the canvas right after the entry trigger.</p>
+                                <p>Configure the email:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>Spring Challenge Invitation</code></li>
+                                    <li><strong>Subject:</strong> <code>{{Individual.FirstName}}, you're invited to the Spring Hiking Challenge! 🥾</code></li>
+                                    <li><strong>Content:</strong> Invite the member to enroll, highlighting that the invitation is exclusive to their tier (Silver Tier or Gold Tier) and points level. Include a clear CTA to join the challenge.</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab-invite-step2-invite-email.jpg"
+                                         alt="Spring Challenge invitation email configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Day 0 invitation email inviting eligible members to enroll</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab-invite-step2-invite-email.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">3</span>
+                                <h4>Add Wait + Reminder Email</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Drag a <strong>Wait</strong> element after the invitation email:</p>
+                                <ul>
+                                    <li><strong>Wait Type:</strong> <code>Wait for Duration</code></li>
+                                    <li><strong>Duration:</strong> <code>3 days</code></li>
+                                </ul>
+
+                                <p>Then add a second <strong>Email</strong> element for members who haven't enrolled yet:</p>
+                                <ul>
+                                    <li><strong>Email Name:</strong> <code>Spring Challenge Reminder</code></li>
+                                    <li><strong>Subject:</strong> <code>Don't miss out — the Spring Hiking Challenge is waiting for you</code></li>
+                                    <li><strong>Content:</strong> Reinforce the enrollment deadline and the tier/points benefit, with the same CTA to join.</li>
+                                </ul>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab-invite-step3-reminder-email.jpg"
+                                         alt="Wait element and reminder email configuration"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Wait 3 days, then send a reminder to members who haven't enrolled</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab-invite-step3-reminder-email.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>💡 Key Insight:</strong> Members who already enrolled after the first email have left the "Spring Challenge Eligible" segment during its daily refresh — the exclusion criterion (NOT already enrolled) removes them automatically. Only members who still haven't enrolled remain in the journey to receive this reminder.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">4</span>
+                                <h4>Optimize Send Times with Einstein</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Instead of blasting every eligible member at the same moment, let <strong>Einstein Send Time Optimization (STO)</strong> deliver each email at the time that member is most likely to engage. This is a great fit for the Spring Challenge Invitation — high-value members open on their own schedules, and STO learns each individual's pattern.</p>
+
+                                <p><strong>Enable Send Time Optimization (one-time admin step):</strong></p>
+                                <ol>
+                                    <li>In <strong>Setup</strong>, search for <strong>"Send Time"</strong> and click <strong>Einstein Send Time Optimization</strong> under <strong>Einstein for Marketing</strong>.</li>
+                                    <li>Click <strong>Enable</strong> (the button changes to <strong>Deactivate</strong> once it's on).</li>
+                                    <li>The status stays <strong>In Progress for up to 72 hours</strong> while Einstein trains on engagement history.</li>
+                                </ol>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Enable STO <strong>early</strong> — because training can take up to 72 hours, turn it on well before you plan to send so it's ready when you activate the journey. STO also needs engagement history to learn from; in a brand-new org with little send history, expect the model to improve as data accumulates.
+                                </div>
+
+                                <p><strong>Apply STO to the journey's emails:</strong></p>
+                                <ol>
+                                    <li>Open the <strong>Spring Challenge Invitation</strong> email element (and then the <strong>Spring Challenge Reminder</strong> email).</li>
+                                    <li>In the email's send settings, set the send timing option to <strong>Einstein Send Time Optimization</strong> instead of sending immediately.</li>
+                                    <li>Save each email element.</li>
+                                </ol>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab-invite-step4-send-time-optimization.jpg"
+                                         alt="Enabling and applying Einstein Send Time Optimization to the invitation emails"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Einstein Send Time Optimization applied to the invitation and reminder emails</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab-invite-step4-send-time-optimization.jpg</code></p>
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>💡 Key Insight:</strong> STO chooses the optimal send time <em>per individual</em> within a window you allow, rather than a single fixed time for everyone. Combined with the daily segment refresh, members who enroll after their optimized invitation drop out of the segment before the reminder ever sends.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">5</span>
+                                <h4>Activate the Journey</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Click <strong>Review</strong> in the top right to validate your journey.</p>
+                                <p>Once validated, click <strong>Activate</strong>.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod6-lab-invite-step4-activate.jpg"
+                                         alt="Activating the Spring Challenge invitation journey"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Spring Challenge invitation journey activated and ready to invite eligible members</p>
+                                    <p class="screenshot-meta">📸 <code>mod6-lab-invite-step4-activate.jpg</code></p>
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Keep using the naming convention <code>NTO_[Type]_Journey_v[#]</code> so you can version this journey (v2, v3) as you refine the invitation and reminder messaging.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-checkpoint">
+                        <h3>🎉 Lab 1B Checkpoint</h3>
+                        <p>Before moving to Lab 2, verify:</p>
+                        <ul class="checkpoint-list">
+                            <li>✓ Journey is segment-triggered from "Spring Challenge Eligible"</li>
+                            <li>✓ Invitation email and reminder email are both configured</li>
+                            <li>✓ Wait element is set between invitation and reminder</li>
+                            <li>✓ Einstein Send Time Optimization is enabled and applied to the emails</li>
+                            <li>✓ Journey is activated and accepting entries</li>
+                        </ul>
+
+                        <div class="key-insight">
+                            <strong>🔗 Closing the Loop:</strong> This invitation journey drives members to enroll in the Spring Hiking Challenge. Once a member starts the trail, the <strong>event-triggered Trail Promotion flow you'll build in Lab 2</strong> takes over — segment-triggered invitation hands off to event-triggered engagement.
+                        </div>
                     </div>
                 </div>
             </section>
@@ -988,6 +1183,7 @@
                         <h3>🛠️ What You Built</h3>
                         <ul>
                             <li>3-email welcome journey over 7 days</li>
+                            <li>Segment-triggered Spring Challenge invitation journey with a follow-up reminder</li>
                             <li>Event-triggered trail promotion with tier-based paths</li>
                             <li>A/B test comparing two subject lines</li>
                             <li>Multi-channel journey with SMS and Email</li>

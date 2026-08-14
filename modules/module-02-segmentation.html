@@ -319,7 +319,7 @@
                                     <li>Click <strong>Next</strong>.</li>
                                     <li><strong>Segment On:</strong> select <strong>Profile Object → Loyalty Program Member</strong>.</li>
                                     <li><strong>Segment Name:</strong> <code>Gold Tier Members</code></li>
-                                    <li><strong>Description:</strong> <code>All active Gold tier loyalty members</code></li>
+                                    <li><strong>Description:</strong> <code>All Gold tier loyalty members</code></li>
                                     <li>Click <strong>Next</strong> to open the segment canvas.</li>
                                 </ol>
 
@@ -327,26 +327,20 @@
                                     <strong>💡 Note:</strong> Member tier and status are not stored directly on the Loyalty Program Member DMO — they live on related DMOs. In the Segment Builder you'll navigate to the related DMO to reach these attributes (the same way Step 4 reaches promotion data).
                                 </div>
 
-                                <p><strong>Criteria (Tier — via related tier DMO):</strong></p>
-                                <ul>
-                                    <li>Navigate to the related <strong>member tier DMO</strong> ⚠️ <em>[verify exact DMO name in org]</em></li>
-                                    <li>Field: <strong>MemberTier</strong> ⚠️ <em>[verify field/DMO]</em></li>
-                                    <li>Operator: <strong>Equals</strong></li>
-                                    <li>Value: <strong>Gold</strong></li>
-                                </ul>
-
-                                <p><strong>Add a second rule (AND logic — member status):</strong></p>
-                                <ul>
-                                    <li>Field: <strong>MemberStatus</strong> ⚠️ <em>[verify field/DMO]</em></li>
-                                    <li>Operator: <strong>Equals</strong></li>
-                                    <li>Value: <strong>Active</strong></li>
-                                </ul>
+                                <p><strong>Criteria (Tier — via the related Loyalty Member Tier DMO):</strong></p>
+                                <ol>
+                                    <li>Select <strong>Attributes</strong>.</li>
+                                    <li>Under <strong>Related Data Model Objects</strong>, select <strong>Loyalty Member Tier</strong>.</li>
+                                    <li>Drag <strong>Name</strong> onto the canvas.</li>
+                                    <li>Set the <strong>Operator</strong> to <strong>Is Equal To</strong>.</li>
+                                    <li>Set the <strong>Value</strong> to <strong>Gold Tier</strong>.</li>
+                                </ol>
 
                                 <div class="screenshot">
                                     <img src="../screenshots/mod2-step3-gold-tier.jpg"
-                                         alt="Gold Tier segment with tier and status criteria"
+                                         alt="Gold Tier segment with tier criteria"
                                          onerror="this.parentElement.classList.add('placeholder')">
-                                    <p class="caption">Gold Tier segment showing MemberTier = Gold AND MemberStatus = Active</p>
+                                    <p class="caption">Gold Tier segment: Loyalty Member Tier → Name Is Equal To "Gold Tier"</p>
                                     <p class="screenshot-meta">📸 <code>mod2-step3-gold-tier.jpg</code></p>
                                 </div>
 
@@ -377,29 +371,23 @@
 
                                 <p><strong>Eligibility Requirements:</strong></p>
                                 <ul>
-                                    <li>Must be Silver OR Gold tier (not Bronze)</li>
-                                    <li>AND PointsBalance &gt;= 1000</li>
+                                    <li>Must be Silver Tier OR Gold Tier (not Bronze Tier)</li>
                                     <li>AND NOT already enrolled in "Spring Hiking Challenge" promotion</li>
                                 </ul>
 
                                 <div class="key-insight">
-                                    <strong>💡 Note:</strong> This segment spans <strong>multiple related DMOs</strong> — tier, points, and promotion enrollment each live on a different DMO from Loyalty Program Member. In the Segment Builder each rule group below navigates to the appropriate related DMO to reach its attributes (a join across related DMOs), rather than filtering flat fields on a single DMO.
+                                    <strong>💡 Note:</strong> This segment spans <strong>multiple related DMOs</strong> — tier and promotion enrollment each live on a different DMO from Loyalty Program Member. In the Segment Builder each rule group below navigates to the appropriate related DMO to reach its attributes (a join across related DMOs), rather than filtering flat fields on a single DMO.
                                 </div>
 
-                                <p><strong>Rule Group 1 (Tier — OR logic, via related tier DMO):</strong></p>
-                                <ul>
-                                    <li>Navigate to the related <strong>member tier DMO</strong> ⚠️ <em>[verify exact DMO name in org]</em></li>
-                                    <li>MemberTier <strong>Equals</strong> Silver ⚠️ <em>[verify field/DMO]</em></li>
-                                    <li><strong>OR</strong> MemberTier <strong>Equals</strong> Gold</li>
-                                </ul>
+                                <p><strong>Rule Group 1 (Tier — OR logic, via the related Loyalty Member Tier DMO):</strong></p>
+                                <ol>
+                                    <li>Select <strong>Attributes</strong>.</li>
+                                    <li>Under <strong>Related Data Model Objects</strong>, select <strong>Loyalty Member Tier</strong>.</li>
+                                    <li>Drag <strong>Name</strong> onto the canvas, set the <strong>Operator</strong> to <strong>Is Equal To</strong>, and set the <strong>Value</strong> to <strong>Silver Tier</strong>.</li>
+                                    <li>Add an <strong>OR</strong> condition on <strong>Name</strong> <strong>Is Equal To</strong> <strong>Gold Tier</strong>.</li>
+                                </ol>
 
-                                <p><strong>Rule Group 2 (Points — AND logic with Group 1, via related points/currency DMO):</strong></p>
-                                <ul>
-                                    <li>Navigate to the related <strong>points/currency DMO</strong> ⚠️ <em>[verify exact DMO name in org]</em></li>
-                                    <li>PointsBalance <strong>Greater than or equal to</strong> 1000 ⚠️ <em>[verify field/DMO]</em></li>
-                                </ul>
-
-                                <p><strong>Rule Group 3 (Exclude already enrolled — AND NOT logic):</strong></p>
+                                <p><strong>Rule Group 2 (Exclude already enrolled — AND NOT logic):</strong></p>
                                 <ul>
                                     <li>Navigate to <strong>Loyalty Promotion Enrollment</strong> related DMO</li>
                                     <li>PromotionName <strong>Not Equals</strong> "Spring Hiking Challenge"</li>
@@ -409,7 +397,7 @@
                                     <img src="../screenshots/mod2-step4-trail-eligible.jpg"
                                          alt="Spring Challenge Eligible complex segment with multiple rule groups"
                                          onerror="this.parentElement.classList.add('placeholder')">
-                                    <p class="caption">Complex segment with OR logic for tiers, AND logic for points, and exclusion criteria</p>
+                                    <p class="caption">Complex segment with OR logic for tiers and exclusion criteria</p>
                                     <p class="screenshot-meta">📸 <code>mod2-step4-trail-eligible.jpg</code></p>
                                 </div>
 

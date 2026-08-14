@@ -246,8 +246,8 @@
                             <strong>✅ Success Criteria:</strong>
                             <ul>
                                 <li>View Data Streams for Salesforce and external behavioral data</li>
-                                <li>Understand Identity Resolution ruleset for cross-channel matching</li>
-                                <li>Query Unified Individual DMO to see 500K NTO Rewards members unified across touchpoints</li>
+                                <li>Create an Identity Resolution ruleset for cross-channel matching</li>
+                                <li>Query Unified Individual DMO to see NTO Rewards members unified across touchpoints</li>
                             </ul>
                         </div>
                     </div>
@@ -309,10 +309,14 @@
                         <div class="lab-step">
                             <div class="step-header">
                                 <span class="step-number">3</span>
-                                <h4>Set Up Salesforce CRM Data Stream</h4>
+                                <h4>Set Up Salesforce CRM Data Stream <span style="font-weight:normal;font-size:0.8em;">(Fallback)</span></h4>
                             </div>
                             <div class="step-content">
-                                <p>Now let's bring Salesforce data into Data Cloud by creating a Data Stream.</p>
+                                <div class="key-insight">
+                                    <strong>💡 Primary path vs. fallback:</strong> You do <strong>not</strong> need to install the Sales Data Bundle. The simplest path is to <strong>deploy the Loyalty Management Advanced data kit directly</strong> — see <strong>Step 4</strong>. Only if that data kit is <strong>not available</strong> in your org do you fall back to installing the Data Bundles described here (Sales) and in Step 4A (Loyalty). If the data kit is available, you can skip this step.
+                                </div>
+
+                                <p>If you need the fallback, bring Salesforce data into Data Cloud by creating a Data Stream.</p>
 
                                 <p><strong>Navigate to Data Streams:</strong></p>
                                 <ol>
@@ -364,12 +368,16 @@
                         <div class="lab-step">
                             <div class="step-header">
                                 <span class="step-number">4</span>
-                                <h4>Install Salesforce CDP CRM Loyalty Data Bundle</h4>
+                                <h4>Deploy the Loyalty Management Advanced Data Kit</h4>
                             </div>
                             <div class="step-content">
-                                <p>Now let's add the Loyalty Management data so we can access member tiers, points, and enrollments using the standard <strong>Salesforce CDP CRM Loyalty</strong> data bundle.</p>
+                                <p>Now let's add the Loyalty Management data so we can access member tiers, points, and enrollments.</p>
 
-                                <p><strong>Step 4A: Navigate to Salesforce CRM Data Bundles</strong></p>
+                                <div class="key-insight">
+                                    <strong>💡 Primary path:</strong> Deploy the <strong>Loyalty Management Advanced data kit</strong> directly (<strong>Step 4B</strong> below). Go to <strong>Data Cloud Setup → Data Kits</strong>, then deploy — you'll need your <strong>Org ID</strong>. <strong>If the data kit is not available</strong> in your org, use the fallback in <strong>Step 4A</strong>: install the <strong>Salesforce CDP CRM Loyalty</strong> data bundle first (which makes the data kit available), then deploy it in Step 4B.
+                                </div>
+
+                                <p><strong>Step 4A <em>(Fallback — only if the Loyalty Management Advanced data kit isn't already available)</em>: Install the Salesforce CDP CRM Loyalty Data Bundle</strong></p>
                                 <ol>
                                     <li>In Data Cloud Setup, search for <strong>"Salesforce CRM"</strong> in the left sidebar</li>
                                     <li>Click on <strong>Salesforce CRM</strong> (under the Setup section)</li>
@@ -413,14 +421,13 @@
                                     <strong>💡 Key Insight:</strong> The Salesforce CDP CRM Loyalty bundle (version 1.8) is a pre-configured data bundle powered by Data Kits. It automatically maps all Salesforce Loyalty Management objects to Data Cloud DMOs, saving you hours of manual configuration work. Once installed, the bundle appears in the "Installed Version" column.
                                 </div>
 
-                                <p><strong>Step 4B: Deploy the Data Kit</strong></p>
+                                <p><strong>Step 4B <em>(Primary)</em>: Deploy the Loyalty Management Advanced Data Kit</strong></p>
 
                                 <p><strong>Navigate to Data Kits:</strong></p>
                                 <ol>
-                                    <li>From Setup, enter <strong>Data Kit</strong> in the Quick Find box</li>
-                                    <li>Under <strong>Developer Tools</strong>, select <strong>Data Kits</strong></li>
+                                    <li>Go to <strong>Data Cloud Setup → Data Kits</strong> (or from Setup, enter <strong>Data Kit</strong> in the Quick Find box and select <strong>Data Kits</strong> under Developer Tools)</li>
                                     <li>You'll see a list of all available Data Kits in your org</li>
-                                    <li>Locate <strong>Loyalty Management Advanced</strong> in the list (this was installed when you added the Salesforce CDP CRM Loyalty bundle)</li>
+                                    <li>Locate <strong>Loyalty Management Advanced</strong> in the list (if you took the fallback in Step 4A, it was installed with the Salesforce CDP CRM Loyalty bundle)</li>
                                     <li>Click on <strong>Loyalty Management Advanced</strong> to open the Data Kit detail page</li>
                                 </ol>
 
@@ -526,29 +533,82 @@
                         <div class="lab-step">
                             <div class="step-header">
                                 <span class="step-number">5</span>
-                                <h4>Review Identity Resolution Ruleset</h4>
+                                <h4>Create the Identity Resolution Ruleset</h4>
                             </div>
                             <div class="step-content">
-                                <p>In Data Cloud Setup, navigate to <strong>Identity Resolution</strong>.</p>
-                                <p>Review the ruleset configured for NTO. You'll likely see rules like:</p>
-                                <div class="code-block">
-                                    <strong>Rule 1:</strong> Email Exact Match<br>
-                                    <strong>Logic:</strong> If Person_Account.Email = Web_Visitor.Email → Same person<br><br>
-                                    <strong>Rule 2:</strong> Customer ID Match<br>
-                                    <strong>Logic:</strong> If Person_Account.Id = Mobile_User.Customer_ID → Same person
-                                </div>
-                                <p>This is how Data Cloud knows that Sarah Johnson in Salesforce is the same person browsing the website, using the mobile app, and shopping in stores.</p>
-
-                                <div class="screenshot">
-                                    <img src="../screenshots/mod1-step5-identity-resolution.jpg"
-                                         alt="Identity Resolution ruleset configuration"
-                                         onerror="this.parentElement.classList.add('placeholder')">
-                                    <p class="caption">Identity Resolution ruleset showing Email matching rule</p>
-                                    <p class="screenshot-meta">📸 <code>mod1-step5-identity-resolution.jpg</code></p>
-                                </div>
+                                <p>Identity Resolution is <strong>not pre-configured</strong> in this org — you'll create it now. This is how Data Cloud knows that Sarah Johnson in Salesforce is the same person browsing the website, using the mobile app, and shopping in stores: it links records that represent the same person into a single <strong>Unified Individual</strong>.</p>
 
                                 <div class="pro-tip">
-                                    <strong>💡 Pro Tip:</strong> Identity Resolution can take 4-24 hours for the first run on large datasets. For NTO's 2M customers, it likely ran overnight during setup.
+                                    <strong>💡 Pro Tip:</strong> Wait until the previous step (data kit deploy / sync) has finished before starting this — patience is a virtue. Creating the ruleset takes about <strong>3–5 minutes</strong> of work.
+                                </div>
+
+                                <div class="key-insight">
+                                    <strong>💡 Key Insight:</strong> SDO orgs ship with the Marketing Cloud Engagement (MCE) SKU enabled, so getting an out-of-the-box ruleset would require extra steps (including connecting MCE with Data Cloud). Instead, you'll create the ruleset <strong>manually</strong> — which is also the best way to understand how it works.
+                                </div>
+
+                                <p><strong>Create the Individual ruleset:</strong></p>
+                                <ol>
+                                    <li>Click the <strong>App Launcher</strong> and open the <strong>Data Cloud</strong> app. Navigate to the <strong>Identity Resolutions</strong> tab.</li>
+                                    <li>Click <strong>New</strong> to start setting up your identity resolution.</li>
+                                    <li>Select <strong>Create New Ruleset</strong> and click <strong>Next</strong>.</li>
+                                    <li>Select <strong>Primary Data Model Object = Individual</strong>, then enter a <strong>4-character Ruleset ID</strong> (for example, <strong>MCAI</strong>). Click <strong>Next</strong>.</li>
+                                    <li>Enter a <strong>Ruleset Name</strong> and click <strong>Save</strong>.</li>
+                                </ol>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step5a-new-ruleset.jpg"
+                                         alt="New Identity Resolution ruleset dialog"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Creating a new ruleset with Primary DMO = Individual and a 4-character Ruleset ID</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step5a-new-ruleset.jpg</code></p>
+                                </div>
+
+                                <p><strong>Resolve the warnings on the ruleset record page:</strong></p>
+                                <p>On the Identity Ruleset record page, look at the <strong>warnings in the right column</strong> and resolve each one.</p>
+                                <ol>
+                                    <li><strong>Data mapping warning</strong> (e.g. "Map required field Lead_Home") — click the hyperlinked field text to open the data mapping screen. In the left column, map the source field to the appropriate target field on the right (for example, map <strong>Phone</strong> to <strong>Contact Point Phone → Formatted E164 Phone Number</strong>). Save the mapping update and return to the ruleset record page.</li>
+                                    <li><strong>Reconciliation rule warning</strong> — click the linked object/field (e.g. <strong>individual.Individual Id</strong>). Under <strong>Reconciliation Rules → Individual</strong>, select <strong>Individual Id</strong>, <strong>disable</strong> the default reconciliation rule (it's on by default), and update the field reconciliation rule to <strong>Source Priority</strong>. Click <strong>Save</strong>.</li>
+                                </ol>
+
+                                <div class="key-insight">
+                                    <strong>⚠️ Important — resolve every warning, using your judgement:</strong> The data mappings are <strong>not 100% accurate out of the box</strong>, and it's not just one field. For <strong>each DMO</strong>, check the <strong>right side</strong> and resolve <em>every</em> warning shown. Each unmapped DMO displays a ⚠️ warning triangle; hovering it names the attribute(s) to map — for example, the <strong>Device</strong> DMO warns <em>"The following attributes should be mapped to successfully use Identity Resolution, Segmentation, and Activation: Advertiser Id."</em> Use your best judgement on which field to map for each one; the required mappings vary by DMO and aren't a fixed list.
+                                </div>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step5b-data-mapping-warning.jpg"
+                                         alt="Review Warning tooltip on a DMO showing an attribute that must be mapped"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Each DMO's ⚠️ warning names the attribute to map (here, the Device DMO → Advertiser Id)</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step5b-data-mapping-warning.jpg</code></p>
+                                </div>
+
+                                <p><strong>Configure the matching rules:</strong></p>
+                                <ol>
+                                    <li>Click <strong>Match Rules → Configure</strong>, then <strong>Next → Configure</strong>.</li>
+                                    <li>Select <strong>Fuzzy Name</strong> and <strong>Normalized Email</strong>.</li>
+                                    <li>Click <strong>Next → Next → Save</strong>.</li>
+                                </ol>
+
+                                <div class="code-block">
+                                    <strong>Match Rule 1:</strong> Fuzzy Name<br>
+                                    <strong>Match Rule 2:</strong> Normalized Email<br><br>
+                                    <strong>Reconciliation:</strong> Individual Id → Source Priority
+                                </div>
+
+                                <p><strong>Run the ruleset:</strong> it should start automatically once configured. Then go back to <strong>Setup → Marketing Cloud → Basic Settings</strong> — your <strong>Individual ruleset</strong> should now be <strong>auto-selected</strong>.</p>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step5c-match-rules.jpg"
+                                         alt="Matching rules configured with Fuzzy Name and Normalized Email"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Matching rules: Fuzzy Name + Normalized Email; ruleset runs automatically once configured</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step5c-match-rules.jpg</code></p>
+                                </div>
+
+                                <p><strong>Repeat for the Account (Account Individual) ruleset:</strong> follow the same flow for the Account ruleset. It's more streamlined and does <strong>not</strong> require resolving any warnings.</p>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> Identity Resolution runs on a schedule and the first run can take several hours to complete. Once your ruleset is configured and running, you can continue with the rest of setup while it processes in the background.
                                 </div>
                             </div>
                         </div>
@@ -595,7 +655,7 @@
                         <p>Before moving to Lab 2, verify you can answer these questions:</p>
                         <ul class="checkpoint-list">
                             <li>✓ What are the main Data Streams NTO has configured (Salesforce + external)?</li>
-                            <li>✓ How does Identity Resolution match records across different channels?</li>
+                            <li>✓ How did you configure Identity Resolution to match records across different channels?</li>
                             <li>✓ What is a Unified Individual and why does it span multiple systems?</li>
                             <li>✓ Can you see NTO's customer data in the Query results?</li>
                         </ul>
@@ -828,6 +888,10 @@
                             <li>Migrate past promotion participation</li>
                             <li>Consider data retention policies (do you need 5 years of history?)</li>
                         </ul>
+
+                        <div class="pro-tip">
+                            <strong>💡 Looking ahead — Einstein Send Time Optimization:</strong> Once your data foundation and engagement channels are in place, you can let Einstein pick the best send time for each individual. Send Time Optimization is an advanced engagement feature, so we cover enabling and using it in <strong>Module 6: Flows</strong> (applied to the Spring Challenge Invitation journey) rather than here in the data foundation.
+                        </div>
 
                         <div class="further-reading">
                             <h4>📚 Further Reading</h4>
