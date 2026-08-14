@@ -268,8 +268,12 @@
                                     <li><strong>Segment On:</strong> select <strong>Profile Object → Loyalty Program Member</strong>.</li>
                                     <li><strong>Segment Name:</strong> <code>New Members</code></li>
                                     <li><strong>Description:</strong> <code>Members enrolled within the last 30 days</code></li>
-                                    <li>Click <strong>Next</strong> to open the segment canvas.</li>
+                                    <li>Click <strong>Next</strong>, accept the defaults (<strong>Standard Push</strong> and <strong>Do Not Schedule</strong>), then click <strong>Save</strong> to open the segment canvas.</li>
                                 </ol>
+
+                                <div class="key-insight">
+                                    <strong>💡 Note — why we don't schedule in training:</strong> If this were a segment that changes over time, you'd normally <strong>schedule</strong> it to refresh. For this training we deliberately choose <strong>Do Not Schedule</strong> — leaving it unscheduled keeps the data from going stale and prevents the segment from losing all its members after 30 days (which would otherwise happen as the relative date window moves forward). Publishing and refresh schedules are covered in Lab 2.
+                                </div>
 
                                 <div class="screenshot">
                                     <img src="../screenshots/mod2-step2-new-segment-dialog.jpg"
@@ -283,8 +287,8 @@
                                 <ul>
                                     <li>DMO: <strong>Loyalty Program Member</strong></li>
                                     <li>Field: <strong>EnrollmentDate</strong></li>
-                                    <li>Operator: <strong>Greater than or equal to</strong></li>
-                                    <li>Value: <strong>TODAY() - 30</strong> (relative date)</li>
+                                    <li>Operator: <strong>Last Number Of Days</strong></li>
+                                    <li>Value: <strong>30</strong></li>
                                 </ul>
 
                                 <div class="screenshot">
@@ -298,10 +302,10 @@
                                 <p>Click <strong>Preview</strong> to see the member count. You should see approximately 50,000 members.</p>
 
                                 <div class="pro-tip">
-                                    <strong>💡 Pro Tip:</strong> Using relative dates like TODAY() - 30 ensures the segment stays current. It will always show members from the last 30 days, not a fixed date.
+                                    <strong>💡 Pro Tip:</strong> The <strong>Last Number Of Days</strong> operator is a relative date filter — it always matches members from the last 30 days rather than a fixed date, so the criteria stay current without editing.
                                 </div>
 
-                                <p>Click <strong>Save</strong> to save the segment (we'll publish later).</p>
+                                <p>The segment is saved when you complete the dialog above. We'll publish it in Lab 2.</p>
                             </div>
                         </div>
 
@@ -320,7 +324,7 @@
                                     <li><strong>Segment On:</strong> select <strong>Profile Object → Loyalty Program Member</strong>.</li>
                                     <li><strong>Segment Name:</strong> <code>Gold Tier Members</code></li>
                                     <li><strong>Description:</strong> <code>All Gold tier loyalty members</code></li>
-                                    <li>Click <strong>Next</strong> to open the segment canvas.</li>
+                                    <li>Click <strong>Next</strong>, accept the defaults (<strong>Standard Push</strong> and <strong>Do Not Schedule</strong>), then click <strong>Save</strong> to open the segment canvas. (See the note in Step 2 on why we don't schedule in training.)</li>
                                 </ol>
 
                                 <div class="key-insight">
@@ -366,7 +370,7 @@
                                     <li><strong>Segment On:</strong> select <strong>Profile Object → Loyalty Program Member</strong>.</li>
                                     <li><strong>Segment Name:</strong> <code>Spring Challenge Eligible</code></li>
                                     <li><strong>Description:</strong> <code>Members eligible for Spring Hiking Challenge engagement trail</code></li>
-                                    <li>Click <strong>Next</strong> to open the segment canvas.</li>
+                                    <li>Click <strong>Next</strong>, accept the defaults (<strong>Standard Push</strong> and <strong>Do Not Schedule</strong>), then click <strong>Save</strong> to open the segment canvas. (See the note in Step 2 on why we don't schedule in training.)</li>
                                 </ol>
 
                                 <p><strong>Eligibility Requirements:</strong></p>
