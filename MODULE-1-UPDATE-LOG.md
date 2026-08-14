@@ -222,10 +222,11 @@ example; Match Rules = Fuzzy Name + Normalized Email; recon = Individual Id → 
 Priority; auto-selects in Basic Settings). Removed the fabricated Email Exact/Customer ID
 rules and the "2M customers ran overnight" prose. Updated Lab 1 success criteria + checkpoint
 to "create/configure" framing. **Screenshots:** placeholders added (mod1-step5a-new-ruleset,
-mod1-step5b-data-mapping-warning, mod1-step5c-match-rules) — real captures still needed; the
-reference .heic still needs converting/renaming. **Open items still pending:** confirm "MCAI"
-is the intended Ruleset ID vs. example; confirm ordering vs. Marketing Data Kits install
-(Change 2).
+mod1-step5c-match-rules) — real captures still needed. The data-mapping warning screenshot is
+now wired to the real capture **`DLO-Error-Example.jpg`** (Device DMO → Advertiser Id, Aug 14
+2026); the earlier `mod1-step5b-*` placeholder is retired. **"MCAI" is confirmed an EXAMPLE Ruleset ID**
+(Aug 14, 2026) — HTML already phrases it "for example, MCAI"; no change needed. **Open item
+still pending:** confirm ordering vs. Marketing Data Kits install (Change 2).
 **Location:** Lab 1 → **Step 5 "Review Identity Resolution Ruleset"** (lines ~525–553).
 Also touches the concept prose (lines ~157–195, 529–551) and the Basic Settings sequence
 (Change 2) — the ruleset auto-selects back in Basic Settings once created.
