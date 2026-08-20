@@ -86,6 +86,93 @@ with this — the operator does the relative windowing, so the value is just `30
 
 ---
 
+### Change 2 — Add sending-domain / email authentication setup (MISSING from modules)
+**Status:** ✅ Applied Aug 17, 2026 — added Module 1 Lab 1 **Step 8 "Configure Domain
+Settings & Email Authentication"** (Setup Assistant → Email Setup; add sending domain +
+SPF/DKIM/DMARC; From/Reply-To; verify). Includes the PDF's subdomain best-practice
+(rewards.nto.com example) and DNS-propagation pro-tip. Checkpoint + success criteria updated.
+Grounded in Admin Onboarding PDF ("Domain Settings and DNS Configuration"; "Email Setup —
+DNS, Physical Address (CAN-SPAM)"). Screenshot placeholder `mod1-step8-domain-settings.jpg`.
+**Verify:** exact MC Next UI path/labels for domain add + record entry against the org.
+**Module/File:** Likely **Module 1** admin-setup sequence (or wherever the email channel is
+configured); ties into `MODULE-1-UPDATE-LOG.md` Change 2 (Basic Settings → "Add default
+email channel").
+
+**Gap found (Aug 17, 2026):**
+There are **no steps** in any HTML module for setting up a **sending domain / email
+authentication** (SPF, DKIM, DMARC, from/reply-to address, DNS). Confirmed by grepping all
+modules — zero hits.
+- The only related content is `modules/module-01-getting-started.md` (lines 25–26: "Sender
+  authentication (SPF, DKIM)", "Reply-to and from addresses") — but that's a **legacy
+  MC-on-Core outline** (Email Studio / Journey Builder), NOT the MC Next lab modules. It's
+  not real domain-setup content and doesn't belong to the current training flow.
+
+**It IS in the library — so we can add it:**
+- `referance docs/reference-sources.md:30` — the **Admin Onboarding** video+PDF explicitly
+  covers *"Email setup including domain management and DNS configuration."*
+- Source PDF: `referance docs/Getting Started_ Marketing Cloud Growth & Advanced _ Admin
+  Onboarding.pdf` (39MB).
+- `overview/key-concepts-summary.md:224` lists *"Configure email settings (SPF, DKIM)"*
+  under Channel Setup, and line 212 lists "Add default email channel" as a Basic Settings
+  prereq.
+
+**Change needed:**
+- Add a domain / email-authentication setup step to the Module 1 admin sequence (after /
+  alongside "Add default email channel"). Pull the specifics (where domain management lives
+  in MC Next Setup, SPF/DKIM/DMARC records, from/reply-to configuration, verification) from
+  the Admin Onboarding PDF.
+- Explain *why* it matters: deliverability + sender authentication; unverified/unauthenticated
+  domains hurt inbox placement and can block sends.
+
+**Notes / open questions:**
+- Extract the exact MC Next UI path + record types from the Admin Onboarding PDF before
+  writing (don't invent DNS/console steps).
+- Confirm whether this is admin-only setup (Module 1) or should be referenced again in the
+  email/content module.
+
+---
+
+### Change 3 — Add "Set up Company Information" reminder + why it matters
+**Status:** ✅ Applied Aug 17, 2026 — added Module 1 Lab 1 **Step 7 "Set Up Company
+Information"** (Setup → Company Information; confirm physical address, locale, time zone,
+currency) with the CAN-SPAM / deliverability "why it matters" note. Cross-linked from the
+Step 4 Org ID lookup ("you'll return to this page in Step 7"). Checkpoint + success criteria
+updated. Grounded in PDF ("Your physical address in Marketing Cloud is linked to your company
+information in the base CRM"). Screenshot placeholder `mod1-step7-company-information.jpg`.
+**Verify:** confirm exactly which fields MC Next pulls into the email footer.
+**Module/File:** **Module 1** (`modules/module-01-data-foundation.html`) — currently only a
+passing mention at lines ~469–470 (search Company Information to grab the Org ID for the
+data-kit deploy).
+
+**Gap found (Aug 17, 2026):**
+Company Information is referenced **only** as a way to find the Org ID — there is **no step**
+that has the learner **verify/complete Company Information**, and **no explanation of why it
+matters**.
+
+**Why it matters (to capture in the step):**
+- The org's **physical mailing address** in Company Information flows into email footers and
+  is required for **CAN-SPAM / anti-spam compliance** (Module 5 line ~812 already flags the
+  unsubscribe-link requirement but not the physical address).
+- Default org locale / time zone / currency and the org-wide email context also derive from
+  Company Information and affect sends and scheduling.
+
+**Change needed:**
+- Add a short setup step (early in Module 1) to review/complete **Company Information**
+  (Setup → Company Information): confirm the org's physical address, default locale, time
+  zone, and currency — with a note on the compliance/deliverability importance.
+- Cross-link the existing Org ID lookup (lines ~469–470) to this step instead of introducing
+  Company Information cold there.
+
+**Library check:** not found as a discrete topic in `reference-sources.md`; likely folded
+into the Admin Onboarding PDF's setup flow — verify there, otherwise this is net-new content
+we author (it's standard Salesforce Setup, so low risk).
+
+**Notes / open questions:**
+- Confirm which fields MC Next actually pulls into email footers (physical address for
+  CAN-SPAM) vs. what's just general org config, so the "why" is accurate.
+
+---
+
 <!--
 Entry template:
 

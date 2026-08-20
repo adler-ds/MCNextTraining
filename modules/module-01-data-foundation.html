@@ -248,6 +248,7 @@
                                 <li>View Data Streams for Salesforce and external behavioral data</li>
                                 <li>Create an Identity Resolution ruleset for cross-channel matching</li>
                                 <li>Query Unified Individual DMO to see NTO Rewards members unified across touchpoints</li>
+                                <li>Complete Company Information and configure an authenticated sending domain</li>
                             </ul>
                         </div>
                     </div>
@@ -471,6 +472,7 @@
                                     <li>Find <strong>Salesforce.com Organization ID</strong> (example: 00Dg70000075qOd)</li>
                                     <li>Copy this value - you'll need it in the deployment dialog</li>
                                 </ol>
+                                <p>You'll return to this same <strong>Company Information</strong> page in <strong>Step 7</strong> to confirm the org's physical address and other details.</p>
 
                                 <div class="pro-tip">
                                     <strong>💡 Pro Tip:</strong> Your Org ID is a unique 15 or 18-character identifier for your Salesforce org. It always starts with "00D". Keep this handy as you may need it for various Data Cloud configurations.
@@ -648,6 +650,74 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Step 7 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">7</span>
+                                <h4>Set Up Company Information</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Before you start sending, make sure your org's <strong>Company Information</strong> is complete. In Marketing Cloud your <strong>physical mailing address is linked to the Company Information in the base CRM</strong> — and it's used in the required footer of every email you send.</p>
+
+                                <ol>
+                                    <li>From <strong>Setup</strong>, enter <strong>Company Information</strong> in the Quick Find box.</li>
+                                    <li>Select <strong>Company Information</strong> under Company Settings.</li>
+                                    <li>Confirm (or complete) the org's <strong>physical mailing address</strong>, <strong>default locale</strong>, <strong>time zone</strong>, and <strong>currency</strong>.</li>
+                                </ol>
+
+                                <div class="key-insight">
+                                    <strong>💡 Why it matters:</strong> Anti-spam laws (such as CAN-SPAM) require a valid physical postal address in every commercial email. Because MC Next pulls that address from Company Information, an incomplete record can block sends or hurt deliverability. Locale, time zone, and currency also drive how sends are scheduled and how content renders.
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> This is the same <strong>Company Information</strong> page where you found your <strong>Org ID</strong> for the Data Kit deploy in Step 4 — a good moment to confirm everything on this page is accurate.
+                                </div>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step7-company-information.jpg"
+                                         alt="Company Information setup page showing physical address and org defaults"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Company Information: physical address, locale, time zone, and currency</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step7-company-information.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 8 -->
+                        <div class="lab-step">
+                            <div class="step-header">
+                                <span class="step-number">8</span>
+                                <h4>Configure Domain Settings &amp; Email Authentication</h4>
+                            </div>
+                            <div class="step-content">
+                                <p>Finally, set up the <strong>sending domain</strong> so NTO's emails authenticate properly and land in the inbox. Proper domain settings are crucial for email sending, and when configured correctly they don't interfere with your live web traffic.</p>
+
+                                <p>Email Setup lives in the <strong>Marketing Cloud Setup Assistant</strong> — the centralized checklist for your implementation. Under <strong>Email Setup</strong>, complete the <strong>DNS / Domain</strong> configuration:</p>
+                                <ol>
+                                    <li>Open the <strong>Marketing Cloud Setup Assistant</strong> and go to the <strong>Email Setup</strong> area.</li>
+                                    <li>Add your <strong>sending domain</strong> and publish the required DNS records (SPF, DKIM, and DMARC) to authenticate your mail.</li>
+                                    <li>Set your <strong>From</strong> and <strong>Reply-To</strong> addresses on the verified domain.</li>
+                                    <li>Verify the domain and confirm the records validate successfully.</li>
+                                </ol>
+
+                                <div class="key-insight">
+                                    <strong>💡 Best Practice — use a subdomain:</strong> Salesforce strongly recommends sending from a dedicated <strong>subdomain</strong> (for example, <code>rewards.nto.com</code> or <code>email.nto.com</code>) rather than your primary domain. This reduces risk, keeps marketing mail from affecting your corporate domain's reputation, and is standard practice for large senders.
+                                </div>
+
+                                <div class="pro-tip">
+                                    <strong>💡 Pro Tip:</strong> SPF, DKIM, and DMARC are DNS records that prove your mail is legitimately from your domain. DNS changes can take time to propagate, so set the domain up early — well before your first send — and wait for verification to complete.
+                                </div>
+
+                                <div class="screenshot">
+                                    <img src="../screenshots/mod1-step8-domain-settings.jpg"
+                                         alt="Domain Settings and DNS configuration in the Marketing Cloud Setup Assistant"
+                                         onerror="this.parentElement.classList.add('placeholder')">
+                                    <p class="caption">Email Setup: sending domain with SPF/DKIM/DMARC authentication</p>
+                                    <p class="screenshot-meta">📸 <code>mod1-step8-domain-settings.jpg</code></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="lab-checkpoint">
@@ -658,6 +728,8 @@
                             <li>✓ How did you configure Identity Resolution to match records across different channels?</li>
                             <li>✓ What is a Unified Individual and why does it span multiple systems?</li>
                             <li>✓ Can you see NTO's customer data in the Query results?</li>
+                            <li>✓ Is Company Information complete (physical address for CAN-SPAM)?</li>
+                            <li>✓ Is the sending domain configured and authenticated (SPF/DKIM/DMARC)?</li>
                         </ul>
                     </div>
                 </div>
