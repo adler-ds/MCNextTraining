@@ -1666,3 +1666,44 @@ section h4 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Comparison table (Module 6 Direct Send API, and reusable) */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-md) 0;
+  font-size: 0.95rem;
+}
+
+.comparison-table th,
+.comparison-table td {
+  border: 1px solid var(--medium-gray);
+  padding: var(--spacing-sm);
+  text-align: left;
+  vertical-align: top;
+}
+
+.comparison-table thead th {
+  background: var(--sf-light-blue);
+  color: var(--nto-blue);
+  font-weight: 600;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+  background: var(--light-gray);
+}
+
+/* Inline reference/doc-link note */
+.reference-note {
+  font-size: 0.9rem;
+  color: var(--dark-gray);
+  border-left: 3px solid var(--sf-blue);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  margin: var(--spacing-sm) 0;
+  background: var(--sf-light-blue);
+  border-radius: var(--border-radius-sm);
+}
+
+.reference-note a {
+  color: var(--sf-blue);
+}

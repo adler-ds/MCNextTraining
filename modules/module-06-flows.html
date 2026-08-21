@@ -923,6 +923,154 @@
                 </div>
             </section>
 
+            <!-- Direct Send API -->
+            <section class="lesson-section core">
+                <div class="section-header">
+                    <span class="section-badge core">📖 CORE LESSON</span>
+                    <h2>Sending Beyond Flows: The Email Direct Send API</h2>
+                    <p class="section-duration">Concept • 15 minutes</p>
+                </div>
+
+                <div class="lesson-content">
+                    <p>So far every send in this module has been driven by a <strong>Flow</strong> — segment-triggered (Welcome, Spring Challenge Invitation) or event-triggered (Trail Promotion). There's a third pattern: sending <strong>programmatically from your own systems</strong> using the <strong>Email Direct Send API</strong> (GA August 2026).</p>
+
+                    <h3>🧠 What You Need to Know</h3>
+                    <div class="strategy-grid">
+                        <div class="strategy-card">
+                            <h4>What it is</h4>
+                            <p>A dedicated, purpose-built API for sending email at scale with a stable contract, predictable performance, and support for direct ingestion of HTML payloads.</p>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>Why it matters</h4>
+                            <p>Some messages are too time-sensitive to route through a scheduled journey — <strong>OTP and 2FA codes</strong>, order confirmations, password resets. Customers expect these in real time, and the API delivers that with predictable performance.</p>
+                        </div>
+                        <div class="strategy-card">
+                            <h4>How it's different</h4>
+                            <p>No dependency on Flows or APEX classes for personalization — a CPaaS-grade message experience. It supports <strong>both promotional and transactional</strong> messaging and works out of the box in Marketing Cloud Next.</p>
+                        </div>
+                    </div>
+
+                    <h3>🎯 When to Use It (vs. a Flow)</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Use a Flow when…</th>
+                                <th>Use the Direct Send API when…</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>The audience is a segment or a marketing event inside MC Next</td>
+                                <td>Your own app/backend needs to trigger a 1:1 message on its own event</td>
+                            </tr>
+                            <tr>
+                                <td>Marketers build and own the journey (point-and-click)</td>
+                                <td>Developers build a programmatic or headless integration</td>
+                            </tr>
+                            <tr>
+                                <td>Timing tolerates a scheduled/near-real-time journey</td>
+                                <td>The message is time-critical (OTP, 2FA, order/shipping confirmation)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>⚙️ How It Works (the big picture)</h3>
+                    <p>Under the hood the API uses the <strong>High Scale Flow</strong> messaging service. Conceptually there are three moving parts:</p>
+                    <ol>
+                        <li><strong>Authenticate</strong> — obtain an OAuth <strong>JWT bearer token with the <code>sfap_api</code> scope</strong> from an External Client App.</li>
+                        <li><strong>Send definition</strong> — create a <code>ListEmail</code> object that references the (published) email content, sender identity, and tracking settings.</li>
+                        <li><strong>Send</strong> — POST to the send endpoint with your <code>sendDefinitionId</code>, identifying recipients by <code>individualId</code> (single) or a <code>recipients</code> array (bulk). A preview endpoint renders without sending.</li>
+                    </ol>
+
+                    <div class="key-insight">
+                        <strong>💡 NTO in practice:</strong> When a member redeems points and an order ships, NTO's commerce backend can call the Direct Send API to fire an instant shipping confirmation — no journey required. (The companion <strong>Transactional Order Triggers</strong> feature, also GA Aug '26, can fire these order/shipment/return messages automatically off the Data Cloud data model.)
+                    </div>
+
+                    <div class="pro-tip">
+                        <strong>💡 Pro Tip:</strong> This is a developer-facing capability. Marketers don't need to write code to benefit — but knowing the pattern exists helps you scope integrations with your engineering team. Full reference docs are linked in the hands-on section below.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced: Direct Send API hands-on -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Optional Hands-On: Send an Email via the Direct Send API</h2>
+                    <p class="section-duration">Optional • Developer • 30 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Hands-On ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <div class="key-insight">
+                            <strong>⚠️ Optional &amp; developer-focused:</strong> This section makes real API calls and is intended for developers or marketing technologists. Marketers can skip it — the concept above is enough for the rest of the training. You'll need permission to create an External Client App and access to a REST client (curl, Postman, etc.).
+                        </div>
+
+                        <h3>Prerequisites</h3>
+                        <ul>
+                            <li><strong>High Scale Actions</strong> and <strong>Direct Email Send</strong> must be enabled for your tenant. If not, the API returns <code>403 - feature not enabled for tenant</code> (contact your account executive).</li>
+                            <li>Email content must be <strong>published in the marketing CMS</strong> before it can be sent.</li>
+                        </ul>
+
+                        <h3>Step 1 — Authenticate (Connect to the API)</h3>
+                        <ol>
+                            <li>In <strong>Setup</strong>, create an <strong>External Client App</strong> and enable OAuth with the <strong><code>sfap_api</code></strong> scope.</li>
+                            <li>Relax or configure IP restrictions as appropriate for your integration.</li>
+                            <li>Request a token using the flow that fits your use case — <strong>Authorization Code</strong> (user-facing) or <strong>Client Credentials</strong> (server-to-server). The token must be a <strong>JWT</strong>; non-JWT tokens are not supported.</li>
+                            <li>Use the token as <code>Authorization: Bearer &lt;token&gt;</code> on every request.</li>
+                        </ol>
+                        <p class="reference-note">📖 Reference: <a href="https://developer.salesforce.com/docs/marketing/marketing-cloud-growth/guide/mc-connect-apis-direct-send.html" target="_blank">Connect to Direct Email Send API</a></p>
+
+                        <h3>Step 2 — Create a Send Definition (ListEmail)</h3>
+                        <p>Use the REST API to create a <code>ListEmail</code> object referencing your published content, sender identity, and tracking options, then deploy it. Note the resulting <code>sendDefinitionId</code>.</p>
+                        <p class="reference-note">📖 Reference: <a href="https://developer.salesforce.com/docs/marketing/marketing-cloud-growth/references/mc-next-email-send-definitions?meta=Summary" target="_blank">Email — Manage Send Definitions (REST API)</a></p>
+
+                        <h3>Step 3 — Send (or Preview)</h3>
+                        <p>All endpoints use base URL <code>https://api.salesforce.com/automation/actions360</code>, require the <code>sendDefinitionId</code> query parameter, and the bearer <code>Authorization</code> header.</p>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr><th>Operation</th><th>Method</th><th>Path</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Send to a single recipient</td><td>POST</td><td><code>/messaging/email/v1</code></td></tr>
+                                <tr><td>Send to multiple recipients (bulk)</td><td>POST</td><td><code>/messaging/email/v1/bulk</code></td></tr>
+                                <tr><td>Preview the rendered email</td><td>POST</td><td><code>/messaging/email/v1/preview</code></td></tr>
+                            </tbody>
+                        </table>
+                        <div class="code-block">
+                            POST https://api.salesforce.com/automation/actions360/messaging/email/v1?sendDefinitionId=&lt;id&gt;<br>
+                            Authorization: Bearer &lt;JWT token&gt;<br>
+                            Content-Type: application/json<br><br>
+                            {<br>
+                            &nbsp;&nbsp;"individualId": "&lt;Unified Individual Id&gt;",<br>
+                            &nbsp;&nbsp;"attributes": { "FirstName": "Sarah" }<br>
+                            }
+                        </div>
+                        <ul>
+                            <li><strong>Single send:</strong> identify the recipient with <code>individualId</code>.</li>
+                            <li><strong>Bulk send:</strong> pass a <code>recipients</code> array.</li>
+                            <li><strong>Personalization:</strong> <code>attributes</code> keys must match the Apex class names exactly (case-sensitive).</li>
+                            <li><strong>Rate limits:</strong> the API returns <code>429</code> when exceeded — implement exponential backoff and retry.</li>
+                        </ul>
+                        <p class="reference-note">📖 References: <a href="https://developer.salesforce.com/docs/marketing/marketing-cloud-growth/guide/mc-manage-transactions-messages-direct-send.html" target="_blank">Send Transactional Messages with Direct Email Send API</a> · <a href="https://developer.salesforce.com/docs/marketing/marketing-cloud-growth/references/mc-next-email-direct-send?meta=Summary" target="_blank">Email — Preview and Send (Direct Email Send API)</a></p>
+
+                        <div class="lab-checkpoint">
+                            <h3>🎉 Hands-On Checkpoint</h3>
+                            <ul class="checkpoint-list">
+                                <li>✓ External Client App created with the <code>sfap_api</code> scope</li>
+                                <li>✓ Obtained a JWT bearer token</li>
+                                <li>✓ Created and deployed a <code>ListEmail</code> send definition</li>
+                                <li>✓ Sent (or previewed) an email via the API and received a success response</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Advanced Section -->
             <section class="lesson-section advanced">
                 <div class="section-header">

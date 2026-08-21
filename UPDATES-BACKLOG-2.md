@@ -173,6 +173,30 @@ we author (it's standard Salesforce Setup, so low risk).
 
 ---
 
+### Change 4 — Add Email Direct Send API content to Module 6
+**Status:** ✅ Applied Aug 21, 2026 — Module 6 (`modules/module-06-flows.html`), after Lab 3.
+Added a **Core Lesson** "Sending Beyond Flows: The Email Direct Send API" (what it is / why /
+how it differs / when to use vs. a Flow / how it works, with an NTO shipping-confirmation
+example + Transactional Order Triggers mention) AND an **optional Advanced Hands-On** section
+(External Client App + `sfap_api` JWT, create `ListEmail` send definition, POST to
+single/bulk/preview endpoints with `individualId`/`recipients`, rate-limit note). New CSS for
+`.comparison-table` + `.reference-note` in `styles/training.css`.
+
+**Grounded in:** Aug '26 Agentforce Marketing Release Deck (GA Aug '26) + the 4 API docs now
+in `reference-sources.md` (Connect/auth, Send Transactional Messages guide, Send Definitions
+ref, Direct Email Send ref). Endpoints/base URL/attributes pulled from the Send Transactional
+Messages guide.
+
+**Verify against org:** exact External Client App / OAuth setup UI labels; confirm the
+`sfap_api` scope + endpoint paths current at the trainee's release; whether High Scale Actions
+/ Direct Email Send are enabled in the training org (API returns 403 if not).
+
+**Deferred (separate future item):** deeper **Transactional Order Triggers** hands-on (Data
+360 + Marketing Triggers Admin permission set + DMO field mapping) — only mentioned here, not
+built.
+
+---
+
 <!--
 Entry template:
 

@@ -188,6 +188,26 @@ This document tracks authoritative sources for MC on Core training materials.
 - **Key Value:** THE comprehensive technical implementation guide for enterprise deployments
 - **Critical Insight:** MCA is a downstream consumer of D360 data model - "joined at the hip"
 
+### August 2026 Agentforce Marketing Release Deck (Internal Only)
+- **File:** `[Internal Only] August 2026 Agentforce Marketing Release Deck.pdf` (14MB) /
+  `.pptx` (85MB)
+- **Type:** Release Deck / Enablement
+- **Release:** August '26 (GA features)
+- **Status:** Available
+- **Internal Only:** Not for external customer distribution
+- **Topics:**
+  - What's NEW across Agentforce Marketing (MC Next, Marketing Intelligence, Loyalty,
+    Personalization)
+  - **Email Direct Send API (GA Aug '26)** — dedicated, purpose-built API for sending email
+    at scale; stable contract, predictable performance, direct ingestion of HTML payloads;
+    no Flow/APEX dependency for personalization; supports promotional + transactional;
+    works OOTB
+  - **Transactional Order Triggers (GA Aug '26)** — real-time order/shipment/return event
+    triggers via direct API integration on the Data Cloud data model (requires Data 360,
+    Marketing Triggers Admin permission set, mapped DMO fields)
+  - Additional release items across the four product pillars
+- **Key Value:** Authoritative source for Aug '26 GA feature messaging (esp. Direct Send API)
+
 ### Consent Management FAQ
 - **File:** `Marketing Cloud Next Consent Management_ Frequently Asked Questions.docx` (1.2MB)
 - **Type:** FAQ Document
@@ -320,6 +340,58 @@ This document tracks authoritative sources for MC on Core training materials.
 - Multi-language Preference Pages
 - Agent-first / Slack-first BU operations
 - Cross-Cloud BU expansion
+
+---
+
+## API & Developer Documentation
+
+Developer references for programmatic (API-triggered) transactional sending. Relevant to
+the Release 260 "API-Triggered Transactional Sending (On-Demand Flows)" capability. These
+support developer/integration scenarios rather than the point-and-click admin flow.
+
+### Authentication / Connect to the API
+- **Page Title:** "Connect to Direct Email Send API"
+- **URL:** https://developer.salesforce.com/docs/marketing/marketing-cloud-growth/guide/mc-connect-apis-direct-send.html
+- **Type:** API Developer Guide
+- **Status:** Available
+- **Topics:** Authenticating to the Direct Email Send API with an OAuth Bearer token
+  (`sfap_api` scope) — creating an External Client App, OAuth scopes/JWT tokens, IP
+  restriction management, Authorization Code vs. Client Credentials flows, invoking the API
+  with a bearer token, token verification, and troubleshooting
+- **Notes:** Prerequisite for all API-based sending below
+
+### Send Transactional Messages guide
+- **Page Title:** "Send Transactional Messages with Direct Email Send API"
+- **URL:** https://developer.salesforce.com/docs/marketing/marketing-cloud-growth/guide/mc-manage-transactions-messages-direct-send.html
+- **Type:** API Developer Guide
+- **Status:** Available
+- **Topics:** Sending immediate, personalized transactional emails (welcome emails, order
+  confirmations) via the High Scale Flow messaging service; OAuth `sfap_api` token
+  requirement; creating `ListEmail` send definitions; three endpoints (single recipient,
+  bulk, preview); feature setup, publishing content, rate limiting, and structuring
+  requests with `individualId` / `recipients`
+- **Notes:** Conceptual + how-to companion to the Send Definitions and Direct Email Send
+  API references below
+
+### Send Definitions API Reference
+- **Page Title:** "Email - Manage Send Definitions (REST API)"
+- **URL:** https://developer.salesforce.com/docs/marketing/marketing-cloud-growth/references/mc-next-email-send-definitions?meta=Summary
+- **Type:** API Reference
+- **Status:** Available
+- **API Version:** 67.0 (Summer '26)
+- **Topics:** Creating and managing email send definitions (the `ListEmail` objects that
+  reference content, sender identity, and tracking) via REST API endpoints
+- **Notes:** Reference-level endpoint/schema documentation
+
+### Direct Email Send API Reference
+- **Page Title:** "Email - Preview and Send (Direct Email Send API)"
+- **URL:** https://developer.salesforce.com/docs/marketing/marketing-cloud-growth/references/mc-next-email-direct-send?meta=Summary
+- **Type:** API Reference
+- **Status:** Available
+- **API Version:** 67.0 (Summer '26)
+- **Topics:** Directly previewing and triggering an email send via API — Endpoints, Types,
+  and Security specifications
+- **Notes:** Reference-level endpoint/schema documentation
 
 ---
 
