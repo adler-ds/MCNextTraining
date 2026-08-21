@@ -1071,6 +1071,101 @@
                 </div>
             </section>
 
+            <!-- Advanced: Transactional Order Triggers hands-on -->
+            <section class="lesson-section advanced">
+                <div class="section-header">
+                    <span class="section-badge advanced">🎓 ADVANCED</span>
+                    <h2>Optional Hands-On: Transactional Order Triggers</h2>
+                    <p class="section-duration">Optional • Admin + Developer • 40 minutes</p>
+                </div>
+
+                <div class="lesson-content collapsible collapsed">
+                    <button class="expand-btn" onclick="this.parentElement.classList.toggle('collapsed')">
+                        Expand Advanced Hands-On ▼
+                    </button>
+
+                    <div class="advanced-content">
+                        <h3>🧠 What You Need to Know</h3>
+                        <p>The Direct Send API (above) lets <em>your</em> systems push a message. <strong>Transactional Order Triggers</strong> (GA August 2026) flips that around: it fires a Flow <strong>automatically</strong> when a real-time order event lands on the Data Cloud data model — <strong>order status change, shipment, or return</strong> — with no polling and no batch delay.</p>
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <h4>What it is</h4>
+                                <p>Real-time triggers that start a marketing Flow off order/shipment/return events delivered through a direct API integration on the Data Cloud data model.</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Why it matters</h4>
+                                <p>Order and shipping notifications have some of the highest open rates in marketing. Customers expect them the moment the event happens — this delivers them automatically, at scale.</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>How it's different</h4>
+                                <p>Previously a Flow could only trigger on <em>data changes</em> in Data Cloud or the platform — not truly real time. Order Triggers fire on the transactional API event itself, integrated directly into the Flow.</p>
+                            </div>
+                        </div>
+
+                        <div class="key-insight">
+                            <strong>💡 NTO in practice:</strong> A member redeems points for a jacket. The moment NTO's commerce system posts the <strong>shipment</strong> event, a Flow fires an "Your NTO Rewards order is on its way" email with the tracking number — and if the jacket is later <strong>returned</strong>, a separate "We've received your return" message goes out. No journey scheduling, no nightly batch.
+                        </div>
+
+                        <h3>Prerequisites</h3>
+                        <ul>
+                            <li><strong>Data 360</strong> (Data Cloud) provisioned in the org — order events land on its data model.</li>
+                            <li>The <strong>Marketing Triggers Admin</strong> permission set assigned to whoever configures the trigger.</li>
+                            <li>The order/shipment/return <strong>DMO fields mapped</strong> in Data Cloud (Step 1 below).</li>
+                            <li>Published email content for each message you plan to send (shipment confirmation, return received, etc.).</li>
+                        </ul>
+
+                        <h3>Step 1 — Map the Required DMO Fields</h3>
+                        <p>The trigger reads its data from Data Cloud DMOs, so the order event fields must be mapped first. In <strong>Data Cloud</strong>, map the incoming order data to the order-event data model:</p>
+                        <ul>
+                            <li><strong>Order identity &amp; recipient:</strong> the order/transaction identifier and the reference back to the <strong>Unified Individual</strong> (so the Flow knows which member to message).</li>
+                            <li><strong>Event type &amp; status:</strong> the field that distinguishes order status vs. <strong>shipment</strong> vs. <strong>return</strong>.</li>
+                            <li><strong>Message payload fields:</strong> anything the email needs — e.g. tracking number, carrier, item name, order total, return reason.</li>
+                        </ul>
+                        <div class="key-insight">
+                            <strong>⚠️ Verify against your org:</strong> exact DMO and field names for the order-event model depend on your data setup — resolve every mapping warning on the right of each DMO using your best judgement before continuing, the same way you did for Identity Resolution in Module 1.
+                        </div>
+
+                        <h3>Step 2 — Build the Event-Triggered Flow</h3>
+                        <ol>
+                            <li>Create a new <strong>event-triggered Flow</strong> and choose the <strong>order event</strong> as the trigger source.</li>
+                            <li>Add a <strong>Decision / branch</strong> on the event type so each event routes to the right message:
+                                <ul>
+                                    <li><strong>Shipment</strong> → "Your order is on its way" email (include the tracking number attribute).</li>
+                                    <li><strong>Return</strong> → "We've received your return" email.</li>
+                                    <li><strong>Order status</strong> → optional order-confirmation or delay notice.</li>
+                                </ul>
+                            </li>
+                            <li>Add the <strong>Send Email</strong> action on each branch, referencing the matching <strong>published content</strong> and mapping in the payload fields from Step 1.</li>
+                        </ol>
+
+                        <h3>Step 3 — Connect &amp; Test</h3>
+                        <ol>
+                            <li><strong>Activate</strong> the Flow so it listens for live order events.</li>
+                            <li>Post a <strong>test order event</strong> through the API integration (or your commerce sandbox) — a shipment event for a known test member.</li>
+                            <li>Confirm the Flow fires <strong>in real time</strong> and the correct branch sends: check the Flow run and that the test member receives the shipment email with the right tracking number.</li>
+                            <li>Repeat with a <strong>return</strong> event to verify the second branch.</li>
+                        </ol>
+
+                        <div class="pro-tip">
+                            <strong>💡 Pro Tip:</strong> Pair this with the <strong>Direct Send API</strong> above — Order Triggers cover events flowing through your Data Cloud model automatically, while the Direct Send API is the escape hatch when a backend needs to push a one-off transactional message on its own terms. Together they cover both the automated and the ad-hoc transactional paths.
+                        </div>
+
+                        <p class="reference-note">📖 References: August 2026 Agentforce Marketing Release Deck (Transactional Order Triggers, GA Aug '26) · <a href="https://developer.salesforce.com/docs/marketing/marketing-cloud-growth/guide/mc-manage-transactions-messages-direct-send.html" target="_blank">Send Transactional Messages with Direct Email Send API</a></p>
+
+                        <div class="lab-checkpoint">
+                            <h3>🎉 Hands-On Checkpoint</h3>
+                            <ul class="checkpoint-list">
+                                <li>✓ Data 360 confirmed and Marketing Triggers Admin permission set assigned</li>
+                                <li>✓ Order/shipment/return DMO fields mapped (warnings resolved)</li>
+                                <li>✓ Event-triggered Flow built with a branch per event type</li>
+                                <li>✓ Test shipment event fired the Flow in real time and delivered the correct email</li>
+                                <li>✓ Return event verified on its own branch</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Advanced Section -->
             <section class="lesson-section advanced">
                 <div class="section-header">

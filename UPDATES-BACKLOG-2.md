@@ -192,8 +192,31 @@ Messages guide.
 / Direct Email Send are enabled in the training org (API returns 403 if not).
 
 **Deferred (separate future item):** deeper **Transactional Order Triggers** hands-on (Data
-360 + Marketing Triggers Admin permission set + DMO field mapping) — only mentioned here, not
-built.
+360 + Marketing Triggers Admin permission set + DMO field mapping) — ✅ now built as Change 5.
+
+---
+
+### Change 5 — Add Transactional Order Triggers hands-on to Module 6
+**Status:** ✅ Applied Aug 21, 2026 — Module 6 (`modules/module-06-flows.html`), new optional
+**Advanced Hands-On** section placed right after the Direct Send API hands-on (so the two Aug
+'26 GA transactional features sit together). Covers: What You Need to Know (3 strategy-cards:
+what it is / why / how it differs, real-time order/shipment/return off the Data Cloud model),
+NTO shipment+return example, prerequisites (Data 360, **Marketing Triggers Admin** permission
+set, mapped DMO fields, published content), **Step 1** map required DMO fields (order identity
++ Unified Individual ref, event type/status, payload fields — with the "resolve every mapping
+warning using best judgement" caveat mirroring Module 1 IR), **Step 2** build the
+event-triggered Flow with a Decision branch per event type (shipment → tracking email; return
+→ return-received; order status → optional), **Step 3** activate/connect + test with a live
+shipment then return event, pro-tip pairing it with the Direct Send API, and a hands-on
+checkpoint. div balance 226=226.
+
+**Grounded in:** Aug '26 Agentforce Marketing Release Deck (Transactional Order Triggers slide
+— GA Aug '26; two config steps "Map Required DMO Fields" + "Build and Connect the Flow";
+requires Data 360 + Marketing Triggers Admin permission set + mapped DMO fields) plus the Send
+Transactional Messages guide.
+
+**Verify against org:** exact order-event DMO/field names and the event-trigger source UI
+labels; confirm the Marketing Triggers Admin permission set name at the trainee's release.
 
 ---
 
